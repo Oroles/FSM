@@ -9,7 +9,7 @@ Pin::Pin()
 
 }
 
-Pin::Pin(std::string n, std::string s, int p) : name(n),  status(s), port(p)
+Pin::Pin(std::string n, std::string s, int p) : name(n),  status(s), port(p), value(0)
 {
 	assert(p > -1);
 #ifdef RASPBERRY_PI
@@ -25,7 +25,7 @@ Pin::Pin(std::string n, std::string s, int p) : name(n),  status(s), port(p)
 	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
-Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port)
+Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port), value(rhs.value)
 {
 #ifdef RASPBERRY_PI
 	if (status == "OUT" )
@@ -40,7 +40,7 @@ Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port)
 	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
-Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.status)), port(std::move(rhs.port))
+Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.status)), port(std::move(rhs.port)), value(std::move(rhs.value))
 {
 #ifdef RASPBERRY_PI
 	if (status == "OUT" )
@@ -60,6 +60,7 @@ Pin& Pin::operator=(const Pin& rhs)
 	name = rhs.name;
 	status = rhs.status;
 	port = rhs.port;
+	value = rhs.value;
 	return *this;
 }
 
