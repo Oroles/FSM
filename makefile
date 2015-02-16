@@ -12,7 +12,7 @@ COMPILE_OPTIONS = -Wall -std=c++11
 #Header include directories
 HEADERS =
 #Libraries for linking
-LIBS =
+LIBS = -lwiringPi
 
 # Dependency options
 DEPENDENCY_OPTIONS = -std=c++11 -MM
