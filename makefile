@@ -40,7 +40,6 @@ release: COMPILE_OPTIONS += -DNDEBUG
 release: debug
 
 raspberry: COMPILE_OPTIONS += -DRASPBERRY_PI
-raspberry: LIBS += -pthread
 raspberry: debug
 
 # Make $(PROJECT) the default target
