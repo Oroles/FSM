@@ -1,5 +1,7 @@
 #include "parser.h"
 
+#include "../utils/utils.h"
+
 void Parser::generateFSM(FSM* fsm)
 {
 	pugi::xml_node modules = doc.child("nta");

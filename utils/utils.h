@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-static bool allowDebug = true;
+static bool allowDebug = false;
 
 template< class T >
 void displayMessage(const T& msg)

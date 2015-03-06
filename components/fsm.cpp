@@ -7,3 +7,11 @@ void FSM::step()
 		m.step();
 	}
 }
+
+void FSM::startModules()
+{
+	for ( auto m : modules )
+	{
+		
+	}
+}

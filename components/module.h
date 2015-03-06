@@ -5,6 +5,7 @@
 
 #include "state.h"
 #include "tranzition.h"
+#include "../utils/utils.h"
 
 class Module
 {
@@ -20,11 +21,13 @@ public:
 
 	void addState( const State& s )
 	{
+		display("State: ", s, "is added to module\n");
 		states.push_back( s );
 	}
 
 	void addTranzition( const Tranzition& t )
 	{
+		display("Tranzaction: ", t, "is added to module\n");
 		tranzitions.push_back( t );
 	}
 	void setCurrentState( const State& s )
@@ -34,6 +37,7 @@ public:
 
 	State nextState( const State& s ) const;
 	void step();
+	void run();
 
 private:
 	std::vector<State> states;

@@ -2,6 +2,7 @@
 #define _STATE_H_
 
 #include <string>
+#include <iostream>
 
 class State
 {
@@ -30,6 +31,11 @@ public:
 	friend bool operator==(const State& lhs, const State& rhs)
 	{
 		return lhs.getName() == rhs.getName();
+	}
+	friend std::ostream& operator<<(std::ostream& o, const State& rhs)
+	{
+		o << "State: " << rhs.name;
+		return o;
 	}
 
 	std::string getName() const

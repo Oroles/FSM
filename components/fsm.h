@@ -11,6 +11,7 @@ public:
 	FSM() {}
 	
 	void step();
+	void startModules();
 	void addModule(const Module& m )
 	{
 		modules.push_back( m );

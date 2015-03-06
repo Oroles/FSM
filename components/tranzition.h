@@ -2,6 +2,7 @@
 #define _TRANZITION_H_
 
 #include <vector>
+#include <iostream>
 
 #include "state.h"
 
@@ -50,6 +51,7 @@ public:
 	}
 
 	State operator()(const State&);
+	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
 	bool isAvailable(const State&) const;
 
 private:

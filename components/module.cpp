@@ -1,4 +1,5 @@
 #include "module.h"
+#include "../utils/utils.h"
 
 State Module::nextState(const State& s) const
 {
@@ -19,6 +20,14 @@ void Module::step()
 		if ( t.isAvailable( currState ) )
 		{
 			currState = t( currState );
+			display("New state: ", currState );
 		}
+	}
+}
+
+void Module::run()
+{
+	while( 1 ) {
+		this->step();
 	}
 }
