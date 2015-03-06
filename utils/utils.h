@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-static bool allowDebug = false;
+static bool allowDebug = true;
 
 template< class T >
 void displayMessage(const T& msg)
@@ -21,6 +21,22 @@ void displayMessage(const T&& msg)
 	{
 		std::cout << msg << std::endl;
 	}
+}
+
+template < class T >
+void display(T msg)
+{
+	if ( allowDebug == true )
+	{
+		std::cout << msg << " ";
+	}
+}
+
+template < class T, class... Args >
+void display(T t, Args... args)
+{
+	display(t);
+	display(args...);
 }
 
 #endif
