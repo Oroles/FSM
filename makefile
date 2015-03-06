@@ -3,8 +3,8 @@ CFLAGS = -Wall -c -std=c++11
 
 all: fsm
 
-fsm: main.o components.o xml.o
-	$(CC) -std=c++11 main.o tranzition.o module.o fsm.o parser.o pugixml.o
+fsm: main.o components.o xml.o utils.o
+	$(CC) -std=c++11 main.o tranzition.o module.o fsm.o parser.o pugixml.o utils.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -14,6 +14,9 @@ components.o:
 
 xml.o:
 	$(CC) $(CFLAGS) pugixml/*.cpp
+
+utils.o:
+	$(CC) $(CFLAGS) utils/*.cpp
 
 
 clean:
