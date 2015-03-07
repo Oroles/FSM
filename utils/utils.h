@@ -2,41 +2,46 @@
 #define _UTILS_H_
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
-static bool allowDebug = false;
+#include "debugmessagepriority.h"
+
+extern DebugMessagePriority priority;
+void setPriority(const std::vector<std::string>& args);
 
 template< class T >
-void displayMessage(const T& msg)
+void displayMessage(const DebugMessagePriority& p, const T& msg)
 {
-	if (allowDebug == true )
+	if ( priority <= p )
 	{
 		std::cout << msg << std::endl;
 	}
 }
 
 template< class T >
-void displayMessage(const T&& msg)
+void displayMessage(const DebugMessagePriority& p, const T&& msg)
 {
-	if (allowDebug == true )
+	if ( priority <= p )
 	{
 		std::cout << msg << std::endl;
 	}
 }
 
 template < class T >
-void display(T msg)
+void display(const DebugMessagePriority& p, T msg)
 {
-	if ( allowDebug == true )
+	if ( priority <= p )
 	{
 		std::cout << msg << " ";
 	}
 }
 
 template < class T, class... Args >
-void display(T t, Args... args)
+void display(const DebugMessagePriority& p, T t, Args... args)
 {
-	display(t);
-	display(args...);
+	display(p,t);
+	display(p,args...);
 }
 
 #endif

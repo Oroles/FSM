@@ -1,11 +1,10 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
 
 #include "components/fsm.h"
 #include "pugixml/parser.h"
 #include "utils/utils.h"
-
-extern bool allowDebug;
 
 int main(int argc, char* argv[])
 {
@@ -14,8 +13,7 @@ int main(int argc, char* argv[])
 	{
 		arguments.push_back( argv[i] );
 	}
-
-	std::for_each(arguments.begin(), arguments.end(), [&](std::string arg){ if (arg=="-d") { allowDebug=true; } } );
+	setPriority( arguments );
 
 	FSM fsm;
 	Parser parser("SimpleStates.xml");

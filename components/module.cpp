@@ -20,7 +20,7 @@ void Module::step()
 		if ( t.isAvailable( currState ) )
 		{
 			currState = t( currState );
-			display("New state: ", currState );
+			display(DebugMessagePriority::Priority::Level2,"New state: ", currState );
 		}
 	}
 }

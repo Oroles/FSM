@@ -21,13 +21,13 @@ public:
 
 	void addState( const State& s )
 	{
-		display("State: ", s, "is added to module\n");
+		display(DebugMessagePriority::Priority::Level1, "State: ", s, "is added to module\n");
 		states.push_back( s );
 	}
 
 	void addTranzition( const Tranzition& t )
 	{
-		display("Tranzaction: ", t, "is added to module\n");
+		display(DebugMessagePriority::Priority::Level1, "Tranzaction: ", t, "is added to module\n");
 		tranzitions.push_back( t );
 	}
 	void setCurrentState( const State& s )
