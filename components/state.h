@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cassert>
 
 class State
 {
@@ -14,12 +15,12 @@ public:
 
 	State(const std::string n) : name(n) 
 	{
-
+		assert(n.size() != 0 );
 	}
 
 	State(const State& rhs) : name(rhs.name)
 	{
-
+		assert(rhs.getName().size() != 0);
 	}
 
 	State& operator=(const State& rhs)
@@ -45,6 +46,7 @@ public:
 
 	void setName(std::string n)
 	{
+		assert(n.size() != 0 );
 		name = n;
 	}
 

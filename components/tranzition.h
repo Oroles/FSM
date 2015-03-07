@@ -16,15 +16,19 @@ public:
 
 	Tranzition(const State s, const State d) : source(s), destination(d)
 	{
-
+		assert(s.getName().size() != 0);
+		assert(d.getName().size() != 0);
 	}
 	Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination)
 	{
-
+		assert(rhs.source.getName().size() != 0);
+		assert(rhs.destination.getName().size() != 0);
 	}
 
 	Tranzition& operator=(const Tranzition& rhs)
 	{
+		assert(rhs.source.getName().size() != 0 );
+		assert(rhs.destination.getName().size() != 0 );
 		source = rhs.source;
 		destination = rhs.destination;
 		return *this;
@@ -37,6 +41,7 @@ public:
 
 	void setSource( const State s )
 	{
+		assert(s.getName().size() != 0 );
 		source = s;
 	}
 
@@ -47,6 +52,7 @@ public:
 
 	void setDestination( const State d )
 	{
+		assert(d.getName().size() != 0 );
 		destination = d;
 	}
 

@@ -14,6 +14,7 @@ void setPriority(const std::vector<std::string>& args)
 	{
 		if ( ++it == args.end() )
 		{
+			assert(true); //It should not reach this state;
 			priority.setPriority(DebugMessagePriority::Priority::NoMessage);
 		}
 		else
