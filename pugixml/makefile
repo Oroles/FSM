@@ -1,7 +1,13 @@
-all:
+libs: pugixml parser
+
+pugixml:
 	g++ -std=c++11 -c pugixml.cpp
 	ar rvs pugixml.a pugixml.o
-	rm -rf pugixml.o
+
+parser:
+	g++ -std=c++11 -c parser.cpp
+	ar rvs parser.a parser.o
 
 clean:
-	rm -rf pugixml.a
+	rm *.a
+	rm *.o
