@@ -1,10 +1,10 @@
 CC = g++
-CFLAGS = -Wall -c -std=c++11
+CFLAGS = -Wall -c -std=c++11 -pthread
 
 all: fsm
 
 fsm: main.o components.o xml.o utils.o
-	$(CC) -std=c++11 -g	 main.o tranzition.o module.o fsm.o parser.o pugixml.o utils.o
+	$(CC) -std=c++11 -g -pthread main.o tranzition.o module.o fsm.o parser.o pugixml.o utils.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp

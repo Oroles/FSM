@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <algorithm>
+#include <cassert>
 
 DebugMessagePriority priority;
 
