@@ -1,4 +1,5 @@
 #include "fsm.h"
+#include "../utils/utils.h"
 
 #include <thread>
 
@@ -7,6 +8,7 @@ void FSM::step()
 	for ( auto m : modules )
 	{
 		m.step();
+		nextStep();
 	}
 }
 

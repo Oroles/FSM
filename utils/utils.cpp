@@ -3,6 +3,7 @@
 #include <cassert>
 
 DebugMessagePriority priority;
+bool stepProgress = false;
 
 void setPriority(const std::vector<std::string>& args)
 {
@@ -54,4 +55,33 @@ std::string getFileName(const std::vector<std::string>& args)
 			return *it;
 		}
 	}
+}
+
+bool setStepProgress(const std::vector<std::string>& args)
+{
+	auto it = std::find(args.begin(), args.end(), "-step");
+	if ( it == args.end() )
+	{
+		stepProgress = false;
+		return false;
+	}
+	else
+	{
+		stepProgress = true;
+		return true;
+	}
+}
+
+void nextStep()
+{
+	if ( stepProgress == true )
+	{
+		std::string aux;
+		while( aux != "s")
+		{
+			std::cout << "Press s to make progress: ";
+			std::cin >> aux;
+		}
+	}
+	return;
 }

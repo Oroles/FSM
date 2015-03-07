@@ -15,10 +15,12 @@ int main(int argc, char* argv[])
 	}
 	setPriority( arguments );
 	std::string fileName = getFileName( arguments );
+	setStepProgress( arguments );
 
 	FSM fsm;
 	Parser parser(fileName);
 	parser.generateFSM(&fsm);
+	fsm.step();
 	fsm.step();
 	return 0;
 }
