@@ -14,9 +14,10 @@ int main(int argc, char* argv[])
 		arguments.push_back( argv[i] );
 	}
 	setPriority( arguments );
+	std::string fileName = getFileName( arguments );
 
 	FSM fsm;
-	Parser parser("SimpleStates.xml");
+	Parser parser(fileName);
 	parser.generateFSM(&fsm);
 	fsm.step();
 	return 0;

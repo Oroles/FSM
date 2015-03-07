@@ -9,6 +9,7 @@
 
 extern DebugMessagePriority priority;
 void setPriority(const std::vector<std::string>& args);
+std::string getFileName(const std::vector<std::string>& args);
 
 template< class T >
 void displayMessage(const DebugMessagePriority& p, const T& msg)
