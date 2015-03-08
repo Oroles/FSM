@@ -20,7 +20,9 @@ int main(int argc, char* argv[])
 	FSM fsm;
 	Parser parser(fileName);
 	parser.generateFSM(&fsm);
-	fsm.step();
-	fsm.step();
+	while( 1 )
+	{
+		fsm.step();
+	}
 	return 0;
 }

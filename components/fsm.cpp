@@ -5,7 +5,7 @@
 
 void FSM::step()
 {
-	for ( auto m : modules )
+	for ( auto& m : modules )
 	{
 		m.step();
 		nextStep();

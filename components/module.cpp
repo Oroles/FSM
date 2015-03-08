@@ -21,6 +21,7 @@ void Module::step()
 		{
 			currState = t( currState );
 			display(DebugMessagePriority::Priority::Level2,"New state: ", currState, "\n" );
+			break;
 		}
 	}
 }
