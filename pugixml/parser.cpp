@@ -31,6 +31,10 @@ Module Parser::processModule(const pugi::xml_node& nodes)
 		{
 			rez.setCurrentState( this->processCurrentState(node) );
 		}
+		if ( std::string(node.name()) == "name" )
+		{
+			rez.setName( this->processName(node) );
+		}
 	}
 	return rez;
 }
@@ -55,4 +59,10 @@ Tranzition Parser::processTranzition(const pugi::xml_node& node)
 	State destination( node.child("target").attribute("ref").value() );
 	Tranzition tranz(source,destination);
 	return tranz;
+}
+
+std::string Parser::processName(const pugi::xml_node& node)
+{
+	std::string name = node.child_value();
+	return name;
 }

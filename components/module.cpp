@@ -23,6 +23,7 @@ void Module::step()
 			display(DebugMessagePriority::Priority::Level2,"New state: ", currState, "\n" );
 			break;
 		}
+		display(DebugMessagePriority::Priority::Level2,"No tranzition available\n" );
 	}
 }
 
