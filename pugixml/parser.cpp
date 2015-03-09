@@ -1,6 +1,9 @@
 #include "parser.h"
 
+#include <memory>
+
 #include "../utils/utils.h"
+#include "stringparser.h"
 
 void Parser::generateFSM(FSM* fsm)
 {
@@ -10,6 +13,15 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "template" )
 		{
 			fsm->addModule( this->processModule( node ) );
+		}
+		if ( std::string(node.name()) == "declaration" )
+		{
+			StringParser parser(node.child_value());
+			std::shared_ptr<Variable> var = nullptr;
+			while ( ( var = parser.nextVariable() ) != nullptr )
+			{
+				fsm->addVariable( var );
+			}
 		}
 	}
 }
