@@ -17,6 +17,11 @@ public:
 		name = n;
 	}
 
+	bool operator=(const Variable& rhs)
+	{
+		return this->name == rhs.name;
+	}
+
 	virtual void set( int value ) = 0;
 	virtual int get() = 0;
 

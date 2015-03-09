@@ -9,3 +9,8 @@ int Chan::get()
 {
 	return value;
 }
+
+Chan::~Chan()
+{
+	
+}

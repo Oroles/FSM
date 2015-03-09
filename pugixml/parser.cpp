@@ -17,11 +17,7 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "declaration" )
 		{
 			StringParser parser(node.child_value());
-			std::shared_ptr<Variable> var = nullptr;
-			while ( ( var = parser.nextVariable() ) != nullptr )
-			{
-				fsm->addVariable( var );
-			}
+			fsm->updateVariables( parser.generateVariables() );
 		}
 	}
 }

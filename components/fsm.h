@@ -23,6 +23,11 @@ public:
 	{
 		variables.push_back( v );
 	}
+	void updateVariables(const std::vector<std::shared_ptr<Variable>>&& v )
+	{
+		variables.clear();
+		variables = v;
+	}
 private:
 	std::vector<Module> modules;
 	std::vector<std::shared_ptr<Variable>> variables;
