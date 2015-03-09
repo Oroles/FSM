@@ -8,8 +8,8 @@ void FSM::step()
 	for ( auto& m : modules )
 	{
 		m.step();
-		nextStep();
 	}
+	nextStep();
 }
 
 void FSM::startModules()

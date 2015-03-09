@@ -16,7 +16,7 @@ public:
 
 	}
 
-	Module(const Module& rhs) : states(rhs.states), tranzitions(rhs.tranzitions), currState(rhs.currState)
+	Module(const Module& rhs) : states(rhs.states), tranzitions(rhs.tranzitions), currState(rhs.currState), name(rhs.name)
 	{
 	}
 
@@ -28,7 +28,7 @@ public:
 
 	void addTranzition( const Tranzition& t )
 	{
-		display(DebugMessagePriority::Priority::Level1, "Tranzaction: ", t, "is added to module: ", name, "\n");
+		display(DebugMessagePriority::Priority::Level1, "Tranzition: ", t, "is added to module: ", name, "\n");
 		tranzitions.push_back( t );
 	}
 	void setCurrentState( const State& s )

@@ -20,11 +20,11 @@ void Module::step()
 		if ( t.isAvailable( currState ) )
 		{
 			currState = t( currState );
-			display(DebugMessagePriority::Priority::Level2,"New state: ", currState, "\n" );
-			break;
+			display(DebugMessagePriority::Priority::Level2,"New state: ", currState, "for module ", name ,"\n" );
+			return;
 		}
-		display(DebugMessagePriority::Priority::Level2,"No tranzition available\n" );
 	}
+	display(DebugMessagePriority::Priority::Level2,"No tranzition available for module ", name, " from the state ", currState, "\n" );
 }
 
 void Module::run()
