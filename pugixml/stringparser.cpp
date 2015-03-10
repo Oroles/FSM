@@ -7,8 +7,8 @@
 #include <map>
 #include <iostream>
 
-std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-z]+)(;)") },
-										   { "clock", std::regex("(clock)( [a-z]+)(;)") }  };
+std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z]+)(;)") },
+										   { "clock", std::regex("(clock)( [a-zA-Z]+)(;)") }  };
 
 StringParser::StringParser(std::string t) : text(t)
 {

@@ -17,7 +17,7 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "declaration" )
 		{
 			StringParser parser(node.child_value());
-			fsm->updateVariables( parser.generateVariables() );
+			fsm->setVariables( parser.generateVariables() );
 		}
 	}
 }
