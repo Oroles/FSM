@@ -6,6 +6,7 @@
 
 #include "module.h"
 #include "variables/variable.h"
+#include "../utils/utils.h"
 
 class FSM
 {
@@ -23,8 +24,9 @@ public:
 	{
 		variables.push_back( v );
 	}
-	void updateVariables(const std::vector<std::shared_ptr<Variable>>&& v )
+	void setVariables(const std::vector<std::shared_ptr<Variable>>&& v )
 	{
+		display(DebugMessagePriority::Priority::Level1, "Set ", v.size(), "variables to fsm.\n");
 		variables.clear();
 		variables = v;
 	}

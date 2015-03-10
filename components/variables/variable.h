@@ -16,8 +16,20 @@ public:
 		assert(n.size()!=0);
 		name = n;
 	}
+	Variable( const Variable& rhs)
+	{
+		assert(rhs.name.size()!=0);
+		name = rhs.name;
+	}
 
-	bool operator=(const Variable& rhs)
+	Variable& operator=(const Variable& rhs)
+	{
+		assert(rhs.name.size()!=0);
+		name = rhs.name;
+		return *this;
+	}
+
+	bool operator==(const Variable& rhs)
 	{
 		return this->name == rhs.name;
 	}

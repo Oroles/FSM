@@ -10,6 +10,9 @@ public:
 	{
 
 	}
+	Chan(const Chan& rhs);
+	Chan& operator=(const Chan& rhs);
+	bool operator==(const Chan& rhs);
 
 	void set(int value) override;
 	int get() override;
