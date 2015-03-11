@@ -14,6 +14,8 @@ std::string getFileName(const std::vector<std::string>& args);
 bool setStepProgress(const std::vector<std::string>& args);
 void nextStep();
 
+bool is_integer(std::string name); //Checks if the string contains only numbers
+
 template< class T >
 void displayMessage(const DebugMessagePriority& p, const T& msg)
 {

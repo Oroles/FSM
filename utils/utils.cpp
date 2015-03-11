@@ -85,3 +85,9 @@ void nextStep()
 	}
 	return;
 }
+
+bool is_integer(std::string name)
+{
+	size_t pos = name.find_first_not_of("0123456789");
+	return pos == std::string::npos;
+}
