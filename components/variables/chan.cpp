@@ -1,8 +1,8 @@
 #include "chan.h"
 
-Chan::Chan(const Chan& rhs) : Variable(rhs), value(rhs.value)
+Chan::Chan(const Chan& rhs) : name(rhs.name), value(rhs.value)
 {
-
+	assert(name.size() != 0);
 }
 
 Chan::~Chan()
@@ -12,15 +12,14 @@ Chan::~Chan()
 
 Chan& Chan::operator=(const Chan& rhs)
 {
-	Variable::operator=(rhs);
+	name=rhs.name;
 	value=rhs.value;
 	return *this;
 }
 
 bool Chan::operator==(const Chan& rhs)
 {
-	bool rez = Variable::operator==(rhs);
-	return rez;
+	return name == rhs.name;
 }
 
 

@@ -10,6 +10,10 @@ void FSM::step()
 		m.step();
 	}
 	nextStep();
+	for ( auto& c : clocks )
+	{
+		c.update();
+	}
 }
 
 void FSM::startModules()

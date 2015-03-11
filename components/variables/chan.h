@@ -1,25 +1,27 @@
 #ifndef _CHAN_H_
 #define _CHAN_H_
 
-#include "variable.h"
+#include <string>
+#include <cassert>
 
-class Chan : public Variable
+class Chan
 {
 public:
-	Chan( std::string name, int val = 0 ) : Variable(name), value(val)
+	Chan( std::string n, int val = 0 ) : name(n), value(val)
 	{
-
+		assert(n.size() != 0);
 	}
 	Chan(const Chan& rhs);
 	Chan& operator=(const Chan& rhs);
 	bool operator==(const Chan& rhs);
 
-	void set(int value) override;
-	int get() override;
+	void set(int value);
+	int get();
 
 	~Chan();
 
 private:
+	std::string name;
 	int value = 0;
 };
 

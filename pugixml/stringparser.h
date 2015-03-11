@@ -7,20 +7,17 @@
 #include <map>
 #include <vector>
 
-#include "../components/variables/variable.h"
+#include "../components/variables/clock.h"
+#include "../components/variables/chan.h"
 
 class StringParser
 {
 public:
 	StringParser( std::string t );
-	std::vector<std::shared_ptr<Variable>> generateVariables();
+	std::vector<Clock> generateClocks();
+	std::vector<Chan> generateChannels();
 
 private:
-	using genVar = std::shared_ptr<Variable> (StringParser::*)(const std::string);
-	std::map<std::string,genVar> dispatcher;
-
-	std::shared_ptr<Variable> generateClock(std::string name);
-	std::shared_ptr<Variable> generateChan(std::string name);
 
 	std::string text;
 };

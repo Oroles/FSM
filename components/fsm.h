@@ -5,8 +5,9 @@
 #include <memory>
 
 #include "module.h"
-#include "variables/variable.h"
 #include "../utils/utils.h"
+#include "./variables/clock.h"
+#include "./variables/chan.h"
 
 class FSM
 {
@@ -20,19 +21,20 @@ public:
 	{
 		modules.push_back( m );
 	}
-	void addVariable(const std::shared_ptr<Variable> v )
+	void addChannels(const std::vector<Chan>& c)
 	{
-		variables.push_back( v );
+		display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "channels to FSM\n" );
+		channels = c;
 	}
-	void setVariables(const std::vector<std::shared_ptr<Variable>>&& v )
+	void addClocks(const std::vector<Clock>& c)
 	{
-		display(DebugMessagePriority::Priority::Level1, "Set ", v.size(), "variables to fsm.\n");
-		variables.clear();
-		variables = v;
+		display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "clocks to FSM\n" );
+		clocks = c;
 	}
 private:
 	std::vector<Module> modules;
-	std::vector<std::shared_ptr<Variable>> variables;
+	std::vector<Chan> channels;
+	std::vector<Clock> clocks;
 };
 
 #endif

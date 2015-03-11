@@ -17,7 +17,8 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "declaration" )
 		{
 			StringParser parser(node.child_value());
-			fsm->setVariables( parser.generateVariables() );
+			fsm->addChannels( parser.generateChannels() );
+			fsm->addClocks( parser.generateClocks() );
 		}
 	}
 }
