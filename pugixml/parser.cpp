@@ -1,7 +1,5 @@
 #include "parser.h"
 
-#include <memory>
-
 #include "../utils/utils.h"
 #include "stringparser.h"
 
@@ -67,7 +65,24 @@ Tranzition Parser::processTranzition(const pugi::xml_node& node)
 	State source( node.child("source").attribute("ref").value() );
 	State destination( node.child("target").attribute("ref").value() );
 	Tranzition tranz(source,destination);
+	tranz.setGuards( this->processGuards(node) );
 	return tranz;
+}
+
+std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
+{
+	std::vector<Expression> rez;
+	for ( auto it = node.begin(); it != node.end(); ++it )
+	{
+		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("guard") ) )
+		{
+			std::string expressions = it->child_value();
+			Expression ex( expressions );
+			rez.push_back( ex );
+			display(DebugMessagePriority::Priority::Level1, "Guard founded: ", ex );
+		}
+	}
+	return rez;
 }
 
 std::string Parser::processName(const pugi::xml_node& node)

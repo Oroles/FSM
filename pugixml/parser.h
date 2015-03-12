@@ -4,11 +4,13 @@
 #include <string>
 #include <iostream>
 #include <cassert>
+#include <vector>
 
 #include "../components/fsm.h"
 #include "../components/module.h"
 #include "../components/state.h"
 #include "../components/tranzition.h"
+#include "../components/expressions/expression.h"
 #include "pugixml.hpp"
 
 class Parser
@@ -29,6 +31,7 @@ private:
 	State processCurrentState(const pugi::xml_node& node);
 	Tranzition processTranzition(const pugi::xml_node& node);
 	std::string processName(const pugi::xml_node& node );
+	std::vector<Expression> processGuards(const pugi::xml_node& node);
 
 	pugi::xml_document doc;
 };

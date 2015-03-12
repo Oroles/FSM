@@ -1,4 +1,4 @@
-#include "expression.cpp"
+#include "expression.h"
 
 #include "../../utils/utils.h"
 
@@ -10,54 +10,66 @@ constexpr unsigned int str2int(const char* str, int h = 0)
     return !str[h] ? 5381 : (str2int(str, h+1)*33) ^ str[h];
 }
 
+Expression::Expression()
+{
+
+}
+
 Expression::Expression(std::string ex)
 {
 	assert(ex.size() != 0 );
 	std::size_t pos;
 	std::vector<std::string> operands;
-	while ( ( pos = ex.find(" ") != std::string::npos )
+	while ( ( pos = ex.find(" ") ) != std::string::npos )
 	{
-		operands.push_back( ex.substr(0,pos) );
+		std::string aux = ex.substr(0,pos);
+		operands.push_back( aux );
 		ex = ex.substr(pos+1);
 	}
 	first = operands[0];
 	op = operands[1];
-	second = operands[2];
+	second = ex;
 }
 
-Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second)
+Expression::Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second)
 {
 	assert( first != "" );
 	assert( op != "" );
 	assert( second != "" );
 }
 
-Expression& operator=(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second)
+Expression& Expression::operator=(const Expression& rhs)
 {
+	first = rhs.first;
+	op = rhs.op;
+	second = rhs.second;
 	assert( first != "" );
 	assert( op != "" );
 	assert( second != "" );
+	return *this;
 }
 
-bool operator==(const Expression& rhs)
+bool Expression::operator==(const Expression& rhs)
 {
 	return first==rhs.first && op==rhs.op && second==rhs.second;
 }
 
 bool Expression::evaluate()
 {
-	switch( str2int(op) )
+	switch( str2int(op.c_str()) )
 	{
-		case str2int(">=")
+		case str2int(">=") :
 			{
 				return get_value(first) >= get_value(second);
 			}
-		case str2int(">")
+		case str2int(">") :
 			{
 				return get_value(first) > get_value(second);
 			}
+		default:
+			return false;
 	}
-	return true;
+	return false;
 }
 
 int Expression::get_value(std::string name)
@@ -70,4 +82,26 @@ int Expression::get_value(std::string name)
 	{
 		//Has to go to the FSM to get the value of name
 	}
+	return 0;
+}
+
+std::string Expression::getFirst() const
+{
+	return first;
+}
+
+std::string Expression::getOp() const
+{
+	return op;
+}
+
+std::string Expression::getSecond() const
+{
+	return second;
+}
+
+std::ostream& operator<<(std::ostream& o, const Expression& e)
+{
+	o << "Expression: " << e.getFirst() << e.getOp() << e.getSecond() << "\n";
+	return o;
 }

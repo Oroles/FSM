@@ -9,8 +9,8 @@ debug: fsm
 release: CFLAGS += -O3
 release: fsm
 
-fsm: main.o components.o xml.o utils.o variables.o
-	$(CC) -std=c++11 -g -pthread main.o tranzition.o module.o fsm.o chan.o clock.o parser.o pugixml.o stringparser.o utils.o
+fsm: main.o components.o xml.o utils.o variables.o expressions.o
+	$(CC) -std=c++11 -g -pthread main.o tranzition.o module.o fsm.o expression.o chan.o clock.o parser.o pugixml.o stringparser.o utils.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -26,6 +26,9 @@ utils.o:
 
 variables.o:
 	$(CC) $(CFLAGS) components/variables/*.cpp
+
+expressions.o:
+	$(CC) $(CFLAGS) components/expressions/*.cpp
 
 clean:
 	rm -f *.o

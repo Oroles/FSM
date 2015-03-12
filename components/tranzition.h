@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "state.h"
+#include "./expressions/expression.h"
 
 class Tranzition
 {
@@ -56,6 +57,7 @@ public:
 		destination = d;
 	}
 
+	void setGuards( const std::vector<Expression>& g );
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
 	bool isAvailable(const State&) const;
@@ -63,6 +65,7 @@ public:
 private:
 	State source;
 	State destination;
+	std::vector<Expression> guards;
 };
 
 #endif
