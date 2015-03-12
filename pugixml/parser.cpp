@@ -21,7 +21,7 @@ void Parser::generateFSM(FSM* fsm)
 	}
 }
 
-Module Parser::processModule(const pugi::xml_node& nodes)
+Module Parser::processModule(const pugi::xml_node& nodes )
 {
 	Module rez;
 	for( const pugi::xml_node node : nodes )

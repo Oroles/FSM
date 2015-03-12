@@ -4,7 +4,7 @@
 
 State Tranzition::operator()(const State& s)
 {
-	if ( source == s )
+	if ( this->isAvailable(s) )
 	{
 		return destination;
 	}
@@ -13,12 +13,23 @@ State Tranzition::operator()(const State& s)
 
 bool Tranzition::isAvailable(const State& s) const
 {
-	return s == source;
+	if ( !(s == source) )
+	{
+		return false;
+	}
+	for ( auto& g : guards )
+	{
+		if ( !g.evaluate() )
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 void Tranzition::setGuards(const std::vector<Expression>& g)
 {
-	display(DebugMessagePriority::Priority::Level1, "There are: ", g.size(), " expressions added to ", *this, "\n");
+	display(DebugMessagePriority::Priority::Level1, "There are: ", g.size(), " guards added to ", *this, "\n");
 	guards = g;
 }
 

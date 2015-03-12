@@ -5,7 +5,6 @@
 #include <memory>
 
 #include "module.h"
-#include "../utils/utils.h"
 #include "./variables/clock.h"
 #include "./variables/chan.h"
 
@@ -17,20 +16,10 @@ public:
 	void step();
 	void startModules();
 
-	void addModule(const Module& m )
-	{
-		modules.push_back( m );
-	}
-	void addChannels(const std::vector<Chan>& c)
-	{
-		display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "channels to FSM\n" );
-		channels = c;
-	}
-	void addClocks(const std::vector<Clock>& c)
-	{
-		display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "clocks to FSM\n" );
-		clocks = c;
-	}
+	void addModule(const Module& m );
+	void addChannels(const std::vector<Chan>& c);
+	void addClocks(const std::vector<Clock>& c);
+
 private:
 	std::vector<Module> modules;
 	std::vector<Chan> channels;

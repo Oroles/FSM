@@ -1,5 +1,14 @@
 #include "chan.h"
 
+Chan::Chan( std::string n, int val ) : name(n), value(val)
+{
+	assert(n.size() != 0);
+
+	size_t pos_space = name.find(" ");
+	name = name.substr(pos_space+1,std::string::npos);
+	name = name.substr(0,name.find(";"));
+}
+
 Chan::Chan(const Chan& rhs) : name(rhs.name), value(rhs.value)
 {
 	assert(name.size() != 0);
@@ -23,12 +32,23 @@ bool Chan::operator==(const Chan& rhs)
 }
 
 
-void Chan::set( int val )
+void Chan::setValue( int val )
 {
 	value = val;
 }
 
-int Chan::get()
+int Chan::getValue() const
 {
 	return value;
+}
+
+std::string Chan::getName() const
+{
+	return name;
+}
+
+std::ostream& operator<<(std::ostream& o, const Chan& c)
+{
+	o << "Chan " << c.getName() << " with value " << c.getValue() ;
+	return o;
 }

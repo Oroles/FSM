@@ -8,47 +8,17 @@
 class State
 {
 public:
-	State() : name("")
-	{
+	State();
+	State(const std::string n);
+	State(const State& rhs);
 
-	}
+	State& operator=(const State& rhs);
+	bool operator==(const State& rhs) const;
 
-	State(const std::string n) : name(n) 
-	{
-		assert(n.size() != 0 );
-	}
+	friend std::ostream& operator<<(std::ostream& o, const State& rhs);
 
-	State(const State& rhs) : name(rhs.name)
-	{
-		assert(rhs.getName().size() != 0);
-	}
-
-	State& operator=(const State& rhs)
-	{
-		name = rhs.name;
-		return *this;
-	}
-
-	friend bool operator==(const State& lhs, const State& rhs)
-	{
-		return lhs.getName() == rhs.getName();
-	}
-	friend std::ostream& operator<<(std::ostream& o, const State& rhs)
-	{
-		o << "State: " << rhs.name;
-		return o;
-	}
-
-	std::string getName() const
-	{
-		return name;
-	}
-
-	void setName(std::string n)
-	{
-		assert(n.size() != 0 );
-		name = n;
-	}
+	std::string getName() const;
+	void setName(std::string n);
 
 private:
 	std::string name;

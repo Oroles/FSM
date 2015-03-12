@@ -2,21 +2,21 @@
 #define _CHAN_H_
 
 #include <string>
+#include <iostream>
 #include <cassert>
 
 class Chan
 {
 public:
-	Chan( std::string n, int val = 0 ) : name(n), value(val)
-	{
-		assert(n.size() != 0);
-	}
+	Chan( std::string n, int val );
 	Chan(const Chan& rhs);
 	Chan& operator=(const Chan& rhs);
 	bool operator==(const Chan& rhs);
+	friend std::ostream& operator<<(std::ostream& o, const Chan& c);
 
-	void set(int value);
-	int get();
+	void setValue(int value);
+	int getValue() const;
+	std::string getName() const;
 
 	~Chan();
 

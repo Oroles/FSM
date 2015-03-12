@@ -1,6 +1,7 @@
 #include "expression.h"
 
 #include "../../utils/utils.h"
+#include "../symboltable.h"
 
 #include <vector>
 #include <cassert>
@@ -54,7 +55,7 @@ bool Expression::operator==(const Expression& rhs)
 	return first==rhs.first && op==rhs.op && second==rhs.second;
 }
 
-bool Expression::evaluate()
+bool Expression::evaluate() const
 {
 	switch( str2int(op.c_str()) )
 	{
@@ -66,13 +67,21 @@ bool Expression::evaluate()
 			{
 				return get_value(first) > get_value(second);
 			}
+		case str2int("<") :
+			{
+				return get_value(first) < get_value(second);
+			}
+		case str2int("<=") :
+			{
+				return get_value(first) <= get_value(second);
+			}
 		default:
 			return false;
 	}
 	return false;
 }
 
-int Expression::get_value(std::string name)
+int Expression::get_value(std::string name) const
 {
 	if ( is_integer( name ) ) //The name contains only digits
 	{
@@ -80,7 +89,8 @@ int Expression::get_value(std::string name)
 	}
 	else
 	{
-		//Has to go to the FSM to get the value of name
+		int value = SymbolTable::getInstance().getEntry(name);
+		return value;
 	}
 	return 0;
 }

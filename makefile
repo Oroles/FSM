@@ -10,13 +10,13 @@ release: CFLAGS += -O3
 release: fsm
 
 fsm: main.o components.o xml.o utils.o variables.o expressions.o
-	$(CC) -std=c++11 -g -pthread main.o tranzition.o module.o fsm.o expression.o chan.o clock.o parser.o pugixml.o stringparser.o utils.o
+	$(CC) -std=c++11 -g -pthread *.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 components.o:
-	$(CC) $(CFLAGS) components/fsm.cpp components/module.cpp components/tranzition.cpp
+	$(CC) $(CFLAGS) components/*.cpp
 
 xml.o:
 	$(CC) $(CFLAGS) pugixml/*.cpp

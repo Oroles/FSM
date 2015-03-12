@@ -1,6 +1,39 @@
 #include "module.h"
 #include "../utils/utils.h"
 
+Module::Module()
+{
+}
+
+Module::Module(const Module& rhs): states(rhs.states), tranzitions(rhs.tranzitions), currState(rhs.currState), name(rhs.name)
+{
+}
+
+void Module::addState(const State& s)
+{
+	display(DebugMessagePriority::Priority::Level1, "State: ", s, "is added to module: ", name, "\n");
+	states.push_back( s );
+}
+
+void Module::addTranzition(const Tranzition& t)
+{
+	display(DebugMessagePriority::Priority::Level1, "Tranzition: ", t, "is added to module: ", name, "\n");
+	tranzitions.push_back( t );
+}
+
+void Module::setCurrentState(const State& s)
+{
+	display(DebugMessagePriority::Priority::Level1, "Init state: ", s, "is added to module: ", name, "\n");
+	currState = s;
+}
+
+void Module::setName(const std::string n)
+{
+	assert(n.size() != 0);
+	display(DebugMessagePriority::Priority::Level1, "Set name to module: ", n, "\n");
+	name = n;
+}
+
 State Module::nextState(const State& s) const
 {
 	for( auto t : tranzitions )

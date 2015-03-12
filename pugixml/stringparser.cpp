@@ -23,7 +23,7 @@ std::vector<Clock> StringParser::generateClocks()
 	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
 	{
 		std::string matchString = i->str();
-		rez.push_back( Clock(matchString) );
+		rez.push_back( Clock(matchString,0) );
 	}
 	return rez;
 }
@@ -37,7 +37,7 @@ std::vector<Chan> StringParser::generateChannels()
 	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
 	{
 		std::string matchString = i->str();
-		rez.push_back( Chan(matchString) );
+		rez.push_back( Chan(matchString,0) );
 	}
 	return rez;
 }
