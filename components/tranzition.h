@@ -20,7 +20,7 @@ public:
 		assert(s.getName().size() != 0);
 		assert(d.getName().size() != 0);
 	}
-	Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination)
+	Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), guards(rhs.guards)
 	{
 		assert(rhs.source.getName().size() != 0);
 		assert(rhs.destination.getName().size() != 0);
@@ -32,6 +32,7 @@ public:
 		assert(rhs.destination.getName().size() != 0 );
 		source = rhs.source;
 		destination = rhs.destination;
+		guards = rhs.guards;
 		return *this;
 	}
 

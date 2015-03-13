@@ -4,11 +4,11 @@
 
 State Tranzition::operator()(const State& s)
 {
-	if ( this->isAvailable(s) )
-	{
+	//if ( this->isAvailable(s) )
+	//{
 		return destination;
-	}
-	return source;
+	//}
+	//return source;
 }
 
 bool Tranzition::isAvailable(const State& s) const

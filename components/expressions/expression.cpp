@@ -57,6 +57,7 @@ bool Expression::operator==(const Expression& rhs)
 
 bool Expression::evaluate() const
 {
+	display(DebugMessagePriority::Priority::Level2, "Is evaluated ", *this );
 	switch( str2int(op.c_str()) )
 	{
 		case str2int(">=") :
@@ -112,6 +113,6 @@ std::string Expression::getSecond() const
 
 std::ostream& operator<<(std::ostream& o, const Expression& e)
 {
-	o << "Expression: " << e.getFirst() << e.getOp() << e.getSecond() << "\n";
+	o << "Expression: " << e.getFirst() << " " << e.getOp() << " " << e.getSecond() << "\n";
 	return o;
 }
