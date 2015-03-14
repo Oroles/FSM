@@ -28,13 +28,13 @@ public:
 	static const unsigned int Fsm = 1;
 	static const unsigned int Tranzition = 1 << 1;
 	static const unsigned int Module = 1 << 2;
-	static const unsigned int Expression = 1 << 3;
-	static const unsigned int Chan = 1 << 3; 
-	static const unsigned int Clock = 1 << 4; 
-	static const unsigned int State = 1 << 5;
-	static const unsigned int SymbolTable = 1 << 6;
-	static const unsigned int Parser = 1 << 7;
-	static const unsigned int StringParser = 1 << 8;
+	static const unsigned int Parser = 1 << 3;
+	static const unsigned int Expression = 1 << 4;
+	static const unsigned int Chan = 1 << 5;
+	static const unsigned int Clock = 1 << 6;
+	static const unsigned int State = 1 << 7;
+	static const unsigned int SymbolTable = 1 << 8;
+	static const unsigned int StringParser = 1 << 9;
 
 	DebugMessagePriority() : priority{0} {}
 	DebugMessagePriority(unsigned int p) 

@@ -37,7 +37,7 @@ std::vector<Chan> StringParser::generateChannels()
 	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
 	{
 		std::string matchString = i->str();
-		rez.push_back( Chan(matchString,0) );
+		rez.push_back( Chan(matchString,-1) );
 	}
 	return rez;
 }
