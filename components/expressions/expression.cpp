@@ -57,7 +57,7 @@ bool Expression::operator==(const Expression& rhs)
 
 bool Expression::evaluate() const
 {
-	display(DebugMessagePriority::Priority::Level2, "Is evaluated ", *this );
+	display(DebugMessagePriority::Expression, "Is evaluated ", *this );
 	switch( str2int(op.c_str()) )
 	{
 		case str2int(">=") :

@@ -2,6 +2,54 @@
 
 #include "../utils/utils.h"
 
+Tranzition::Tranzition() : source(""), destination("")
+{
+
+}
+
+Tranzition::Tranzition(const State s, const State d) : source(s), destination(d)
+{
+	assert(s.getName().size() != 0);
+	assert(d.getName().size() != 0);
+}
+Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), guards(rhs.guards)
+{
+	assert(rhs.source.getName().size() != 0);
+	assert(rhs.destination.getName().size() != 0);
+}
+
+Tranzition& Tranzition::operator=(const Tranzition& rhs)
+{
+	assert(rhs.source.getName().size() != 0 );
+	assert(rhs.destination.getName().size() != 0 );
+	source = rhs.source;
+	destination = rhs.destination;
+	guards = rhs.guards;
+	return *this;
+}
+
+State Tranzition::getSource() const
+{
+	return source;
+}
+
+void Tranzition::setSource( const State s )
+{
+	assert(s.getName().size() != 0 );
+	source = s;
+}
+
+State Tranzition::getDestination() const
+{
+	return destination;
+}
+
+void Tranzition::setDestination( const State d )
+{
+	assert(d.getName().size() != 0 );
+	destination = d;
+}
+
 State Tranzition::operator()(const State& s)
 {
 	//if ( this->isAvailable(s) )
@@ -29,7 +77,7 @@ bool Tranzition::isAvailable(const State& s) const
 
 void Tranzition::setGuards(const std::vector<Expression>& g)
 {
-	display(DebugMessagePriority::Priority::Level1, "There are: ", g.size(), " guards added to ", *this, "\n");
+	display(DebugMessagePriority::Tranzition, "There are: ", g.size(), " guards added to ", *this, "\n");
 	guards = g;
 }
 

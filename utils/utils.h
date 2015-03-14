@@ -19,7 +19,7 @@ bool is_integer(std::string name); //Checks if the string contains only numbers
 template< class T >
 void displayMessage(const DebugMessagePriority& p, const T& msg)
 {
-	if ( priority <= p )
+	if ( ( priority & p ) != 0 )
 	{
 		std::cout << msg << std::endl;
 	}
@@ -28,7 +28,7 @@ void displayMessage(const DebugMessagePriority& p, const T& msg)
 template< class T >
 void displayMessage(const DebugMessagePriority& p, const T&& msg)
 {
-	if ( priority <= p )
+	if ( ( priority & p ) != 0 )
 	{
 		std::cout << msg << std::endl;
 	}
@@ -37,7 +37,7 @@ void displayMessage(const DebugMessagePriority& p, const T&& msg)
 template < class T >
 void display(const DebugMessagePriority& p, T msg)
 {
-	if ( priority <= p )
+	if ( ( priority & p ) != 0 )
 	{
 		std::cout << msg << " ";
 	}

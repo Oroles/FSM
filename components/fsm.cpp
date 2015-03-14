@@ -34,10 +34,10 @@ void FSM::startModules()
 
 void FSM::addClocks(const std::vector<Clock>& c)
 {
-	display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "clocks to FSM\n" );
+	display(DebugMessagePriority::Fsm, "There were added ", c.size(), "clocks to FSM\n" );
 	for( auto& v : c )
 	{
-		display(DebugMessagePriority::Priority::Level1, "The ", v, "is added to Symbol Table\n");
+		display(DebugMessagePriority::Fsm, "The ", v, "is added to Symbol Table\n");
 		SymbolTable::getInstance().updateEntry(v.getName(),v.getValue());
 	}
 	clocks = c;
@@ -45,10 +45,10 @@ void FSM::addClocks(const std::vector<Clock>& c)
 
 void FSM::addChannels(const std::vector<Chan>& c)
 {
-	display(DebugMessagePriority::Priority::Level1, "There were added ", c.size(), "channels to FSM\n" );
+	display(DebugMessagePriority::Fsm, "There were added ", c.size(), "channels to FSM\n" );
 	for ( auto& v : c )
 	{
-		display(DebugMessagePriority::Priority::Level1, "The ", v, "is added to Symbol Table\n");
+		display(DebugMessagePriority::Fsm, "The ", v, "is added to Symbol Table\n");
 		SymbolTable::getInstance().updateEntry(v.getName(),v.getValue());
 	}
 	channels = c;

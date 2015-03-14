@@ -11,26 +11,26 @@ Module::Module(const Module& rhs): states(rhs.states), tranzitions(rhs.tranzitio
 
 void Module::addState(const State& s)
 {
-	display(DebugMessagePriority::Priority::Level1, "State: ", s, "is added to module: ", name, "\n");
+	display(DebugMessagePriority::Module, "State: ", s, "is added to module: ", name, "\n");
 	states.push_back( s );
 }
 
 void Module::addTranzition(const Tranzition& t)
 {
-	display(DebugMessagePriority::Priority::Level1, "Tranzition: ", t, "is added to module: ", name, "\n");
+	display(DebugMessagePriority::Module, "Tranzition: ", t, "is added to module: ", name, "\n");
 	tranzitions.push_back( t );
 }
 
 void Module::setCurrentState(const State& s)
 {
-	display(DebugMessagePriority::Priority::Level1, "Init state: ", s, "is added to module: ", name, "\n");
+	display(DebugMessagePriority::Module, "Init state: ", s, "is added to module: ", name, "\n");
 	currState = s;
 }
 
 void Module::setName(const std::string n)
 {
 	assert(n.size() != 0);
-	display(DebugMessagePriority::Priority::Level1, "Set name to module: ", n, "\n");
+	display(DebugMessagePriority::Module, "Set name to module: ", n, "\n");
 	name = n;
 }
 
@@ -52,13 +52,13 @@ void Module::step()
 	{
 		if ( t.isAvailable( currState ) )
 		{
-			display(DebugMessagePriority::Priority::Level2,"Current state: ", currState, "for module ", name, "\n" );
+			display(DebugMessagePriority::Module,"Current state: ", currState, "for module ", name, "\n" );
 			currState = t( currState );
-			display(DebugMessagePriority::Priority::Level2,"New state: ", currState, "for module ", name, "\n" );
+			display(DebugMessagePriority::Module,"New state: ", currState, "for module ", name, "\n" );
 			return;
 		}
 	}
-	display(DebugMessagePriority::Priority::Level2,"No tranzition available from the state ", currState, " for module ", name, "\n" );
+	display(DebugMessagePriority::Module,"No tranzition available from the state ", currState, " for module ", name, "\n" );
 }
 
 void Module::run()

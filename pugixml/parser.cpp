@@ -79,7 +79,22 @@ std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
 			std::string expressions = it->child_value();
 			Expression ex( expressions );
 			rez.push_back( ex );
-			display(DebugMessagePriority::Priority::Level1, "Guard founded: ", ex );
+			display(DebugMessagePriority::Parser, "Guard founded: ", ex );
+		}
+	}
+	return rez;
+}
+
+std::vector<std::string> Parser::processSyncs(const pugi::xml_node& node)
+{
+	std::vector<std::string> rez;
+	for ( auto it = node.begin(); it != node.end(); ++it )
+	{
+		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("guard") ) )
+		{
+			std::string expressions = it->child_value();
+			rez.push_back( expressions );
+			display(DebugMessagePriority::Parser, "Guard founded: ", expressions );
 		}
 	}
 	return rez;
