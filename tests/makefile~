@@ -7,8 +7,8 @@ clean:
 	rm -f ./pugixml/*.hpp
 	rm -f ./utils/*.h
 	rm -f ./components/*.a
-	rm -f ./expressions/*.a
-	rm -f ./variables/*.a
+	rm -f ./components/expressions/*.a
+	rm -f ./components/variables/*.a
 	rm -f ./pugixml/*.a
 	rm -f ./utils/*.a
 	rm -f *.out
