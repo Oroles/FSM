@@ -1,7 +1,7 @@
 #include "expression.h"
 
-#include "../../utils/utils.h"
-#include "../symboltable.h"
+#include "../utils/utils.h"
+#include "../components/symboltable.h"
 
 #include <vector>
 #include <cassert>

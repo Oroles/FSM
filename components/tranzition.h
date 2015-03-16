@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "state.h"
-#include "./expressions/expression.h"
+#include "../expressions/expression.h"
 
 class Tranzition
 {

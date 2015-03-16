@@ -10,7 +10,7 @@
 #include "../components/module.h"
 #include "../components/state.h"
 #include "../components/tranzition.h"
-#include "../components/expressions/expression.h"
+#include "../expressions/expression.h"
 #include "pugixml.hpp"
 
 class Parser

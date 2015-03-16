@@ -7,8 +7,9 @@
 #include <map>
 #include <vector>
 
-#include "../components/variables/clock.h"
-#include "../components/variables/chan.h"
+#include "../variables/clock.h"
+#include "../variables/chan.h"
+#include "../components/module.h"
 
 class StringParser
 {
@@ -16,6 +17,7 @@ public:
 	StringParser( std::string t );
 	std::vector<Clock> generateClocks();
 	std::vector<Chan> generateChannels();
+	std::vector<Module> generateModules();
 
 private:
 

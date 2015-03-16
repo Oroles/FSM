@@ -18,6 +18,11 @@ void Parser::generateFSM(FSM* fsm)
 			fsm->addChannels( parser.generateChannels() );
 			fsm->addClocks( parser.generateClocks() );
 		}
+		if ( std::string(node.name()) == "system" )
+		{
+			StringParser parser(node.child_value());
+			parser.generateModules();
+		}
 	}
 }
 

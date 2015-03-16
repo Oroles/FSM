@@ -5,8 +5,8 @@
 #include <memory>
 
 #include "module.h"
-#include "./variables/clock.h"
-#include "./variables/chan.h"
+#include "../variables/clock.h"
+#include "../variables/chan.h"
 
 class FSM
 {
