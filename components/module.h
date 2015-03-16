@@ -18,6 +18,7 @@ public:
 	void setCurrentState( const State& s );
 
 	void setName( const std::string n );
+	std::string getName() const;
 
 	State nextState( const State& s ) const;
 	void step();

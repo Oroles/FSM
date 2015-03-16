@@ -54,7 +54,23 @@ void FSM::addChannels(const std::vector<Chan>& c)
 	channels = c;
 }
 
-void FSM::addModule(const Module& m)
+void FSM::addTemplate(const Module& t)
 {
-	modules.push_back( m );
+	templates.push_back( t );
+}
+
+void FSM::addModules(const std::map<std::string,std::string> modulesName )
+{
+	for ( auto name : modulesName )
+	{
+		for ( auto& t : templates )
+		{
+			if ( t.getName() == name.second )
+			{
+				Module aux = t;
+				aux.setName( name.first );
+				modules.push_back( aux );
+			}
+		}
+	}
 }

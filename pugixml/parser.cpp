@@ -10,7 +10,7 @@ void Parser::generateFSM(FSM* fsm)
 	{
 		if ( std::string(node.name()) == "template" )
 		{
-			fsm->addModule( this->processModule( node ) );
+			fsm->addTemplate( this->processTemplate( node ) );
 		}
 		if ( std::string(node.name()) == "declaration" )
 		{
@@ -21,12 +21,12 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "system" )
 		{
 			StringParser parser(node.child_value());
-			parser.generateModules();
+			fsm->addModules( parser.generateModules() ); 
 		}
 	}
 }
 
-Module Parser::processModule(const pugi::xml_node& nodes )
+Module Parser::processTemplate(const pugi::xml_node& nodes )
 {
 	Module rez;
 	for( const pugi::xml_node node : nodes )

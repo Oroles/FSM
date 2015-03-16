@@ -26,7 +26,7 @@ public:
 	void generateFSM(FSM* fsm);
 
 private:
-	Module processModule(const pugi::xml_node& node );
+	Module processTemplate(const pugi::xml_node& node );
 	State processState(const pugi::xml_node& node );
 	State processCurrentState(const pugi::xml_node& node);
 	Tranzition processTranzition(const pugi::xml_node& node);

@@ -34,6 +34,11 @@ void Module::setName(const std::string n)
 	name = n;
 }
 
+std::string Module::getName() const
+{
+	return name;
+}
+
 State Module::nextState(const State& s) const
 {
 	for( auto t : tranzitions )
