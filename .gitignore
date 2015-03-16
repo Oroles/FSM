@@ -1,6 +1,7 @@
 *.o
 *.a
 *.out
+*.d
 tests/components/
 tests/pugixml/
 tests/utils/
