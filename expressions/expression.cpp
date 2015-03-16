@@ -6,6 +6,11 @@
 #include <vector>
 #include <cassert>
 
+const std::vector<std::pair<std::string,int>> operators { std::pair<std::string,int>( "<=", 2 ),
+														  std::pair<std::string,int>( ">=", 2 ),
+														  std::pair<std::string,int>( "<", 1 ),
+														  std::pair<std::string,int>( ">", 1) };
+
 constexpr unsigned int str2int(const char* str, int h = 0)
 {
     return !str[h] ? 5381 : (str2int(str, h+1)*33) ^ str[h];
@@ -19,17 +24,17 @@ Expression::Expression()
 Expression::Expression(std::string ex)
 {
 	assert(ex.size() != 0 );
-	std::size_t pos;
-	std::vector<std::string> operands;
-	while ( ( pos = ex.find(" ") ) != std::string::npos )
+
+	ex.erase(std::remove_if(ex.begin(),ex.end(),isspace),ex.end());
+	auto found = std::find_if( operators.begin(), operators.end(), [&ex](std::pair<std::string,int> o ) -> bool { return (ex.find(o.first) != std::string::npos ); } );
+	
+	if ( found != operators.end() )
 	{
-		std::string aux = ex.substr(0,pos);
-		operands.push_back( aux );
-		ex = ex.substr(pos+1);
+		std::size_t pos = ex.find(found->first);
+		first = ex.substr(0,pos);
+		op = ex.substr(pos,found->second);
+		second = ex.substr(pos+found->second,std::string::npos);
 	}
-	first = operands[0];
-	op = operands[1];
-	second = ex;
 }
 
 Expression::Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second)
