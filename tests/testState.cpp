@@ -2,6 +2,8 @@
 
 #include "components/state.h"
 
+#include "utils.h"
+
 int main( int argc, char* argv[] )
 {
 	State s("ana");
@@ -10,29 +12,25 @@ int main( int argc, char* argv[] )
 	State s3( s );
 
 	/* Test constructors & equal operator */
-	if ( s == s1 ) return -1;
-	if ( s == s2 ) return -1;
-	if ( s1 == s2 ) return -1;
-	if ( !( s == s3 ) ) return -1;
-
-	/* Test operator != */
-	if ( s != s3 ) return -1;
-	if ( !( s != s1 ) ) return -1;
+	TEST_NOT_EQUAL(s,s1);
+	TEST_NOT_EQUAL(s,s2);
+	TEST_NOT_EQUAL(s1,s2);
+	TEST_EQUAL(s,s3);
 
 	/* Test assign operator */
 	s1 = s;
-	if ( !( s1 == s ) ) return -1;
-	if ( s1 == s2  ) return -1;
-	if ( !( s1 == s3 ) ) return -1;
+	TEST_EQUAL(s1,s);
+	TEST_NOT_EQUAL(s1,s2);
+	TEST_EQUAL(s1,s3);
 
 	/* Test set and get name */
-	if ( s1.getName() != "ana" ) return -1;
-	if ( s.getName() != "ana" ) return -1;
-	if ( s2.getName() != "maria" ) return -1;
-	if ( s3.getName() != "ana" ) return -1;
+	if ( s1.getName() != "ana" ) FAILED_BLOCK();
+	if ( s.getName() != "ana" ) FAILED_BLOCK();
+	if ( s2.getName() != "maria" ) FAILED_BLOCK();
+	if ( s3.getName() != "ana" ) FAILED_BLOCK();
 	s1.setName( "testName" );
-	if ( s1.getName() != "testName" ) return -1;
-	if ( s.getName() != "ana" ) return -1;
+	if ( s1.getName() != "testName" ) FAILED_BLOCK();
+	if ( s.getName() != "ana" ) FAILED_BLOCK();
 
 	return 0;
 }
