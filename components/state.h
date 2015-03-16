@@ -14,6 +14,7 @@ public:
 
 	State& operator=(const State& rhs);
 	bool operator==(const State& rhs) const;
+	bool operator!=(const State& rhs) const;
 
 	friend std::ostream& operator<<(std::ostream& o, const State& rhs);
 

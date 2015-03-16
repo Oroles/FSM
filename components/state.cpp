@@ -26,6 +26,11 @@ bool State::operator==(const State& rhs) const
 	return name == rhs.getName();
 }
 
+bool State::operator!=(const State& rhs) const
+{
+	return name != rhs.getName();
+}
+
 std::string State::getName() const
 {
 	return name;
