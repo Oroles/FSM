@@ -10,6 +10,7 @@
 # 6. run the script and check if all the tests failed
 # 7. if you want to delete .h and .a file run make clean in tests folder
 
+cd ./scripts
 for file in ./*.sh
 do
 	if [[ "$file" != "./createTests.sh" && "$file" != "./runTests.sh" ]]

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-g++ -std=c++11 -pthread testState.cpp ./components/state.a
+g++ -std=c++11 -pthread ../tests/testState.cpp ../components/state.a
 ./a.out
 if [ $? == 0 ]; then
 	echo "Passed testState"

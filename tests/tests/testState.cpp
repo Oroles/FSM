@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "components/state.h"
+#include "../components/state.h"
 
 #include "utils.h"
 
