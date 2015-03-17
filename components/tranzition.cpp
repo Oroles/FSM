@@ -19,6 +19,13 @@ Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(
 	assert(rhs.destination.getName().size() != 0);
 }
 
+Tranzition::Tranzition(Tranzition&& rhs) : source(std::move(rhs.source)), destination(std::move(rhs.destination)),
+										   guards(std::move(rhs.guards)), updates(std::move(rhs.updates)),
+										   sync(std::move(rhs.sync))
+{
+
+}
+
 Tranzition& Tranzition::operator=(const Tranzition& rhs)
 {
 	assert(rhs.source.getName().size() != 0 );

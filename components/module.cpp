@@ -9,6 +9,20 @@ Module::Module(const Module& rhs): states(rhs.states), tranzitions(rhs.tranzitio
 {
 }
 
+Module::Module(Module&& rhs) : states(std::move(rhs.states)), tranzitions(std::move(rhs.tranzitions)),
+							   currState(std::move(rhs.currState)), name(std::move(rhs.name))
+{
+}
+
+Module& Module::operator=(const Module& rhs)
+{
+	states = rhs.states;
+	tranzitions = rhs.tranzitions;
+	currState = rhs.currState;
+	name = rhs.name;
+	return *this;
+}
+
 void Module::addState(const State& s)
 {
 	display(DebugMessagePriority::Module, "State: ", s, "is added to module: ", name, "\n");

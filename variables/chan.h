@@ -10,6 +10,7 @@ class Chan
 public:
 	Chan( std::string n, int val );
 	Chan(const Chan& rhs);
+	Chan(Chan&& rhs);
 	Chan& operator=(const Chan& rhs);
 	bool operator==(const Chan& rhs);
 	friend std::ostream& operator<<(std::ostream& o, const Chan& c);

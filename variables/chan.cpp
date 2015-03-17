@@ -14,6 +14,11 @@ Chan::Chan(const Chan& rhs) : name(rhs.name), value(rhs.value)
 	assert(name.size() != 0);
 }
 
+Chan::Chan(Chan&& rhs) : name(std::move(rhs.name)), value(std::move(rhs.value))
+{
+	
+}
+
 Chan::~Chan()
 {
 	

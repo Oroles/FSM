@@ -11,6 +11,7 @@ public:
 	State();
 	State(const std::string n);
 	State(const State& rhs);
+	State(State&& rhs);
 
 	State& operator=(const State& rhs);
 	bool operator==(const State& rhs) const;

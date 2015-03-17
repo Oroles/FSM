@@ -15,6 +15,11 @@ State::State(const State& rhs) : name(rhs.name)
 	assert(rhs.getName().size() != 0);
 }
 
+State::State(State&& rhs) : name(std::move(rhs.name))
+{
+
+}
+
 State& State::operator=(const State& rhs)
 {
 	name = rhs.name;

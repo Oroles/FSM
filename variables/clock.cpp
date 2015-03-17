@@ -16,6 +16,11 @@ Clock::Clock(const Clock& rhs) : name(rhs.name), value(rhs.value)
 	assert(rhs.value >= 0);
 }
 
+Clock::Clock(Clock&& rhs) : name(std::move(rhs.name)), value(std::move(rhs.value))
+{
+	
+}
+
 Clock::~Clock()
 {
 	

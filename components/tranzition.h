@@ -14,6 +14,7 @@ public:
 
 	Tranzition(const State s, const State d);
 	Tranzition(const Tranzition& rhs);
+	Tranzition(Tranzition&& rhs);
 
 	Tranzition& operator=(const Tranzition& rhs);
 	State getSource() const;
