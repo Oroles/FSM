@@ -11,6 +11,7 @@ public:
 	Expression();
 	Expression(std::string ex);
 	Expression(const Expression& rhs);
+	Expression(Expression&& rhs);
 	Expression& operator=(const Expression& rhs);
 	bool operator==(const Expression& rhs);
 	bool evaluate() const;

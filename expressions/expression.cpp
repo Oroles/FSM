@@ -46,6 +46,11 @@ Expression::Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), se
 	assert( second != "" );
 }
 
+Expression::Expression(Expression&& rhs) : first(std::move(rhs.first)), op(std::move(rhs.op)), second(std::move(rhs.second))
+{
+
+}
+
 Expression& Expression::operator=(const Expression& rhs)
 {
 	first = rhs.first;
