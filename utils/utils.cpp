@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include "../components/symboltable.h"
+
 DebugMessagePriority priority;
 bool stepProgress = false;
 
@@ -73,6 +75,10 @@ void nextStep()
 		{
 			std::cout << "Press s to make progress: ";
 			std::cin >> aux;
+			if ( aux != "s" )
+			{
+				std::cout << aux << " = " << SymbolTable::getInstance().getEntry(aux) << std::endl;
+			}
 		}
 	}
 	return;
