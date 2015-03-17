@@ -82,10 +82,14 @@ std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
 	{
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("guard") ) )
 		{
-			std::string expressions = it->child_value();
-			Expression ex( expressions );
-			rez.push_back( ex );
-			display(DebugMessagePriority::Parser, "Guard founded: ", ex );
+			std::string data = it->child_value();
+			std::vector<std::string> expressions = splitString(data,"&&");
+			for ( auto it : expressions )
+			{
+				Expression ex(it);
+				rez.push_back( ex );
+				display(DebugMessagePriority::Parser, "Guard founded: ", ex );	
+			}
 		}
 	}
 	return rez;

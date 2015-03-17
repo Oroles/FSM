@@ -83,3 +83,18 @@ bool is_integer(std::string name)
 	size_t pos = name.find_first_not_of("0123456789");
 	return pos == std::string::npos;
 }
+
+std::vector<std::string> splitString(std::string data, const std::string split)
+{
+	std::vector<std::string> rez;
+	data.erase(std::remove_if(data.begin(),data.end(),isspace), data.end());
+	size_t poz;
+	while( ( poz = data.find(split) ) != std::string::npos )
+	{
+		std::string aux = data.substr(0,poz);
+		rez.push_back( aux );
+		data = data.substr(poz+split.length(),std::string::npos);
+	}
+	rez.push_back( data );
+	return rez;
+}

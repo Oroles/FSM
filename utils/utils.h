@@ -15,6 +15,7 @@ bool setStepProgress(const std::vector<std::string>& args);
 void nextStep();
 
 bool is_integer(std::string name); //Checks if the string contains only numbers
+std::vector<std::string> splitString(std::string data, const std::string split);
 
 template< class T >
 void displayMessage(const DebugMessagePriority& p, const T& msg)
