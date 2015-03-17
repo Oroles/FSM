@@ -11,6 +11,12 @@ void FSM::step()
 		m.step();
 	}
 	nextStep();
+	//Update clocks Work around
+	for ( auto& c : clocks )
+	{
+		c.setValue( SymbolTable::getInstance().getEntry( c.getName() ) );
+	}
+
 	for ( auto& c : clocks )
 	{
 		c.update();

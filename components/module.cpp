@@ -41,7 +41,7 @@ std::string Module::getName() const
 
 State Module::nextState(const State& s) const
 {
-	for( auto t : tranzitions )
+	for( auto& t : tranzitions )
 	{
 		if ( t.isAvailable( s ) )
 		{
@@ -53,7 +53,7 @@ State Module::nextState(const State& s) const
 
 void Module::step()
 {
-	for( auto t : tranzitions )
+	for( auto& t : tranzitions )
 	{
 		if ( t.isAvailable( currState ) )
 		{

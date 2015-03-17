@@ -13,7 +13,7 @@ Tranzition::Tranzition(const State s, const State d) : source(s), destination(d)
 	assert(s.getName().size() != 0);
 	assert(d.getName().size() != 0);
 }
-Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), guards(rhs.guards), sync(rhs.sync)
+Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), guards(rhs.guards), updates(rhs.updates), sync(rhs.sync)
 {
 	assert(rhs.source.getName().size() != 0);
 	assert(rhs.destination.getName().size() != 0);
@@ -26,6 +26,7 @@ Tranzition& Tranzition::operator=(const Tranzition& rhs)
 	source = rhs.source;
 	destination = rhs.destination;
 	guards = rhs.guards;
+	updates = rhs.updates;
 	sync = rhs.sync;
 	return *this;
 }
@@ -54,43 +55,9 @@ void Tranzition::setDestination( const State d )
 
 State Tranzition::operator()(const State& s)
 {
-
-	for ( auto s : sync )
+	for ( auto& u : updates )
 	{
-		display(DebugMessagePriority::Tranzition, "Sync ", s, "is evaluated\n");
-		if ( s.find("!") != std::string::npos )
-		{
-			s.pop_back();
-			int value = SymbolTable::getInstance().getEntry(s);
-			if ( value == 1 )
-			{
-				return source;
-			}
-			else
-			{
-				if (value == -1 )
-				{
-					SymbolTable::getInstance().updateEntry(s,1);
-					return source;
-				}
-				SymbolTable::getInstance().updateEntry(s,1);
-				return destination;
-			}
-		}
-		else
-		{
-			s.pop_back();
-			int value = SymbolTable::getInstance().getEntry(s);
-			if ( value == 0 )
-			{
-				return source;
-			}
-			else
-			{
-				SymbolTable::getInstance().updateEntry(s,0);
-				return destination;
-			}
-		}
+		u.evaluate();
 	}
 	return destination;
 }
@@ -115,6 +82,12 @@ void Tranzition::setGuards(const std::vector<Expression>& g)
 {
 	display(DebugMessagePriority::Tranzition, "There are: ", g.size(), " guards added to ", *this, "\n");
 	guards = g;
+}
+
+void Tranzition::setUpdates(const std::vector<Expression>& u)
+{
+	display(DebugMessagePriority::Tranzition, "There are: ", u.size(), "updates added to ", *this, "\n" );
+	updates = u;
 }
 
 void Tranzition::setSyncs(const std::vector<std::string>& s)

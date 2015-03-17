@@ -8,8 +8,10 @@
 
 const std::vector<std::pair<std::string,int>> operators { std::pair<std::string,int>( "<=", 2 ),
 														  std::pair<std::string,int>( ">=", 2 ),
+														  std::pair<std::string,int>( ":=", 2),
 														  std::pair<std::string,int>( "<", 1 ),
-														  std::pair<std::string,int>( ">", 1) };
+														  std::pair<std::string,int>( ">", 1 ),
+														  std::pair<std::string,int>( "=", 1 ) };
 
 constexpr unsigned int str2int(const char* str, int h = 0)
 {
@@ -80,6 +82,13 @@ bool Expression::evaluate() const
 		case str2int("<=") :
 			{
 				return get_value(first) <= get_value(second);
+			}
+		case str2int(":=") :
+		case str2int("=") :
+			{
+				int secondValue = get_value(second);
+				SymbolTable::getInstance().updateEntry(first,secondValue);
+				return true;
 			}
 		default:
 			return false;

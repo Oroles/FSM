@@ -72,6 +72,7 @@ Tranzition Parser::processTranzition(const pugi::xml_node& node)
 	Tranzition tranz(source,destination);
 	tranz.setGuards( this->processGuards(node) );
 	tranz.setSyncs( this->processSyncs(node) );
+	tranz.setUpdates( this->processUpdates(node) );
 	return tranz;
 }
 
@@ -89,6 +90,26 @@ std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
 				Expression ex(it);
 				rez.push_back( ex );
 				display(DebugMessagePriority::Parser, "Guard founded: ", ex );	
+			}
+		}
+	}
+	return rez;
+}
+
+std::vector<Expression> Parser::processUpdates(const pugi::xml_node& node)
+{
+	std::vector<Expression> rez;
+	for ( auto it = node.begin(); it != node.end(); ++it )
+	{
+		if ( ( it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("assignment") ) )
+		{
+			std::string data = it->child_value();
+			std::vector<std::string> expressions = splitString(data,",");
+			for ( auto it : expressions )
+			{
+				Expression ex(it);
+				rez.push_back( ex );
+				display(DebugMessagePriority::Parser, "Update founded: ", ex );
 			}
 		}
 	}
