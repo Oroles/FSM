@@ -22,6 +22,8 @@ public:
 	State getDestination() const;
 	void setDestination( const State d );
 
+	void addGuard( const Expression& e );
+	void addUpdate( const Expression& e );
 	void setGuards( const std::vector<Expression>& g );
 	void setUpdates( const std::vector<Expression>& u );
 	void setSync( const std::string s);

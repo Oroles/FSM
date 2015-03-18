@@ -70,15 +70,12 @@ Tranzition Parser::processTranzition(const pugi::xml_node& node)
 	State source( node.child("source").attribute("ref").value() );
 	State destination( node.child("target").attribute("ref").value() );
 	Tranzition tranz(source,destination);
-	tranz.setGuards( this->processGuards(node) );
-	tranz.setSync( this->processSync(node) );
-	tranz.setUpdates( this->processUpdates(node) );
+	this->processLabels( &tranz, node );
 	return tranz;
 }
 
-std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
+void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 {
-	std::vector<Expression> rez;
 	for ( auto it = node.begin(); it != node.end(); ++it )
 	{
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("guard") ) )
@@ -88,19 +85,10 @@ std::vector<Expression> Parser::processGuards(const pugi::xml_node& node)
 			for ( auto it : expressions )
 			{
 				Expression ex(it);
-				rez.push_back( ex );
+				t->addGuard( ex );
 				display(DebugMessagePriority::Parser, "Guard founded: ", ex );	
 			}
 		}
-	}
-	return rez;
-}
-
-std::vector<Expression> Parser::processUpdates(const pugi::xml_node& node)
-{
-	std::vector<Expression> rez;
-	for ( auto it = node.begin(); it != node.end(); ++it )
-	{
 		if ( ( it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("assignment") ) )
 		{
 			std::string data = it->child_value();
@@ -108,26 +96,17 @@ std::vector<Expression> Parser::processUpdates(const pugi::xml_node& node)
 			for ( auto it : expressions )
 			{
 				Expression ex(it);
-				rez.push_back( ex );
+				t->addUpdate( ex );
 				display(DebugMessagePriority::Parser, "Update founded: ", ex );
 			}
 		}
-	}
-	return rez;
-}
-
-std::string Parser::processSync(const pugi::xml_node& node)
-{
-	std::string rez;
-	for ( auto it = node.begin(); it != node.end(); ++it )
-	{
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )
 		{
-			rez = it->child_value();
+			std::string rez = it->child_value();
 			display(DebugMessagePriority::Parser, "Syncs founded: ", rez, "\n" );
+			t->setSync( rez );
 		}
 	}
-	return rez;
 }
 
 std::string Parser::processName(const pugi::xml_node& node)

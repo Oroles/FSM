@@ -85,6 +85,18 @@ bool Tranzition::isAvailable(const State& s) const
 	return true;
 }
 
+void Tranzition::addGuard( const Expression& e )
+{
+	display(DebugMessagePriority::Tranzition, "The guard ", e, "is added to ", *this, "\n");
+	guards.push_back( e );
+}
+
+void Tranzition::addUpdate( const Expression& e )
+{
+	display(DebugMessagePriority::Tranzition, "The update ", e, "is added to ", *this, "\n");
+	updates.push_back( e );
+}
+
 void Tranzition::setGuards(const std::vector<Expression>& g)
 {
 	display(DebugMessagePriority::Tranzition, "There are: ", g.size(), " guards added to ", *this, "\n");
