@@ -71,7 +71,7 @@ Tranzition Parser::processTranzition(const pugi::xml_node& node)
 	State destination( node.child("target").attribute("ref").value() );
 	Tranzition tranz(source,destination);
 	tranz.setGuards( this->processGuards(node) );
-	tranz.setSyncs( this->processSyncs(node) );
+	tranz.setSync( this->processSync(node) );
 	tranz.setUpdates( this->processUpdates(node) );
 	return tranz;
 }
@@ -116,16 +116,15 @@ std::vector<Expression> Parser::processUpdates(const pugi::xml_node& node)
 	return rez;
 }
 
-std::vector<std::string> Parser::processSyncs(const pugi::xml_node& node)
+std::string Parser::processSync(const pugi::xml_node& node)
 {
-	std::vector<std::string> rez;
+	std::string rez;
 	for ( auto it = node.begin(); it != node.end(); ++it )
 	{
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )
 		{
-			std::string expressions = it->child_value();
-			rez.push_back( expressions );
-			display(DebugMessagePriority::Parser, "Syncs founded: ", expressions, "\n" );
+			rez = it->child_value();
+			display(DebugMessagePriority::Parser, "Syncs founded: ", rez, "\n" );
 		}
 	}
 	return rez;

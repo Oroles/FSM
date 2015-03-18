@@ -97,9 +97,9 @@ void Tranzition::setUpdates(const std::vector<Expression>& u)
 	updates = u;
 }
 
-void Tranzition::setSyncs(const std::vector<std::string>& s)
+void Tranzition::setSync(const std::string s)
 {
-	display(DebugMessagePriority::Tranzition, "There are:", s.size(), " syncs added to ", *this, "\n" );
+	display(DebugMessagePriority::Tranzition, "There is: ", s, " sync added to ", *this, "\n" );
 	sync = s;
 }
 

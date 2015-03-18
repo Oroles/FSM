@@ -33,7 +33,7 @@ private:
 	std::string processName(const pugi::xml_node& node );
 	std::vector<Expression> processGuards(const pugi::xml_node& node);
 	std::vector<Expression> processUpdates(const pugi::xml_node& node);
-	std::vector<std::string> processSyncs(const pugi::xml_node& node);
+	std::string processSync(const pugi::xml_node& node);
 
 	pugi::xml_document doc;
 };

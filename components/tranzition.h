@@ -24,7 +24,7 @@ public:
 
 	void setGuards( const std::vector<Expression>& g );
 	void setUpdates( const std::vector<Expression>& u );
-	void setSyncs( const std::vector<std::string>& s);
+	void setSync( const std::string s);
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
 	bool isAvailable(const State&) const;
@@ -34,7 +34,7 @@ private:
 	State destination;
 	std::vector<Expression> guards;
 	std::vector<Expression> updates;
-	std::vector<std::string> sync;
+	std::string sync;
 };
 
 #endif
