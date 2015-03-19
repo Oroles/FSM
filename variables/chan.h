@@ -9,22 +9,30 @@ class Chan
 {
 public:
 	Chan();
-	Chan( std::string n, int val );
+	Chan( std::string n);
 	Chan(const Chan& rhs);
 	Chan(Chan&& rhs);
 	Chan& operator=(const Chan& rhs);
 	bool operator==(const Chan& rhs);
 	friend std::ostream& operator<<(std::ostream& o, const Chan& c);
 
-	void setValue(int value);
-	int getValue() const;
 	std::string getName() const;
+	bool isSenderSync();
+	bool isReceiverSync();
+	void wantSender();
+	void wantReceiver();
 
 	~Chan();
 
 private:
+	enum class Turn { Sender, Receiver };
 	std::string name;
-	int value = 0;
+	Turn turn;
+	bool wcs;
+	bool wcr;
+	bool acs;
+	bool acr;
+	
 };
 
 #endif

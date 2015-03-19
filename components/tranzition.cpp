@@ -82,7 +82,16 @@ bool Tranzition::isAvailable(const State& s) const
 			return false;
 		}
 	}
+	if ( !this->isSync() )
+	{
+		return false;
+	}
 	return true;
+}
+
+bool Tranzition::isSync() const
+{
+	return sync.isSync();
 }
 
 void Tranzition::addGuard( const Expression& e )

@@ -1,6 +1,6 @@
 #include "sync.h"
 
-#include "../tables/symboltable.h"
+#include "../tables/chantable.h"
 
 #include <cassert>
 #include <algorithm>
@@ -12,29 +12,44 @@ Sync::Sync() : name("")
 
 Sync::Sync(const std::string& n) : name(n)
 {
-	//assert( name != "" );
-	//assert( name.end() != std::find_if(name.begin(),name.end(),[](char c){ return ( c == '?' || c == '!' ); }));
+	
 }
 
-Sync::Sync(const Sync& rhs) : name(rhs.name), lastAction(rhs.lastAction)
+Sync::Sync(const Sync& rhs) : name(rhs.name)
 {
-	//assert( name != "" );	
+	
 }
 	
-Sync::Sync(Sync&& rhs) : name(std::move(rhs.name)), lastAction(std::move(rhs.lastAction))
+Sync::Sync(Sync&& rhs) : name(std::move(rhs.name))
 {
-	assert( name != "" );
+
 }
 
 Sync& Sync::operator=(const Sync& rhs)
 {
 	name = rhs.name;
-	lastAction = rhs.lastAction;
 	return *this;
 }
 
-bool Sync::isSync()
-{
+bool Sync::isSync() const
+{	
+	if ( name == "" )
+	{
+		return true;
+	}
+	
+	const char type = name.back();
+	const std::string chan = name.substr(0,name.length()-1);
+	if ( type == '!' )
+	{
+		ChanTable::getInstance().wantSender( chan );
+		return ChanTable::getInstance().isSenderSync( chan );
+	}
+	else
+	{
+		ChanTable::getInstance().wantReceiver( chan );
+		return ChanTable::getInstance().isReceiverSync( chan );
+	}
 	return false;
 }
 

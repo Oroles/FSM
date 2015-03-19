@@ -12,6 +12,11 @@ public:
 	void addEntry(const Chan& c);
 	void addEntries( const std::vector<Chan>& v);
 
+	bool isSenderSync(std::string name);
+	bool isReceiverSync(std::string name);
+	void wantSender(std::string name);
+	void wantReceiver(std::string name);
+
 private:
 	ChanTable();
 	ChanTable(const ChanTable& rhs) = delete;

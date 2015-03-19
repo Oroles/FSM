@@ -23,3 +23,23 @@ void ChanTable::addEntries(const std::vector<Chan>& v)
 		table[c.getName()] = c;
 	}
 }
+
+bool ChanTable::isSenderSync(std::string name)
+{
+	return table[name].isSenderSync();
+}
+
+bool ChanTable::isReceiverSync(std::string name)
+{
+	return table[name].isReceiverSync();
+}
+
+void ChanTable::wantSender(std::string name)
+{
+	table[name].wantSender();
+}
+
+void ChanTable::wantReceiver(std::string name)
+{
+	table[name].wantReceiver();
+}

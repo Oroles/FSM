@@ -4,7 +4,7 @@ Chan::Chan()
 {
 }
 
-Chan::Chan( std::string n, int val ) : name(n), value(val)
+Chan::Chan( std::string n) : name(n), turn(Chan::Turn::Sender), wcs(false), wcr(false), acs(false), acr(false)
 {
 	assert(n.size() != 0);
 
@@ -13,12 +13,13 @@ Chan::Chan( std::string n, int val ) : name(n), value(val)
 	name = name.substr(0,name.find(";"));
 }
 
-Chan::Chan(const Chan& rhs) : name(rhs.name), value(rhs.value)
+Chan::Chan(const Chan& rhs) : name(rhs.name), turn(rhs.turn), wcs(rhs.wcs), wcr(rhs.wcr), acs(rhs.acs), acr(rhs.acr)
 {
 	assert(name.size() != 0);
 }
 
-Chan::Chan(Chan&& rhs) : name(std::move(rhs.name)), value(std::move(rhs.value))
+Chan::Chan(Chan&& rhs) : name(std::move(rhs.name)), turn(std::move(rhs.turn)), wcs(std::move(rhs.wcs)),
+						 wcr(std::move(rhs.wcr)), acs(std::move(rhs.acs)), acr(std::move(rhs.acr))
 {
 	
 }
@@ -31,24 +32,17 @@ Chan::~Chan()
 Chan& Chan::operator=(const Chan& rhs)
 {
 	name=rhs.name;
-	value=rhs.value;
+	turn = rhs.turn;
+	wcs = rhs.wcs;
+	wcr = rhs.wcr;
+	acs = rhs.acs;
+	acr = rhs.acr;
 	return *this;
 }
 
 bool Chan::operator==(const Chan& rhs)
 {
 	return name == rhs.name;
-}
-
-
-void Chan::setValue( int val )
-{
-	value = val;
-}
-
-int Chan::getValue() const
-{
-	return value;
 }
 
 std::string Chan::getName() const
@@ -58,6 +52,58 @@ std::string Chan::getName() const
 
 std::ostream& operator<<(std::ostream& o, const Chan& c)
 {
-	o << "Chan " << c.getName() << " with value " << c.getValue() ;
+	o << "Chan " << c.getName();
 	return o;
+}
+
+bool Chan::isSenderSync()
+{
+	if ( ( wcs == true ) && ( wcr == true ) )
+	{
+		if ( turn == Chan::Turn::Sender )
+		{
+			wcs = false;
+			turn = Chan::Turn::Receiver;
+			acr = true;
+			return true;
+		}
+	}
+	if ( acs == true )
+	{
+		turn = Chan::Turn::Receiver;
+		acs = false;
+		return true;
+	}
+	return false;
+}
+
+bool Chan::isReceiverSync()
+{
+	if ( ( wcs == true ) && ( wcr == true ) )
+	{
+		if ( turn == Chan::Turn::Receiver )
+		{
+			wcr = false;
+			turn = Chan::Turn::Sender;
+			acs = true;
+			return true;
+		}
+	}
+	if ( acr == true )
+	{
+		turn = Chan::Turn::Sender;
+		acr = false;
+		return true;
+	}
+	return false;
+}
+
+void Chan::wantSender()
+{
+	wcs = true;
+}
+
+void Chan::wantReceiver()
+{
+	wcr = true;
 }

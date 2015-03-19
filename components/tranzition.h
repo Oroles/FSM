@@ -31,6 +31,7 @@ public:
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
 	bool isAvailable(const State&) const;
+	bool isSync() const;
 
 private:
 	State source;
