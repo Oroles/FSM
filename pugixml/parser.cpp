@@ -88,7 +88,7 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 			{
 				Expression ex(it);
 				t->addGuard( ex );
-				display(DebugMessagePriority::Parser, "Guard founded: ", ex );	
+				display(DebugMessagePriority::Parser, "Guard founded: ", ex, "\n" );	
 			}
 		}
 		if ( ( it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("assignment") ) )
@@ -99,7 +99,7 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 			{
 				Expression ex(it);
 				t->addUpdate( ex );
-				display(DebugMessagePriority::Parser, "Update founded: ", ex );
+				display(DebugMessagePriority::Parser, "Update founded: ", ex, "\n" );
 			}
 		}
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )

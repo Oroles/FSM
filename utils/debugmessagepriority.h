@@ -2,29 +2,11 @@
 #define _DEBUG_MESSAGE_PRIORITY_H_
 
 #include <iostream>
-/*
-How to use:
-	see file components/module.cpp for a call
-	A higher value for priority equals a higher priority for the message
-	All the message under or equal to currentPriority will be display
-*/
-
-/*
-1. Expression
-2. Chan
-3. Clock
-4. FSM
-5, Module
-6. State
-7. SymbolTable
-8. Tranzition
-9. Parser
-10. StringParser 
-*/
 
 class DebugMessagePriority
 {
 public:
+	/* This order should be change so the most important class to have a smaller value */
 	static const unsigned int Fsm = 1;
 	static const unsigned int Tranzition = 1 << 1;
 	static const unsigned int Module = 1 << 2;
@@ -35,6 +17,9 @@ public:
 	static const unsigned int State = 1 << 7;
 	static const unsigned int SymbolTable = 1 << 8;
 	static const unsigned int StringParser = 1 << 9;
+	static const unsigned int ClockTable = 1 << 10;
+	static const unsigned int ChanTable = 1 << 11;
+	static const unsigned int Sync = 1 << 12;
 
 	DebugMessagePriority() : priority{0} {}
 	DebugMessagePriority(unsigned int p) 
