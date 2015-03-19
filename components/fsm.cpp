@@ -1,5 +1,5 @@
 #include "fsm.h"
-#include "symboltable.h"
+#include "../tables/clocktable.h"
 #include "../utils/utils.h"
 
 #include <thread>
@@ -10,18 +10,8 @@ void FSM::step()
 	{
 		m.step();
 	}
+	ClockTable::getInstance().updateClocks();
 	nextStep();
-	//Update clocks Work around
-	for ( auto& c : clocks )
-	{
-		c.setValue( SymbolTable::getInstance().getEntry( c.getName() ) );
-	}
-
-	for ( auto& c : clocks )
-	{
-		c.update();
-		SymbolTable::getInstance().updateEntry(c.getName(),c.getValue());
-	}
 }
 
 void FSM::startModules()
@@ -36,28 +26,6 @@ void FSM::startModules()
 	{
 		threads[i].join();
 	}
-}
-
-void FSM::addClocks(const std::vector<Clock>& c)
-{
-	display(DebugMessagePriority::Fsm, "There were added ", c.size(), "clocks to FSM\n" );
-	for( auto& v : c )
-	{
-		display(DebugMessagePriority::Fsm, "The ", v, "is added to Symbol Table\n");
-		SymbolTable::getInstance().updateEntry(v.getName(),v.getValue());
-	}
-	clocks = c;
-}
-
-void FSM::addChannels(const std::vector<Chan>& c)
-{
-	display(DebugMessagePriority::Fsm, "There were added ", c.size(), "channels to FSM\n" );
-	for ( auto& v : c )
-	{
-		display(DebugMessagePriority::Fsm, "The ", v, "is added to Symbol Table\n");
-		SymbolTable::getInstance().updateEntry(v.getName(),v.getValue());
-	}
-	channels = c;
 }
 
 void FSM::addTemplate(const Module& t)

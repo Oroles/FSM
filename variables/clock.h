@@ -8,6 +8,7 @@
 class Clock
 {
 public:
+	Clock();
 	Clock( std::string n, int val );
 	Clock(const Clock& rhs);
 	Clock(Clock&& rhs);

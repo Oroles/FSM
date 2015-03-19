@@ -20,12 +20,17 @@ public:
 	std::string getSecond() const;
 
 private:
+	enum class OperandType { TypeClock, TypeSymbol, TypeUnknown };
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
-	int get_value(std::string) const ;
+	int get_value(std::string, OperandType) const;
+	void set_value(std::string, OperandType, int) const;
+	OperandType findType( std::string name);
 
 	std::string first;
 	std::string op;
 	std::string second;
+	OperandType firstOperand = OperandType::TypeUnknown;
+	OperandType secondOperand = OperandType::TypeUnknown;
 };
 
 #endif

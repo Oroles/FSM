@@ -1,9 +1,9 @@
 #include "tranzition.h"
 
 #include "../utils/utils.h"
-#include "symboltable.h"
+#include "../tables/symboltable.h"
 
-Tranzition::Tranzition() : source(""), destination("")
+Tranzition::Tranzition() : source(""), destination(""), sync("")
 {
 
 }
@@ -109,7 +109,7 @@ void Tranzition::setUpdates(const std::vector<Expression>& u)
 	updates = u;
 }
 
-void Tranzition::setSync(const std::string s)
+void Tranzition::setSync(const Sync s)
 {
 	display(DebugMessagePriority::Tranzition, "There is: ", s, " sync added to ", *this, "\n" );
 	sync = s;

@@ -1,7 +1,8 @@
 #include "expression.h"
 
 #include "../utils/utils.h"
-#include "../components/symboltable.h"
+#include "../tables/symboltable.h"
+#include "../tables/clocktable.h"
 
 #include <vector>
 #include <cassert>
@@ -37,16 +38,19 @@ Expression::Expression(std::string ex)
 		op = ex.substr(pos,found->second);
 		second = ex.substr(pos+found->second,std::string::npos);
 	}
+	firstOperand = this->findType( first );
+	secondOperand = this->findType( second );
 }
 
-Expression::Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second)
+Expression::Expression(const Expression& rhs) : first(rhs.first), op(rhs.op), second(rhs.second), firstOperand(rhs.firstOperand), secondOperand(rhs.secondOperand)
 {
 	assert( first != "" );
 	assert( op != "" );
 	assert( second != "" );
 }
 
-Expression::Expression(Expression&& rhs) : first(std::move(rhs.first)), op(std::move(rhs.op)), second(std::move(rhs.second))
+Expression::Expression(Expression&& rhs) : first(std::move(rhs.first)), op(std::move(rhs.op)), second(std::move(rhs.second)),
+											firstOperand(std::move(rhs.firstOperand)), secondOperand(std::move(rhs.secondOperand))
 {
 
 }
@@ -56,6 +60,8 @@ Expression& Expression::operator=(const Expression& rhs)
 	first = rhs.first;
 	op = rhs.op;
 	second = rhs.second;
+	firstOperand = rhs.firstOperand;
+	secondOperand = rhs.secondOperand;
 	assert( first != "" );
 	assert( op != "" );
 	assert( second != "" );
@@ -74,25 +80,25 @@ bool Expression::evaluate() const
 	{
 		case str2int(">=") :
 			{
-				return get_value(first) >= get_value(second);
+				return get_value(first,firstOperand) >= get_value(second,secondOperand);
 			}
 		case str2int(">") :
 			{
-				return get_value(first) > get_value(second);
+				return get_value(first,firstOperand) > get_value(second,secondOperand);
 			}
 		case str2int("<") :
 			{
-				return get_value(first) < get_value(second);
+				return get_value(first,firstOperand) < get_value(second,secondOperand);
 			}
 		case str2int("<=") :
 			{
-				return get_value(first) <= get_value(second);
+				return get_value(first,firstOperand) <= get_value(second,secondOperand);
 			}
 		case str2int(":=") :
 		case str2int("=") :
 			{
-				int secondValue = get_value(second);
-				SymbolTable::getInstance().updateEntry(first,secondValue);
+				int secondValue = get_value(second,secondOperand);
+				this->set_value(first,firstOperand,secondValue);
 				return true;
 			}
 		default:
@@ -101,7 +107,7 @@ bool Expression::evaluate() const
 	return false;
 }
 
-int Expression::get_value(std::string name) const
+int Expression::get_value(std::string name, Expression::OperandType type) const
 {
 	if ( is_integer( name ) ) //The name contains only digits
 	{
@@ -109,10 +115,28 @@ int Expression::get_value(std::string name) const
 	}
 	else
 	{
-		int value = SymbolTable::getInstance().getEntry(name);
+		int value = 0;
+		switch( type )
+		{
+			case OperandType::TypeSymbol: value = SymbolTable::getInstance().getEntry(name); break;	
+			case OperandType::TypeClock: value = ClockTable::getInstance().getValue(name); break;
+			case OperandType::TypeUnknown:
+			default: break;
+		}
 		return value;
 	}
 	return 0;
+}
+
+void Expression::set_value(std::string name, Expression::OperandType type, int val) const
+{
+	switch( type )
+		{
+			case OperandType::TypeSymbol: SymbolTable::getInstance().updateEntry(name,val); break;	
+			case OperandType::TypeClock: ClockTable::getInstance().setValue(name,val); break;
+			case OperandType::TypeUnknown:
+			default: break;
+		}
 }
 
 std::string Expression::getFirst() const
@@ -128,6 +152,19 @@ std::string Expression::getOp() const
 std::string Expression::getSecond() const
 {
 	return second;
+}
+
+Expression::OperandType Expression::findType(std::string name)
+{
+	if ( SymbolTable::getInstance().exists(name) )
+	{
+		return OperandType::TypeSymbol;
+	}
+	if ( ClockTable::getInstance().exists(name) )
+	{
+		return OperandType::TypeClock;
+	}
+	return OperandType::TypeUnknown;
 }
 
 std::ostream& operator<<(std::ostream& o, const Expression& e)

@@ -1,5 +1,9 @@
 #include "chan.h"
 
+Chan::Chan()
+{
+}
+
 Chan::Chan( std::string n, int val ) : name(n), value(val)
 {
 	assert(n.size() != 0);

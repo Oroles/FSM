@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cassert>
 
-#include "../components/symboltable.h"
+#include "../tables/symboltable.h"
 
 DebugMessagePriority priority;
 bool stepProgress = false;

@@ -6,6 +6,7 @@
 
 #include "state.h"
 #include "../expressions/expression.h"
+#include "../expressions/sync.h"
 
 class Tranzition
 {
@@ -26,7 +27,7 @@ public:
 	void addUpdate( const Expression& e );
 	void setGuards( const std::vector<Expression>& g );
 	void setUpdates( const std::vector<Expression>& u );
-	void setSync( const std::string s);
+	void setSync( const Sync s);
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
 	bool isAvailable(const State&) const;
@@ -36,7 +37,7 @@ private:
 	State destination;
 	std::vector<Expression> guards;
 	std::vector<Expression> updates;
-	std::string sync;
+	Sync sync;
 };
 
 #endif

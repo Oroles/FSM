@@ -1,5 +1,9 @@
 #include "clock.h"
 
+Clock::Clock()
+{
+}
+
 Clock::Clock( std::string n, int val ) : name(n), value(val)
 {
 	assert(n.size() != 0 );

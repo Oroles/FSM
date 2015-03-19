@@ -1,6 +1,8 @@
 #include "parser.h"
 
 #include "../utils/utils.h"
+#include "../tables/chantable.h"
+#include "../tables/clocktable.h"
 #include "stringparser.h"
 
 void Parser::generateFSM(FSM* fsm)
@@ -15,8 +17,8 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "declaration" )
 		{
 			StringParser parser(node.child_value());
-			fsm->addChannels( parser.generateChannels() );
-			fsm->addClocks( parser.generateClocks() );
+			ChanTable::getInstance().addEntries( parser.generateChannels() );
+			ClockTable::getInstance().addEntries( parser.generateClocks() );
 		}
 		if ( std::string(node.name()) == "system" )
 		{
@@ -102,7 +104,7 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 		}
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )
 		{
-			std::string rez = it->child_value();
+			Sync rez( it->child_value() );
 			display(DebugMessagePriority::Parser, "Syncs founded: ", rez, "\n" );
 			t->setSync( rez );
 		}

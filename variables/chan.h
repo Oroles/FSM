@@ -8,6 +8,7 @@
 class Chan
 {
 public:
+	Chan();
 	Chan( std::string n, int val );
 	Chan(const Chan& rhs);
 	Chan(Chan&& rhs);

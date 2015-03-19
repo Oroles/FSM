@@ -20,8 +20,7 @@ DEPENDENCY_OPTIONS = -std=c++11 -pthread -MM
 #-- Do not edit below this line --
 
 # Subdirs to search for additional source files
-SUBDIRS := $(shell ls -F | grep "^[^t][a-zA-Z]*[\/]" )
-#SUBDIRS := ("components/expressions/")
+SUBDIRS := $(shell ls -F | grep -v 'tests' | grep '[a-zA-Z]*[\/]' )
 DIRS := ./ $(SUBDIRS)
 SOURCE_FILES := $(foreach d, $(DIRS), $(wildcard $(d)*.cpp) )
 
