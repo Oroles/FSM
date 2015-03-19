@@ -7,4 +7,5 @@ tests/variables/
 tests/expressions/
 tests/pugixml/
 tests/utils/
+tests/tables/
 tests/*~
