@@ -13,7 +13,6 @@ public:
 	FSM() {}
 	
 	void step();
-	void startModules();
 
 	void addTemplate(const Module& m );
 	void addModules(const std::map<std::string,std::string> modulesName);

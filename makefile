@@ -7,7 +7,7 @@ CC = g++-4.9
 COMMANDLINE_OPTIONS =
 
 # Compiler options during compilation
-COMPILE_OPTIONS = -Wall -std=c++11 -pthread
+COMPILE_OPTIONS = -Wall -std=c++11
 
 #Header include directories
 HEADERS =
