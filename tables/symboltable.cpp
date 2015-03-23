@@ -11,12 +11,12 @@ SymbolTable::SymbolTable()
 	
 }
 
-void SymbolTable::updateEntry(std::string name, int value)
+void SymbolTable::setValue(std::string name, int value)
 {
 	table[name] = value;
 }
 
-int SymbolTable::getEntry(const std::string name)
+int SymbolTable::getValue(const std::string name)
 {
 	return table[name];
 }

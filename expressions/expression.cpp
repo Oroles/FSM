@@ -118,7 +118,7 @@ int Expression::get_value(std::string name, Expression::OperandType type) const
 		int value = 0;
 		switch( type )
 		{
-			case OperandType::TypeSymbol: value = SymbolTable::getInstance().getEntry(name); break;	
+			case OperandType::TypeSymbol: value = SymbolTable::getInstance().getValue(name); break;	
 			case OperandType::TypeClock: value = ClockTable::getInstance().getValue(name); break;
 			case OperandType::TypeUnknown:
 			default: break;
@@ -132,7 +132,7 @@ void Expression::set_value(std::string name, Expression::OperandType type, int v
 {
 	switch( type )
 		{
-			case OperandType::TypeSymbol: SymbolTable::getInstance().updateEntry(name,val); break;	
+			case OperandType::TypeSymbol: SymbolTable::getInstance().setValue(name,val); break;	
 			case OperandType::TypeClock: ClockTable::getInstance().setValue(name,val); break;
 			case OperandType::TypeUnknown:
 			default: break;

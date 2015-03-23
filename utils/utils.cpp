@@ -3,6 +3,7 @@
 #include <cassert>
 
 #include "../tables/symboltable.h"
+#include "../tables/clocktable.h"
 
 DebugMessagePriority priority;
 bool stepProgress = false;
@@ -77,7 +78,14 @@ void nextStep()
 			std::cin >> aux;
 			if ( aux != "s" )
 			{
-				std::cout << aux << " = " << SymbolTable::getInstance().getEntry(aux) << std::endl;
+				if ( ClockTable::getInstance().exists(aux) )
+				{
+					std::cout << "Clock " << aux << " = " << ClockTable::getInstance().getValue(aux) << std::endl;
+				}
+				if ( SymbolTable::getInstance().exists(aux) )
+				{
+					std::cout << "Variable" << aux << " = " << SymbolTable::getInstance().getValue(aux) << std::endl;
+				}
 			}
 		}
 	}
