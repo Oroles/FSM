@@ -72,6 +72,7 @@ bool Chan::isSenderSync()
 	{
 		turn = Chan::Turn::Receiver;
 		acs = false;
+		wcs = false;
 		return true;
 	}
 	return false;
@@ -93,6 +94,7 @@ bool Chan::isReceiverSync()
 	{
 		turn = Chan::Turn::Sender;
 		acr = false;
+		wcr = false;
 		return true;
 	}
 	return false;
