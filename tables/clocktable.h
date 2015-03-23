@@ -25,6 +25,7 @@ private:
 	ClockTable& operator=(const ClockTable& rhs);
 
 	std::map<std::string,Clock> table;
+	std::vector<std::pair<std::string,int>> messages;
 };
 
 #endif

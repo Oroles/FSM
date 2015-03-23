@@ -31,7 +31,7 @@ int ClockTable::getValue(const std::string name)
 
 void ClockTable::setValue(const std::string name, int value)
 {
-	table[name].setValue(value);
+	messages.push_back( std::pair<std::string,int>( name, value ) ); 
 }
 
 void ClockTable::updateClocks()
@@ -40,6 +40,11 @@ void ClockTable::updateClocks()
 	{
 		c.second.update();
 	}
+	for ( auto& p : messages )
+	{
+		table[p.first].setValue( p.second );
+	}
+	messages.clear();
 }
 
 bool ClockTable::exists(const std::string name) const
