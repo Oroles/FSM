@@ -10,6 +10,7 @@
 const std::vector<std::pair<std::string,int>> operators { std::pair<std::string,int>( "<=", 2 ),
 														  std::pair<std::string,int>( ">=", 2 ),
 														  std::pair<std::string,int>( ":=", 2),
+														  std::pair<std::string,int>( "!=", 2),
 														  std::pair<std::string,int>( "<", 1 ),
 														  std::pair<std::string,int>( ">", 1 ),
 														  std::pair<std::string,int>( "=", 1 ) };
@@ -94,6 +95,10 @@ bool Expression::evaluate() const
 			{
 				return get_value(first,firstOperand) <= get_value(second,secondOperand);
 			}
+		case str2int("!=") :
+			{
+				return get_value(first,firstOperand) != get_value(second,secondOperand);
+			}
 		case str2int(":=") :
 		case str2int("=") :
 			{
@@ -109,23 +114,16 @@ bool Expression::evaluate() const
 
 int Expression::get_value(std::string name, Expression::OperandType type) const
 {
-	if ( is_integer( name ) ) //The name contains only digits
+	int value = 0;
+	switch( type )
 	{
-		return std::stoi(name); //Convert to digits
+		case OperandType::TypeSymbol: value = SymbolTable::getInstance().getValue(name); break;	
+		case OperandType::TypeClock: value = ClockTable::getInstance().getValue(name); break;
+		case OperandType::TypeValue: value = stoi( name ); break;
+		case OperandType::TypeUnknown: assert(!"Get value of a unknown type");
+		default: assert(!"Unknown type"); break;
 	}
-	else
-	{
-		int value = 0;
-		switch( type )
-		{
-			case OperandType::TypeSymbol: value = SymbolTable::getInstance().getValue(name); break;	
-			case OperandType::TypeClock: value = ClockTable::getInstance().getValue(name); break;
-			case OperandType::TypeUnknown:
-			default: break;
-		}
-		return value;
-	}
-	return 0;
+	return value;
 }
 
 void Expression::set_value(std::string name, Expression::OperandType type, int val) const
@@ -134,7 +132,8 @@ void Expression::set_value(std::string name, Expression::OperandType type, int v
 		{
 			case OperandType::TypeSymbol: SymbolTable::getInstance().setValue(name,val); break;	
 			case OperandType::TypeClock: ClockTable::getInstance().setValue(name,val); break;
-			case OperandType::TypeUnknown:
+			case OperandType::TypeValue: assert( !"You change value to a constant" ); break;
+			case OperandType::TypeUnknown: assert(!"Set value to unknown type"); break;
 			default: break;
 		}
 }
@@ -156,6 +155,10 @@ std::string Expression::getSecond() const
 
 Expression::OperandType Expression::findType(std::string name)
 {
+	if ( is_integer(name) )
+	{
+		return OperandType::TypeValue;
+	}
 	if ( SymbolTable::getInstance().exists(name) )
 	{
 		return OperandType::TypeSymbol;
@@ -164,6 +167,7 @@ Expression::OperandType Expression::findType(std::string name)
 	{
 		return OperandType::TypeClock;
 	}
+	assert(!"Unknown type");
 	return OperandType::TypeUnknown;
 }
 

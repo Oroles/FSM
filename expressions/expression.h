@@ -20,7 +20,7 @@ public:
 	std::string getSecond() const;
 
 private:
-	enum class OperandType { TypeClock, TypeSymbol, TypeUnknown };
+	enum class OperandType { TypeClock, TypeSymbol, TypeValue, TypeUnknown };
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
 	int get_value(std::string, OperandType) const;
 	void set_value(std::string, OperandType, int) const;
