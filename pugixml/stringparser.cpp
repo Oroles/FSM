@@ -12,6 +12,26 @@ std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z
 StringParser::StringParser(std::string t) : text(t)
 {
 	assert(t.size() != 0);
+	text = this->removeComments(this->text);
+}
+
+std::string StringParser::removeComments( std::string t )
+{
+	size_t it = 0;
+	//Remove one line comments
+	while (  ( it = t.find("//",it ) ) != std::string::npos )
+	{
+		size_t aux = t.find("\n",it);
+		t = t.substr(0,it) + t.substr(aux+1,std::string::npos);
+	}
+	//Remove /* */ comments
+	it = 0 ;
+	while ( (  it = t.find("/*",it) ) != std::string::npos )
+	{
+		size_t aux = t.find("*/",it);
+		t = t.substr(0,it) + t.substr(aux+2, std::string::npos);
+	}
+	return t;
 }
 
 

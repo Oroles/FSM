@@ -19,7 +19,7 @@ public:
 	std::map<std::string,std::string> generateModules();
 
 private:
-
+	std::string removeComments( std::string );
 	std::string text;
 };
 
