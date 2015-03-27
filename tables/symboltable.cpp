@@ -1,5 +1,7 @@
 #include "symboltable.h"
 
+#include <cassert>
+
 SymbolTable& SymbolTable::getInstance()
 {
 	static SymbolTable instance;
@@ -13,12 +15,27 @@ SymbolTable::SymbolTable()
 
 void SymbolTable::setValue(std::string name, int value)
 {
-	table[name] = value;
+	if ( this->exists(name) )
+	{
+		table[name] = value;
+	}
+	else
+	{
+		assert(!"Symbol table set value to an unexisting symbol");
+	}
 }
 
 int SymbolTable::getValue(const std::string name)
 {
-	return table[name];
+	if ( this->exists(name) )
+	{
+		return table[name];
+	}
+	else
+	{
+		assert("Symbol table get value to an unexisting symbol");
+	}
+	return -1;
 }
 
 bool SymbolTable::exists(const std::string name) const
@@ -31,6 +48,13 @@ void SymbolTable::addEntries(const std::vector<std::pair<std::string,int>> entri
 {
 	for ( auto it :entries )
 	{
-		table[it.first] = it.second;
+		if ( !this->exists(it.first) )
+		{
+			table[it.first] = it.second;
+		}
+		else
+		{
+			assert(!"Symbol table value already exits in table");
+		}
 	}
 }

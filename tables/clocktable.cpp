@@ -1,5 +1,7 @@
 #include "clocktable.h"
 
+#include <cassert>
+
 ClockTable& ClockTable::getInstance()
 {
 	static ClockTable instance;
@@ -13,20 +15,36 @@ ClockTable::ClockTable()
 
 void ClockTable::addEntry(const Clock& c)
 {
-	table[c.getName()] = c;
+	if ( !this->exists(c.getName()) )
+	{
+		table[c.getName()] = c;	
+	}
+	else
+	{
+		assert(!"Entry in clock table already exits");
+	}
+	
 }
 
 void ClockTable::addEntries(const std::vector<Clock>& v)
 {
 	for ( auto& c : v )
 	{
-		table[c.getName()] = c;
+		this->addEntry( c );
 	}
 }
 
 int ClockTable::getValue(const std::string name)
 {
-	return table[name].getValue();
+	if ( this->exists(name) )
+	{
+		return table[name].getValue();
+	}
+	else
+	{
+		assert("!Entry in clock table doesn't exists");
+	}
+	return -1;
 }
 
 void ClockTable::setValue(const std::string name, int value)
@@ -42,7 +60,14 @@ void ClockTable::updateClocks()
 	}
 	for ( auto& p : messages )
 	{
-		table[p.first].setValue( p.second );
+		if ( this->exists(p.first) )
+		{
+			table[p.first].setValue( p.second );
+		}
+		else
+		{
+			assert("!Update clocks try to update a clock that doesn't exists");
+		}
 	}
 	messages.clear();
 }
