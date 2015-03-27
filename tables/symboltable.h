@@ -3,12 +3,14 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 class SymbolTable
 {
 public:
 	static SymbolTable& getInstance();
-	void setValue(std::string name, int value);
+	void addEntries(const std::vector<std::pair<std::string,int> > );
+	void setValue(const std::string name, const int value);
 	int getValue(const std::string name);
 	bool exists(const std::string name) const;
 private:

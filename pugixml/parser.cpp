@@ -1,6 +1,7 @@
 #include "parser.h"
 
 #include "../utils/utils.h"
+#include "../tables/symboltable.h"
 #include "../tables/chantable.h"
 #include "../tables/clocktable.h"
 #include "stringparser.h"
@@ -19,6 +20,7 @@ void Parser::generateFSM(FSM* fsm)
 			StringParser parser(node.child_value());
 			ChanTable::getInstance().addEntries( parser.generateChannels() );
 			ClockTable::getInstance().addEntries( parser.generateClocks() );
+			SymbolTable::getInstance().addEntries( parser.generateSymbols() );
 		}
 		if ( std::string(node.name()) == "system" )
 		{

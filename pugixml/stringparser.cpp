@@ -7,6 +7,8 @@
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z]+)(;)") },
 										   { "decl", std::regex("([a-zA-Z1-9]+)( ?)(=)( ?)([a-zA-Z]+)") },
+										   { "declVar", std::regex("(int)( ?)([a-zA-Z1-9]+)(;)") },
+										   { "defVar", std::regex("(int)( ?)([a-zA-Z1-9]+)( ?)(=)( ?)([0-9]+)(;)") },
 										   { "declName", std::regex("( ?)[a-zA-Z1-9]+")}  };
 
 StringParser::StringParser(std::string t) : text(t)
@@ -78,6 +80,36 @@ std::map<std::string,std::string> StringParser::generateModules()
 		poz = matchString.find(" ");
 		std::string name = matchString.substr( 0, poz );
 		rez.emplace(name,type);
+	}
+	return rez;
+}
+
+std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
+{
+	std::vector<std::pair<std::string,int> > rez;
+	auto words_begin = std::sregex_iterator(text.begin(), text.end(), regex["declVar"] );
+	auto words_end = std::sregex_iterator();
+
+	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
+	{
+		std::string matchString = i->str();
+		auto poz = matchString.find_last_of(" ");
+		std::string name = matchString.substr( poz + 1, std::string::npos );
+		poz = name.find( ";" );
+		name = name.substr( 0, poz );
+		rez.push_back(std::pair<std::string,int>(name,0));
+	}
+
+	words_begin = std::sregex_iterator(text.begin(), text.end(), regex["defVar"] );
+	for( std::sregex_iterator i = words_begin; i != words_end; ++i )
+	{
+		std::string matchString = i->str();
+		auto poz = matchString.find(" ");
+		matchString = matchString.substr( poz + 1, std::string::npos );
+		std::string name = matchString.substr(0, matchString.find(" ") );
+		std::string value = matchString.substr( matchString.find_last_of(" ") + 1, std::string::npos );
+		value = value.substr(0, value.find(";") );
+		rez.push_back(std::pair<std::string,int>(name,std::stoi(value)));
 	}
 	return rez;
 }

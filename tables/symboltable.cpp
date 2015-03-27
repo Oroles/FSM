@@ -26,3 +26,11 @@ bool SymbolTable::exists(const std::string name) const
 	auto it = table.find(name);
 	return it != table.end();
 }
+
+void SymbolTable::addEntries(const std::vector<std::pair<std::string,int>> entries)
+{
+	for ( auto it :entries )
+	{
+		table[it.first] = it.second;
+	}
+}

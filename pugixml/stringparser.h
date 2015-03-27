@@ -16,6 +16,7 @@ public:
 	StringParser( std::string t );
 	std::vector<Clock> generateClocks();
 	std::vector<Chan> generateChannels();
+	std::vector<std::pair<std::string,int> > generateSymbols();
 	std::map<std::string,std::string> generateModules();
 
 private:
