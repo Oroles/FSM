@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../expressions/expression.h"
 #include "../tables/symboltable.h"
+#include "../tables/clocktable.h"
 #include "utils.h"
 
 
@@ -63,6 +64,15 @@ int main( int argc, char* argv[] )
 		TEST_NOT_EQUAL( SymbolTable::getInstance().getValue("a"), 2 );
 		IS_TRUE( ex.evaluate() );
 		TEST_EQUAL( SymbolTable::getInstance().getValue("b"), 3 );
+	}
+	{
+		ClockTable::getInstance().addEntry( Clock( std::string("clock c;" ), 0 ) );
+		Expression ex ( "c = 1");
+		TEST_NOT_EQUAL( ClockTable::getInstance().getValue("c"), 1);
+		TEST_EQUAL( ClockTable::getInstance().getValue("c"), 0);
+		IS_TRUE( ex.evaluate() );
+		ClockTable::getInstance().updateClocks();
+		TEST_EQUAL( ClockTable::getInstance().getValue("c"), 1 );
 	}
 	{
 		Expression ex( " 1 != 3 ");
