@@ -7,10 +7,6 @@ Chan::Chan()
 Chan::Chan( std::string n) : name(n), turn(Chan::Turn::Sender), wcs(false), wcr(false), acs(false), acr(false)
 {
 	assert(n.size() != 0);
-
-	size_t pos_space = name.find(" ");
-	name = name.substr(pos_space+1,std::string::npos);
-	name = name.substr(0,name.find(";"));
 }
 
 Chan::Chan(const Chan& rhs) : name(rhs.name), turn(rhs.turn), wcs(rhs.wcs), wcr(rhs.wcr), acs(rhs.acs), acr(rhs.acr)

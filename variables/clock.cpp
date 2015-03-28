@@ -8,10 +8,6 @@ Clock::Clock( std::string n, int val ) : name(n), value(val)
 {
 	assert(n.size() != 0 );
 	assert(val >= 0 );
-
-	size_t pos_space = name.find(" ");
-	name = name.substr(pos_space+1,std::string::npos);
-	name = name.substr(0,name.find(";"));
 }
 
 Clock::Clock(const Clock& rhs) : name(rhs.name), value(rhs.value)
