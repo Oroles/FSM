@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 class Expression
 {
@@ -14,23 +15,17 @@ public:
 	Expression(Expression&& rhs);
 	Expression& operator=(const Expression& rhs);
 	bool operator==(const Expression& rhs);
-	bool evaluate() const;
-	std::string getFirst() const;
-	std::string getOp() const;
-	std::string getSecond() const;
+	int evaluate() const;
 
 private:
-	enum class OperandType { TypeClock, TypeSymbol, TypeValue, TypeUnknown };
-	friend std::ostream& operator<<(std::ostream&, const Expression&);
-	int get_value(std::string, OperandType) const;
-	void set_value(std::string, OperandType, int) const;
-	OperandType findType( std::string name);
 
-	std::string first;
-	std::string op;
-	std::string second;
-	OperandType firstOperand = OperandType::TypeUnknown;
-	OperandType secondOperand = OperandType::TypeUnknown;
+	friend std::ostream& operator<<(std::ostream&, const Expression&);
+	int get_value(std::string) const;
+	void set_value(std::string, int) const;
+	std::vector<std::string> generateRPN();
+
+	std::string expression;
+	std::vector<std::string> rpn;
 };
 
 #endif
