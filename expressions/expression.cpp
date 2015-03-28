@@ -104,7 +104,6 @@ Expression::Expression(std::string ex) : expression(ex)
 	{
 		replaceString( expression, o.first, std::string( " " + o.first + " " ) );
 	}
-	std::cout << expression << std::endl;
 	rpn = this->generateRPN();
 }
 
