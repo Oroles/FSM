@@ -24,6 +24,11 @@ std::string StringParser::removeComments( std::string t )
 	while (  ( it = t.find("//",it ) ) != std::string::npos )
 	{
 		size_t aux = t.find("\n",it);
+		if ( aux == std::string::npos )
+		{
+			t = t.substr(0,it);
+			continue;
+		}
 		t = t.substr(0,it) + t.substr(aux+1,std::string::npos);
 	}
 	//Remove /* */ comments
