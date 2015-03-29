@@ -17,6 +17,8 @@ public:
 	bool operator==(const Expression& rhs);
 	int evaluate() const;
 
+	void setModuleName(const std::string name);
+
 private:
 
 	friend std::ostream& operator<<(std::ostream&, const Expression&);
@@ -26,6 +28,7 @@ private:
 
 	std::string expression;
 	std::vector<std::string> rpn;
+	std::string moduleName;
 };
 
 #endif

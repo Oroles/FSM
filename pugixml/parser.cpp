@@ -4,6 +4,7 @@
 #include "../tables/symboltable.h"
 #include "../tables/chantable.h"
 #include "../tables/clocktable.h"
+#include "../tables/localtable.h"
 #include "stringparser.h"
 
 void Parser::generateFSM(FSM* fsm)
@@ -50,6 +51,11 @@ Module Parser::processTemplate(const pugi::xml_node& nodes )
 		if ( std::string(node.name()) == "name" )
 		{
 			rez.setName( this->processName(node) );
+		}
+		if ( std::string(node.name()) == "declaration" )
+		{
+			StringParser parser( node.child_value() );
+			LocalTable::getInstance().addEntries(rez.getName(), parser.generateSymbols() );
 		}
 	}
 	return rez;

@@ -3,6 +3,7 @@
 #include "../utils/utils.h"
 #include "../tables/symboltable.h"
 #include "../tables/clocktable.h"
+#include "../tables/localtable.h"
 
 #include <vector>
 #include <cassert>
@@ -107,12 +108,12 @@ Expression::Expression(std::string ex) : expression(ex)
 	rpn = this->generateRPN();
 }
 
-Expression::Expression(const Expression& rhs) : expression( rhs.expression ), rpn( rhs.rpn )
+Expression::Expression(const Expression& rhs) : expression( rhs.expression ), rpn( rhs.rpn ), moduleName( rhs.moduleName )
 {
 
 }
 
-Expression::Expression(Expression&& rhs) : expression( std::move( rhs.expression ) ), rpn( std::move(rhs.rpn) )
+Expression::Expression(Expression&& rhs) : expression( std::move( rhs.expression ) ), rpn( std::move(rhs.rpn) ), moduleName( std::move(rhs.moduleName) )
 {
 
 }
@@ -121,6 +122,7 @@ Expression& Expression::operator=(const Expression& rhs)
 {
 	rpn = rhs.rpn;
 	expression = rhs.expression;
+	moduleName = rhs.moduleName;
 	return *this;
 }
 
@@ -169,7 +171,7 @@ int Expression::evaluate() const
 			}
 		}
 	}
-	display(DebugMessagePriority::Expression, "Expression: ", expression, " is evaluated to ", aux[0], "\n" );
+	display(DebugMessagePriority::Expression, "Expression: ", expression, "from module ", moduleName, " is evaluated to ", aux[0], "\n" );
 	return std::stoi( aux[0] );
 }
 
@@ -187,8 +189,17 @@ int Expression::get_value(std::string name) const
 	{
 		return ClockTable::getInstance().getValue(name);
 	}
+	if ( LocalTable::getInstance().exists( moduleName, name ) )
+	{
+		return LocalTable::getInstance().getValue(moduleName, name);
+	}
 	assert(!"Should not reach here");
 	return 0;
+}
+
+void Expression::setModuleName(const std::string name)
+{
+	moduleName = name;
 }
 
 void Expression::set_value(std::string name, int val) const
@@ -201,6 +212,11 @@ void Expression::set_value(std::string name, int val) const
 	if ( ClockTable::getInstance().exists(name) )
 	{
 		ClockTable::getInstance().setValue(name,val);
+		return;
+	}
+	if ( LocalTable::getInstance().exists( moduleName, name ) )
+	{
+		LocalTable::getInstance().setValue( moduleName, name, val );
 		return;
 	}
 	assert(!"assign a value to a non-variable");
@@ -267,6 +283,6 @@ std::vector<std::string> Expression::generateRPN()
 
 std::ostream& operator<<(std::ostream& o, const Expression& e)
 {
-	o << "Expression: " << e.expression << std::endl;
+	o << "Expression: " << e.expression;
 	return o;
 }

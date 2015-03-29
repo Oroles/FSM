@@ -2,6 +2,7 @@
 #define _TRANZITION_H_
 
 #include <vector>
+#include <string>
 #include <iostream>
 
 #include "state.h"
@@ -22,16 +23,20 @@ public:
 	void setSource( const State s );
 	State getDestination() const;
 	void setDestination( const State d );
-
-	void addGuard( const Expression& e );
-	void addUpdate( const Expression& e );
 	void setGuards( const std::vector<Expression>& g );
 	void setUpdates( const std::vector<Expression>& u );
 	void setSync( const Sync s);
+	void setModuleName( const std::string name);
+	std::string getModuleName() const;
+
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
+
 	bool isAvailable(const State&) const;
 	bool isSync() const;
+
+	void addGuard( const Expression& e );
+	void addUpdate( const Expression& e );
 
 private:
 	State source;
@@ -39,6 +44,8 @@ private:
 	std::vector<Expression> guards;
 	std::vector<Expression> updates;
 	Sync sync;
+	std::string moduleName;
+
 };
 
 #endif

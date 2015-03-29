@@ -46,6 +46,10 @@ void Module::setName(const std::string n)
 	assert(n.size() != 0);
 	display(DebugMessagePriority::Module, "Set name to module: ", n, "\n");
 	name = n;
+	for ( auto& t : tranzitions )
+	{
+		t.setModuleName( n );
+	}
 }
 
 std::string Module::getName() const

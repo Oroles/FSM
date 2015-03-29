@@ -1,5 +1,6 @@
 #include "fsm.h"
 #include "../tables/clocktable.h"
+#include "../tables/localtable.h"
 #include "../utils/utils.h"
 
 void FSM::step()
@@ -28,6 +29,7 @@ void FSM::addModules(const std::map<std::string,std::string> modulesName )
 				Module aux = t;
 				aux.setName( name.first );
 				modules.push_back( aux );
+				LocalTable::getInstance().generateTables( name.second, name.first );
 			}
 		}
 	}

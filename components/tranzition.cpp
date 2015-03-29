@@ -3,7 +3,7 @@
 #include "../utils/utils.h"
 #include "../tables/symboltable.h"
 
-Tranzition::Tranzition() : source(""), destination(""), sync("")
+Tranzition::Tranzition() : source(""), destination(""), sync(""), moduleName("")
 {
 
 }
@@ -13,7 +13,8 @@ Tranzition::Tranzition(const State s, const State d) : source(s), destination(d)
 	assert(s.getName().size() != 0);
 	assert(d.getName().size() != 0);
 }
-Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), guards(rhs.guards), updates(rhs.updates), sync(rhs.sync)
+Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), 
+												guards(rhs.guards), updates(rhs.updates), sync(rhs.sync), moduleName(rhs.moduleName)
 {
 	assert(rhs.source.getName().size() != 0);
 	assert(rhs.destination.getName().size() != 0);
@@ -21,7 +22,7 @@ Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(
 
 Tranzition::Tranzition(Tranzition&& rhs) : source(std::move(rhs.source)), destination(std::move(rhs.destination)),
 										   guards(std::move(rhs.guards)), updates(std::move(rhs.updates)),
-										   sync(std::move(rhs.sync))
+										   sync(std::move(rhs.sync)), moduleName(std::move(rhs.moduleName))
 {
 
 }
@@ -35,6 +36,7 @@ Tranzition& Tranzition::operator=(const Tranzition& rhs)
 	guards = rhs.guards;
 	updates = rhs.updates;
 	sync = rhs.sync;
+	moduleName = rhs.moduleName;
 	return *this;
 }
 
@@ -58,6 +60,43 @@ void Tranzition::setDestination( const State d )
 {
 	assert(d.getName().size() != 0 );
 	destination = d;
+}
+
+void Tranzition::setGuards(const std::vector<Expression>& g)
+{
+	display(DebugMessagePriority::Tranzition, "There are: ", g.size(), " guards added to ", *this, "\n");
+	guards = g;
+}
+
+void Tranzition::setUpdates(const std::vector<Expression>& u)
+{
+	display(DebugMessagePriority::Tranzition, "There are: ", u.size(), "updates added to ", *this, "\n" );
+	updates = u;
+}
+
+void Tranzition::setSync(const Sync s)
+{
+	display(DebugMessagePriority::Tranzition, "There is: ", s, " sync added to ", *this, "\n" );
+	sync = s;
+}
+
+void Tranzition::setModuleName( const std::string name)
+{
+	display(DebugMessagePriority::Tranzition, "Tranzition ", *this, "is part of the module ", name, "\n" );
+	moduleName = name;
+	for ( auto& g : guards )
+	{
+		g.setModuleName(name);
+	}
+	for ( auto& u : updates )
+	{
+		u.setModuleName(name);
+	}
+}
+
+std::string Tranzition::getModuleName() const
+{
+	return moduleName;
 }
 
 State Tranzition::operator()(const State& s)
@@ -104,24 +143,6 @@ void Tranzition::addUpdate( const Expression& e )
 {
 	display(DebugMessagePriority::Tranzition, "The update ", e, "is added to ", *this, "\n");
 	updates.push_back( e );
-}
-
-void Tranzition::setGuards(const std::vector<Expression>& g)
-{
-	display(DebugMessagePriority::Tranzition, "There are: ", g.size(), " guards added to ", *this, "\n");
-	guards = g;
-}
-
-void Tranzition::setUpdates(const std::vector<Expression>& u)
-{
-	display(DebugMessagePriority::Tranzition, "There are: ", u.size(), "updates added to ", *this, "\n" );
-	updates = u;
-}
-
-void Tranzition::setSync(const Sync s)
-{
-	display(DebugMessagePriority::Tranzition, "There is: ", s, " sync added to ", *this, "\n" );
-	sync = s;
 }
 
 std::ostream& operator<<(std::ostream& o, const Tranzition& t)
