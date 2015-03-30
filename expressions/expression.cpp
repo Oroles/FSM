@@ -19,6 +19,14 @@
 						   continue;\
 						}
 
+#define EXECUTE_BLOCK_SHORT( s ){ std::string first = aux[ aux.size() - 1 ];\
+								std::string second = aux[ aux.size() - 2 ]; \
+								aux.erase( aux.end() - 2, aux.end() );\
+								set_value( second, get_value(second) s get_value(first) );\
+								aux.push_back( "1" );\
+								continue;\
+							}
+
 std::vector<std::pair<std::string,int>> operators{  std::pair<std::string,int>(":=",1),
 													std::pair<std::string,int>(">=",2),
 													std::pair<std::string,int>("<=",2),
@@ -28,9 +36,13 @@ std::vector<std::pair<std::string,int>> operators{  std::pair<std::string,int>("
 													std::pair<std::string,int>("==",2),
 													std::pair<std::string,int>("=",1),
 													std::pair<std::string,int>("+",3),
+													std::pair<std::string,int>("+=",1),
 													std::pair<std::string,int>("-",3),
+													std::pair<std::string,int>("-=",1),
 													std::pair<std::string,int>("*",4),
-													std::pair<std::string,int>("/",4) }; 
+													std::pair<std::string,int>("*=",1),
+													std::pair<std::string,int>("/",4),
+													std::pair<std::string,int>("/=",1)};
 
 constexpr unsigned int str2int(const char* str, int h = 0)
 {
@@ -172,11 +184,15 @@ int Expression::evaluate() const
 			if ( is_sign(t) )
 			{
 				if ( t == "+" ) EXECUTE_BLOCK(+);
+				if ( t == "+=" ) EXECUTE_BLOCK_SHORT(+);
 				if ( t == "*" ) EXECUTE_BLOCK(*);
+				if ( t == "*=" ) EXECUTE_BLOCK_SHORT(*);
 				if ( t == ">")  EXECUTE_BLOCK(>);
 				if ( t == "<" ) EXECUTE_BLOCK(<);
 				if ( t == "-" ) EXECUTE_BLOCK(-);
+				if ( t == "-=" ) EXECUTE_BLOCK_SHORT(-);
 				if ( t == "/" ) EXECUTE_BLOCK(/);
+				if ( t == "/=" ) EXECUTE_BLOCK_SHORT(/);
 				if ( t == ">=" ) EXECUTE_BLOCK(>=);
 				if ( t == "<=" ) EXECUTE_BLOCK(<=);
 				if ( t == "==" ) EXECUTE_BLOCK(==);
