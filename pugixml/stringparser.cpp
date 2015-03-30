@@ -6,10 +6,10 @@
 
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z]+)(;)") },
-										   { "decl", std::regex("([a-zA-Z1-9]+)( ?)(=)( ?)([a-zA-Z]+)") },
-										   { "declVar", std::regex("(int)( ?)([a-zA-Z1-9]+)(;)") },
-										   { "defVar", std::regex("(int)( ?)([a-zA-Z1-9]+)( ?)(=)( ?)([0-9]+)(;)") },
-										   { "declName", std::regex("( ?)[a-zA-Z1-9]+")}  };
+										   { "decl", std::regex("([a-zA-Z0-9]+)( ?)(=)( ?)([a-zA-Z0-9]+)") },
+										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9]+)(;)") },
+										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9]+)( ?)(=)( ?)([0-9]+)(;)") },
+										   { "declName", std::regex("( ?)[a-zA-Z0-9]+")}  };
 
 StringParser::StringParser(std::string t) : text(t)
 {
