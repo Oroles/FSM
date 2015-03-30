@@ -44,11 +44,6 @@ std::vector<std::pair<std::string,int>> operators{  std::pair<std::string,int>("
 													std::pair<std::string,int>("/",4),
 													std::pair<std::string,int>("/=",1)};
 
-constexpr unsigned int str2int(const char* str, int h = 0)
-{
-    return !str[h] ? 5381 : (str2int(str, h+1)*33) ^ str[h];
-}
-
 bool is_sign(std::string sign)
 {
 	for ( auto& p :operators )
