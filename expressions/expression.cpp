@@ -181,7 +181,7 @@ int Expression::evaluate() const
 				if ( t == "<=" ) EXECUTE_BLOCK(<=);
 				if ( t == "==" ) EXECUTE_BLOCK(==);
 				if ( t == "!=" ) EXECUTE_BLOCK(!=);
-				if ( t == "=" ) {
+				if ( ( t == "=" ) || ( t == ":=" ) ) {
 					std::string first = aux[ aux.size() - 1 ];
 				   	std::string second = aux[ aux.size() - 2 ];
 					aux.erase( aux.end() - 2, aux.end() );
