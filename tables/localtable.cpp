@@ -70,3 +70,36 @@ void LocalTable::generateTables(const std::string currentName, const std::string
 {
 	container[newName] = templates[currentName];
 }
+
+std::vector<std::string> LocalTable::getValue(const std::string variable)
+{
+	std::vector< std::string > rez;
+	for ( auto& i : container )
+	{
+		std::map<std::string,int> table = i.second;
+		for ( auto& t : table )
+		{
+			if ( t.first == variable )
+			{
+				rez.push_back( std::string( "In module " + i.first + " variable " + t.first + " = " + std::to_string(t.second) ) );
+			}
+		}
+	}
+	return rez;
+}
+
+bool LocalTable::exists(const std::string variable )
+{
+	for ( auto& i : container )
+	{
+		auto table = i.second;
+		for(  auto& t : table )
+		{
+			if ( t.first == variable )
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}

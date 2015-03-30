@@ -16,6 +16,10 @@ public:
 	bool exists(const std::string table, const std::string variable);
 	void generateTables(const std::string currentName, const std::string newName );
 
+	//Use only for debug
+	bool exists(const std::string variable );
+	std::vector<std::string> getValue(const std::string variable );
+
 private:
 	LocalTable();
 	LocalTable(const LocalTable& ) = delete;

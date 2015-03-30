@@ -20,6 +20,7 @@ public:
 	static const unsigned int ClockTable = 1 << 10;
 	static const unsigned int ChanTable = 1 << 11;
 	static const unsigned int Sync = 1 << 12;
+	static const unsigned int LocalTable = 1 << 13;
 
 	DebugMessagePriority() : priority{0} {}
 	DebugMessagePriority(unsigned int p) 

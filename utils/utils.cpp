@@ -4,6 +4,7 @@
 
 #include "../tables/symboltable.h"
 #include "../tables/clocktable.h"
+#include "../tables/localtable.h"
 
 DebugMessagePriority priority;
 bool stepProgress = false;
@@ -85,6 +86,14 @@ void nextStep()
 				if ( SymbolTable::getInstance().exists(aux) )
 				{
 					std::cout << "Variable" << aux << " = " << SymbolTable::getInstance().getValue(aux) << std::endl;
+				}
+				if ( LocalTable::getInstance().exists(aux) )
+				{
+					std::vector<std::string> variables = LocalTable::getInstance().getValue(aux);
+					for ( auto& v : variables )
+					{
+						std::cout << v << std::endl;
+					}
 				}
 			}
 		}
