@@ -42,7 +42,9 @@ std::vector<std::pair<std::string,int>> operators{  std::pair<std::string,int>("
 													std::pair<std::string,int>("*",4),
 													std::pair<std::string,int>("*=",1),
 													std::pair<std::string,int>("/",4),
-													std::pair<std::string,int>("/=",1)};
+													std::pair<std::string,int>("/=",1),
+													std::pair<std::string,int>(")",1),
+													std::pair<std::string,int>("(",1)};
 
 bool is_sign(std::string sign)
 {
@@ -281,6 +283,22 @@ std::vector<std::string> Expression::generateRPN()
 			}
 			else
 			{
+				if ( t == "(" )
+				{
+					op.push_back( t );
+					continue;
+				}
+				if ( t == ")" )
+				{
+					while( op.back() != "(" )
+					{
+						std::string o = op[ op.size() - 1 ];
+						op.pop_back();
+						out.push_back( o );
+					}
+					op.pop_back(); //remove the parenthesis
+					continue;
+				}
 				if ( higher_priority(t, op[op.size()-1]) )
 				{
 					op.push_back( t );
