@@ -85,7 +85,7 @@ void nextStep()
 				}
 				if ( SymbolTable::getInstance().exists(aux) )
 				{
-					std::cout << "Variable" << aux << " = " << SymbolTable::getInstance().getValue(aux) << std::endl;
+					std::cout << "Variable " << aux << " = " << SymbolTable::getInstance().getValue(aux) << std::endl;
 				}
 				if ( LocalTable::getInstance().exists(aux) )
 				{
@@ -110,7 +110,6 @@ bool is_integer(std::string name)
 std::vector<std::string> splitString(std::string data, const std::string split)
 {
 	std::vector<std::string> rez;
-	data.erase(std::remove_if(data.begin(),data.end(),isspace), data.end());
 	size_t poz;
 	while( ( poz = data.find(split) ) != std::string::npos )
 	{

@@ -8,6 +8,8 @@
 #include <vector>
 #include <cassert>
 #include <sstream>
+#include <algorithm>
+#include <regex>
 
 #define EXECUTE_BLOCK( s ){  std::string first = aux[ aux.size() - 1 ]; \
 						   std::string second = aux[ aux.size() - 2 ];\
@@ -93,6 +95,30 @@ void replaceString(std::string& subject, const std::string& search, const std::s
     }
 }
 
+bool isValidSymbol(const std::string name)
+{
+	std::regex symbol("([a-zA-Z0-9]+)");
+	return std::regex_match( name, symbol );
+}
+
+bool isValid(const std::string expression)
+{
+	std::vector<std::string> operands = split(expression, ' ' );
+	for ( auto& op : operands )
+	{
+		if ( std::find_if(operators.begin(),operators.end(), [&op](const std::pair<std::string,int> val ){ return val.first == op; } ) != operators.end() )
+		{
+			continue;
+		}
+		if ( isValidSymbol( op ) )
+		{
+			continue;
+		}
+		return false;
+	}
+	return true;
+}
+
 Expression::Expression()
 {
 
@@ -101,9 +127,9 @@ Expression::Expression()
 Expression::Expression(std::string ex) : expression(ex)
 {
 	assert(ex.size() != 0 );
-	for ( auto& o : operators )
+	if ( !isValid(expression) )
 	{
-		replaceString( expression, o.first, std::string( " " + o.first + " " ) );
+		assert(!"Invalid expression: Use this for of expression 'a = a + 4' ");
 	}
 	rpn = this->generateRPN();
 }
