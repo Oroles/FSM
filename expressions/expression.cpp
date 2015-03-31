@@ -23,7 +23,7 @@
 								std::string second = aux[ aux.size() - 2 ]; \
 								aux.erase( aux.end() - 2, aux.end() );\
 								set_value( second, get_value(second) s get_value(first) );\
-								aux.push_back( "1" );\
+								aux.push_back( std::to_string( get_value(second) ) );\
 								continue;\
 							}
 
@@ -39,10 +39,16 @@ std::vector<std::pair<std::string,int>> operators{  std::pair<std::string,int>("
 													std::pair<std::string,int>("+=",1),
 													std::pair<std::string,int>("-",3),
 													std::pair<std::string,int>("-=",1),
+													std::pair<std::string,int>("<<",2),
+													std::pair<std::string,int>("<<=",1),
+													std::pair<std::string,int>(">>",2),
+													std::pair<std::string,int>(">>=",1),
 													std::pair<std::string,int>("*",4),
 													std::pair<std::string,int>("*=",1),
 													std::pair<std::string,int>("/",4),
 													std::pair<std::string,int>("/=",1),
+													std::pair<std::string,int>("%",4),
+													std::pair<std::string,int>("%=",1),
 													std::pair<std::string,int>(")",1),
 													std::pair<std::string,int>("(",1)};
 
@@ -190,6 +196,12 @@ int Expression::evaluate() const
 				if ( t == "-=" ) EXECUTE_BLOCK_SHORT(-);
 				if ( t == "/" ) EXECUTE_BLOCK(/);
 				if ( t == "/=" ) EXECUTE_BLOCK_SHORT(/);
+				if ( t == "%" ) EXECUTE_BLOCK(%);
+				if ( t == "%=" ) EXECUTE_BLOCK_SHORT(%);
+				if ( t == "<<") EXECUTE_BLOCK(<<);
+				if ( t == "<<=" ) EXECUTE_BLOCK_SHORT(<<);
+				if ( t == ">>" ) EXECUTE_BLOCK(>>);
+				if ( t == ">>=" ) EXECUTE_BLOCK_SHORT(>>);
 				if ( t == ">=" ) EXECUTE_BLOCK(>=);
 				if ( t == "<=" ) EXECUTE_BLOCK(<=);
 				if ( t == "==" ) EXECUTE_BLOCK(==);
@@ -199,7 +211,7 @@ int Expression::evaluate() const
 				   	std::string second = aux[ aux.size() - 2 ];
 					aux.erase( aux.end() - 2, aux.end() );
 				   	set_value( second, get_value(first) );
-				   	aux.push_back( "1" );
+					aux.push_back( std::to_string( get_value(second) ) );
 				   	continue;
 				}
 			}
