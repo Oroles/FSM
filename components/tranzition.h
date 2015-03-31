@@ -23,8 +23,6 @@ public:
 	void setSource( const State s );
 	State getDestination() const;
 	void setDestination( const State d );
-	void setGuards( const std::vector<Expression>& g );
-	void setUpdates( const std::vector<Expression>& u );
 	void setSync( const Sync s);
 	void setModuleName( const std::string name);
 	std::string getModuleName() const;
@@ -37,12 +35,14 @@ public:
 
 	void addGuard( const Expression& e );
 	void addUpdate( const Expression& e );
+	void addSelect( const std::string name );
 
 private:
 	State source;
 	State destination;
 	std::vector<Expression> guards;
 	std::vector<Expression> updates;
+	std::vector<std::string> selects;
 	Sync sync;
 	std::string moduleName;
 

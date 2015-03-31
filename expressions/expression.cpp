@@ -4,6 +4,7 @@
 #include "../tables/symboltable.h"
 #include "../tables/clocktable.h"
 #include "../tables/localtable.h"
+#include "../tables/pintable.h"
 
 #include <vector>
 #include <cassert>
@@ -244,6 +245,10 @@ int Expression::get_value(std::string name) const
 	{
 		return LocalTable::getInstance().getValue(moduleName, name);
 	}
+	if ( PinTable::getInstance().exists( name ) )
+	{
+		return PinTable::getInstance().getValue( name );
+	}
 	assert(!"Should not reach here");
 	return 0;
 }
@@ -258,6 +263,15 @@ void Expression::set_value(std::string name, int val) const
 	if ( SymbolTable::getInstance().exists(name) )
 	{
 		SymbolTable::getInstance().setValue(name,val);
+		if ( PinTable::getInstance().exists(name) )
+		{
+			PinTable::getInstance().setValue(name,val);
+		}
+		return;
+	}
+	if ( PinTable::getInstance().exists(name) )
+	{
+		PinTable::getInstance().setValue(name,val);
 		return;
 	}
 	if ( ClockTable::getInstance().exists(name) )
@@ -270,6 +284,7 @@ void Expression::set_value(std::string name, int val) const
 		LocalTable::getInstance().setValue( moduleName, name, val );
 		return;
 	}
+	std::cout << name << std::endl;
 	assert(!"assign a value to a non-variable");
 	return;
 }

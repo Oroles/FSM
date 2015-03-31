@@ -5,6 +5,7 @@
 #include "../tables/chantable.h"
 #include "../tables/clocktable.h"
 #include "../tables/localtable.h"
+#include "../tables/pintable.h"
 #include "stringparser.h"
 
 void Parser::generateFSM(FSM* fsm)
@@ -22,6 +23,7 @@ void Parser::generateFSM(FSM* fsm)
 			ChanTable::getInstance().addEntries( parser.generateChannels() );
 			ClockTable::getInstance().addEntries( parser.generateClocks() );
 			SymbolTable::getInstance().addEntries( parser.generateSymbols() );
+			PinTable::getInstance().addEntries( parser.generatePins() );
 		}
 		if ( std::string(node.name()) == "system" )
 		{
@@ -115,6 +117,12 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 			Sync rez( it->child_value() );
 			display(DebugMessagePriority::Parser, "Syncs founded: ", rez, "\n" );
 			t->setSync( rez );
+		}
+		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("select") ) )
+		{
+			std::string data( it->child_value() );
+			std::string name( data.substr(0, data.find(":") - 1 ) );
+			t->addSelect( name );
 		}
 	}
 }

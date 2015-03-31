@@ -1,5 +1,7 @@
 #include "stringparser.h"
 
+#include "../utils/utils.h"
+
 #include <regex>
 #include <map>
 #include <iostream>
@@ -8,13 +10,25 @@ std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z
 										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },
 										   { "decl", std::regex("([a-zA-Z0-9_]+)( ?)(=)( ?)([a-zA-Z0-9_]+)") },
 										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)(;)") },
-										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)( ?)(=)( ?)([0-9_]+)(;)") },
-										   { "declName", std::regex("( ?)[a-zA-Z0-9_]+")}  };
+										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)( ?)(=)( ?)([0-9_]+)(;)") } };
 
 StringParser::StringParser(std::string t) : text(t)
 {
 	assert(t.size() != 0);
+	pinList = this->createPinList(this->text);
 	text = this->removeComments(this->text);
+}
+
+std::string StringParser::createPinList( std::string t )
+{
+	size_t it = t.find("/**");
+	if ( it == std::string::npos )
+	{
+		return t;
+	}
+	size_t aux = t.find("**/");
+	t = t.substr(it+4,aux-it-4);
+	return t;
 }
 
 std::string StringParser::removeComments( std::string t )
@@ -121,6 +135,23 @@ std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
 		std::string value = matchString.substr( matchString.find_last_of(" ") + 1, std::string::npos );
 		value = value.substr(0, value.find(";") );
 		rez.push_back(std::pair<std::string,int>(name,std::stoi(value)));
+	}
+	std::cout << std::endl;
+	return rez;
+}
+
+std::vector<Pin> StringParser::generatePins()
+{
+	std::vector<Pin> rez;
+	std::vector<std::string> lines = splitString(pinList,"\n");
+	for ( auto l : lines )
+	{
+		if ( l == "" )
+		{
+			continue;
+		}
+		std::vector<std::string> infos = splitString(l," " );
+		rez.push_back( Pin( infos[1], infos[2], std::stoi( infos[3] ) ) );
 	}
 	return rez;
 }
