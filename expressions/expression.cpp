@@ -112,7 +112,7 @@ void replaceString(std::string& subject, const std::string& search, const std::s
 
 bool isValidSymbol(const std::string name)
 {
-	std::regex symbol("([a-zA-Z0-9]+)");
+	std::regex symbol("([a-zA-Z0-9_]+)");
 	return std::regex_match( name, symbol );
 }
 

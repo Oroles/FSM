@@ -4,12 +4,12 @@
 #include <map>
 #include <iostream>
 
-std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z]+)(;)") },
-										   { "clock", std::regex("(clock)( [a-zA-Z]+)(;)") },
-										   { "decl", std::regex("([a-zA-Z0-9]+)( ?)(=)( ?)([a-zA-Z0-9]+)") },
-										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9]+)(;)") },
-										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9]+)( ?)(=)( ?)([0-9]+)(;)") },
-										   { "declName", std::regex("( ?)[a-zA-Z0-9]+")}  };
+std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z0-9_]+)(;)") },
+										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },
+										   { "decl", std::regex("([a-zA-Z0-9_]+)( ?)(=)( ?)([a-zA-Z0-9_]+)") },
+										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)(;)") },
+										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)( ?)(=)( ?)([0-9_]+)(;)") },
+										   { "declName", std::regex("( ?)[a-zA-Z0-9_]+")}  };
 
 StringParser::StringParser(std::string t) : text(t)
 {
