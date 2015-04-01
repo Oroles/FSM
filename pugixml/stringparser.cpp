@@ -136,7 +136,6 @@ std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
 		value = value.substr(0, value.find(";") );
 		rez.push_back(std::pair<std::string,int>(name,std::stoi(value)));
 	}
-	std::cout << std::endl;
 	return rez;
 }
 

@@ -50,4 +50,5 @@ void Pin::update()
 void Pin::setValue(int value)
 {
 	/* here writes data on the pin */
+	this->value = value;
 }

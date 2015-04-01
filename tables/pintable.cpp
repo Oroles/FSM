@@ -42,7 +42,6 @@ void PinTable::addEntries(const std::vector<Pin> pins)
 
 void PinTable::updateEntry(const std::string name)
 {
-	std::cout << name << std::endl;
 	if ( !this->exists(name) )
 	{
 		assert(!"Pin update doesn't exists in PinTable");

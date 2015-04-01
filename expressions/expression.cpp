@@ -263,10 +263,6 @@ void Expression::set_value(std::string name, int val) const
 	if ( SymbolTable::getInstance().exists(name) )
 	{
 		SymbolTable::getInstance().setValue(name,val);
-		if ( PinTable::getInstance().exists(name) )
-		{
-			PinTable::getInstance().setValue(name,val);
-		}
 		return;
 	}
 	if ( PinTable::getInstance().exists(name) )

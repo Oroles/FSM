@@ -1,4 +1,5 @@
 #include "symboltable.h"
+#include "pintable.h"
 
 #include <cassert>
 
@@ -50,7 +51,10 @@ void SymbolTable::addEntries(const std::vector<std::pair<std::string,int>> entri
 	{
 		if ( !this->exists(it.first) )
 		{
-			table[it.first] = it.second;
+			if ( !PinTable::getInstance().exists(it.first) )
+			{
+				table[it.first] = it.second;
+			}
 		}
 		else
 		{

@@ -22,8 +22,8 @@ void Parser::generateFSM(FSM* fsm)
 			StringParser parser(node.child_value());
 			ChanTable::getInstance().addEntries( parser.generateChannels() );
 			ClockTable::getInstance().addEntries( parser.generateClocks() );
-			SymbolTable::getInstance().addEntries( parser.generateSymbols() );
 			PinTable::getInstance().addEntries( parser.generatePins() );
+			SymbolTable::getInstance().addEntries( parser.generateSymbols() );
 		}
 		if ( std::string(node.name()) == "system" )
 		{
