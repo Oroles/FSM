@@ -6,7 +6,6 @@ path=${PWD}
 process_libs()
 {
 	cd $1
-	echo "new process libs"
 	echo $1
 	destination=$path"/tests/${1##*FSM/}"
 	for fileName in *.cpp
@@ -21,8 +20,6 @@ process_libs()
 	cp *.hpp $destination
 
 	rm *.o
-
-	echo "end process libs"
 }
 
 walk_tree()

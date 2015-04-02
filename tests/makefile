@@ -2,6 +2,7 @@
 clean:
 	rm -f ./components/*.h
 	rm -f ./expressions/*.h
+	rm -f ./gpio/*.h
 	rm -f ./pugixml/*.h
 	rm -f ./pugixml/*.hpp
 	rm -f ./tables/*.h
@@ -10,6 +11,7 @@ clean:
 
 	rm -f ./components/*.a
 	rm -f ./expressions/*.a
+	rm -f ./gpio/*.a
 	rm -f ./pugixml/*.a
 	rm -f ./tables/*.a
 	rm -f ./utils/*.a

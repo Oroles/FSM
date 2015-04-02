@@ -3,9 +3,10 @@
 *.out
 *.d
 tests/components/
-tests/variables/
 tests/expressions/
+tests/gpio
 tests/pugixml/
 tests/utils/
 tests/tables/
+tests/variables/
 tests/*~
