@@ -13,6 +13,7 @@ extern bool quitApp;
 void setPriority(const std::vector<std::string>& args);
 std::string getFileName(const std::vector<std::string>& args);
 bool setStepProgress(const std::vector<std::string>& args);
+bool setQuit(const std::vector<std::string>& args);
 void nextStep();
 
 bool is_integer(std::string name); //Checks if the string contains only numbers

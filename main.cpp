@@ -16,16 +16,17 @@ int main(int argc, char* argv[])
 	setPriority( arguments );
 	std::string fileName = getFileName( arguments );
 	setStepProgress( arguments );
+	setQuit( arguments );
 
 	FSM fsm;
 	Parser parser(fileName);
 	parser.generateFSM(&fsm);
-	while( 1 )
+
+	if ( quitApp == false )
 	{
-		fsm.step();
-		if ( quitApp == true )
+		while( 1 )
 		{
-			break;
+			fsm.step();
 		}
 	}
 	return 0;

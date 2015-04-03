@@ -69,6 +69,21 @@ bool setStepProgress(const std::vector<std::string>& args)
 	}
 }
 
+bool setQuit(const std::vector<std::string>& args)
+{
+	auto it = std::find(args.begin(), args.end(), "-quit");
+	if ( it == args.end() )
+	{
+		quitApp = false;
+		return false;
+	}
+	else
+	{
+		quitApp = true;
+		return true;
+	}
+}
+
 void nextStep()
 {
 	if ( stepProgress == true )
@@ -80,11 +95,6 @@ void nextStep()
 			std::cin >> aux;
 			if ( aux != "s" )
 			{
-				if ( aux == "quit" )
-				{
-					quitApp = true;
-					return;
-				}
 				if ( ClockTable::getInstance().exists(aux) )
 				{
 					std::cout << "Clock " << aux << " = " << ClockTable::getInstance().getValue(aux) << std::endl;
