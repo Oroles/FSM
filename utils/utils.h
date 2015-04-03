@@ -8,6 +8,7 @@
 #include "debugmessagepriority.h"
 
 extern DebugMessagePriority priority;
+extern bool quitApp;
 
 void setPriority(const std::vector<std::string>& args);
 std::string getFileName(const std::vector<std::string>& args);

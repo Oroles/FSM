@@ -23,6 +23,10 @@ int main(int argc, char* argv[])
 	while( 1 )
 	{
 		fsm.step();
+		if ( quitApp == true )
+		{
+			break;
+		}
 	}
 	return 0;
 }

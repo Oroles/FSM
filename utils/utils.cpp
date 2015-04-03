@@ -7,6 +7,7 @@
 #include "../tables/localtable.h"
 
 DebugMessagePriority priority;
+bool quitApp = false;
 bool stepProgress = false;
 
 void setPriority(const std::vector<std::string>& args)
@@ -79,6 +80,11 @@ void nextStep()
 			std::cin >> aux;
 			if ( aux != "s" )
 			{
+				if ( aux == "quit" )
+				{
+					quitApp = true;
+					return;
+				}
 				if ( ClockTable::getInstance().exists(aux) )
 				{
 					std::cout << "Clock " << aux << " = " << ClockTable::getInstance().getValue(aux) << std::endl;
