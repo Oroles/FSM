@@ -12,7 +12,7 @@ std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z
 										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)(;)") },
 										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)( ?)(=)( ?)([0-9_]+)(;)") } };
 
-StringParser::StringParser(std::string t) : text(t)
+StringParser::StringParser(std::string t) : text(t), pinList("")
 {
 	assert(t.size() != 0);
 	pinList = this->createPinList(this->text);
@@ -24,7 +24,7 @@ std::string StringParser::createPinList( std::string t )
 	size_t it = t.find("/**");
 	if ( it == std::string::npos )
 	{
-		return t;
+		return "";
 	}
 	size_t aux = t.find("**/");
 	t = t.substr(it+4,aux-it-4);
@@ -142,6 +142,10 @@ std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
 std::vector<Pin> StringParser::generatePins()
 {
 	std::vector<Pin> rez;
+	if ( pinList == "" )
+	{
+		return rez;
+	}
 	std::vector<std::string> lines = splitString(pinList,"\n");
 	for ( auto l : lines )
 	{
