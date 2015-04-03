@@ -135,6 +135,13 @@ bool isValid(const std::string expression)
 	return true;
 }
 
+std::string trim( std::string value )
+{
+	value.erase( value.begin(), std::find_if_not(value.begin(),value.end(),isspace) );
+	value.erase(std::find_if(value.rbegin(), value.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), value.end());
+	return value;
+}
+
 Expression::Expression()
 {
 
@@ -143,6 +150,7 @@ Expression::Expression()
 Expression::Expression(std::string ex) : expression(ex)
 {
 	assert(ex.size() != 0 );
+	expression = trim(expression);
 	if ( !isValid(expression) )
 	{
 		assert(!"Invalid expression: Use this for of expression 'a = a + 4' ");
