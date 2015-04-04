@@ -11,7 +11,7 @@ process_libs()
 	for fileName in *.cpp
 	do
 		name="${fileName%.*}"
-		g++ -std=c++11 -c $fileName
+		g++-4.9 -std=c++11 -c $fileName
 		ar rvs "$name.a" "$name.o"
 	done
 
