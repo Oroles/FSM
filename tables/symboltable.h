@@ -13,12 +13,15 @@ public:
 	void setValue(const std::string name, const int value);
 	int getValue(const std::string name);
 	bool exists(const std::string name) const;
+	void updateSymbols();
+
 private:
 	SymbolTable();
 	SymbolTable(const SymbolTable& rhs) = delete;
 	SymbolTable& operator=(const SymbolTable& rhs) = delete;
 
 	std::map<std::string,int> table;
+	std::vector<std::pair<std::string,int> > messages;
 };
 
 #endif

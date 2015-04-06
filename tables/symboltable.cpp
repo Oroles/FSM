@@ -18,12 +18,21 @@ void SymbolTable::setValue(std::string name, int value)
 {
 	if ( this->exists(name) )
 	{
-		table[name] = value;
+		messages.push_back( std::pair<std::string,int>( name, value ) );
 	}
 	else
 	{
 		assert(!"Symbol table set value to an unexisting symbol");
 	}
+}
+
+void SymbolTable::updateSymbols()
+{
+	for ( auto& p : messages )
+	{
+		table[p.first] = p.second;
+	}
+	messages.clear();
 }
 
 int SymbolTable::getValue(const std::string name)

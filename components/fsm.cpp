@@ -1,6 +1,8 @@
 #include "fsm.h"
 #include "../tables/clocktable.h"
 #include "../tables/localtable.h"
+#include "../tables/symboltable.h"
+#include "../tables/pintable.h"
 #include "../utils/utils.h"
 
 void FSM::step()
@@ -10,6 +12,8 @@ void FSM::step()
 		m.step();
 	}
 	ClockTable::getInstance().updateClocks();
+	SymbolTable::getInstance().updateSymbols();
+	PinTable::getInstance().updatePins();
 	nextStep();
 }
 

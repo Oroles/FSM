@@ -40,6 +40,7 @@ void PinTable::addEntries(const std::vector<Pin> pins)
 	}
 }
 
+/* This method reads the data from the pin and store it in the register */
 void PinTable::updateEntry(const std::string name)
 {
 	if ( !this->exists(name) )
@@ -49,6 +50,7 @@ void PinTable::updateEntry(const std::string name)
 	table[name].update();
 }
 
+/* This method reads the data from the register and return it */
 int PinTable::getValue(const std::string name)
 {
 	if ( !this->exists(name) )
@@ -58,11 +60,21 @@ int PinTable::getValue(const std::string name)
 	return table[name].getValue();
 }
 
+/* This method writes the data directly on the pin */
 void PinTable::setValue(const std::string name, int value)
 {
 	if ( !this->exists(name) )
 	{
 		assert(!"Pin set value doesn't exists in PinTable");
 	}
-	table[name].setValue(value);
+	messages.push_back( std::pair<std::string,int>( name, value ) );
+}
+
+void PinTable::updatePins()
+{
+	for ( auto& p : messages )
+	{
+		table[p.first].setValue(p.second);
+	}
+	messages.clear();
 }

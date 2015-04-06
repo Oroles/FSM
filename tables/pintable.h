@@ -15,6 +15,7 @@ public:
 	void addEntry( const std::string name,const std::string status, const int port );
 	void addEntries( const std::vector<Pin> );
 	void updateEntry( const std::string name );
+	void updatePins();
 	int getValue( const std::string name );
 	void setValue( const std::string name, int value );
 
@@ -25,6 +26,7 @@ private:
 	PinTable& operator=(const PinTable& rhs) = delete;
 
 	std::map<std::string,Pin> table;
+	std::vector<std::pair<std::string,int> > messages;
 };
 
 #endif
