@@ -1,6 +1,6 @@
 #!/bin/bash
 
-g++-4.9 -std=c++11 -pthread ../tests/testExpression.cpp ../expressions/expression.a \
+g++-4.9 -std=c++11 ../tests/testExpression.cpp ../expressions/expression.a \
 				../tables/symboltable.a ../tables/clocktable.a ../variables/clock.a ../utils/utils.a \
 				../tables/localtable.a ../tables/pintable.a ../variables/pin.a
 ./a.out

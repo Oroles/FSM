@@ -15,7 +15,7 @@ HEADERS =
 LIBS =
 
 # Dependency options
-DEPENDENCY_OPTIONS = -std=c++11 -pthread -MM
+DEPENDENCY_OPTIONS = -std=c++11 -MM
 
 #-- Do not edit below this line --
 
@@ -34,11 +34,16 @@ DEPENDENCIES = $(patsubst %.cpp, %.d, $(SOURCE_FILES))
 %.d: %.cpp
 	$(CC) $(DEPENDENCY_OPTIONS) $< -MT "$*.o $*.d" -MF $*.d
 
+all: debug
+
+release: COMPILE_OPTIONS += -DNDEBUG
+release: debug
+
 # Make $(PROJECT) the default target
-all: $(DEPENDENCIES) $(PROJECT)
+debug: $(DEPENDENCIES) $(PROJECT)
 
 $(PROJECT): $(OBJECTS)
-	$(CC) -pthread -std=c++11 -o $(PROJECT) $(OBJECTS) $(LIBS)
+	$(CC) -std=c++11 -o $(PROJECT) $(OBJECTS) $(LIBS)
 
 # Include dependencies (if there are any)
 ifneq "$(strip $(DEPENDENCIES))" ""
