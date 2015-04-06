@@ -13,8 +13,6 @@ int main( int argc, char* argv[] )
 	TEST_EQUAL( m.getName(), "Process" );
 
 	TEST_EQUAL( m.nextState( State( "a" ) ), State( "a" ) );
-	m.addState( State( "a" ) );
-	TEST_EQUAL( m.nextState( State( "a" ) ), State( "a" ) );
 	m.setCurrentState( State( "b" ) );
 	TEST_EQUAL( m.nextState( State( "b" ) ), State( "b" ) );
 	m.addTranzition( Tranzition(State( "b" ) , State( "a" ) ) );
