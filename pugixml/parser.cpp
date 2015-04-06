@@ -38,10 +38,6 @@ Module Parser::processTemplate(const pugi::xml_node& nodes )
 	Module rez;
 	for( const pugi::xml_node node : nodes )
 	{
-		if ( std::string(node.name()) == "location" )
-		{
-			rez.addState( this->processState(node) );
-		}
 		if ( std::string(node.name()) == "transition" )
 		{
 			rez.addTranzition( this->processTranzition(node) );
@@ -61,13 +57,6 @@ Module Parser::processTemplate(const pugi::xml_node& nodes )
 		}
 	}
 	return rez;
-}
-
-State Parser::processState(const pugi::xml_node& node)
-{
-	std::string id = node.attribute("id").value();
-	State state(id);
-	return state;
 }
 
 State Parser::processCurrentState(const pugi::xml_node& node)

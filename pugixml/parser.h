@@ -27,7 +27,6 @@ public:
 
 private:
 	Module processTemplate(const pugi::xml_node& node );
-	State processState(const pugi::xml_node& node );
 	State processCurrentState(const pugi::xml_node& node);
 	Tranzition processTranzition(const pugi::xml_node& node);
 	std::string processName(const pugi::xml_node& node );

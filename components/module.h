@@ -15,7 +15,6 @@ public:
 	Module(Module&& rhs);
 	Module& operator=(const Module& rhs);
 
-	void addState( const State& s );
 	void addTranzition( const Tranzition& t );
 	void setCurrentState( const State& s );
 
@@ -27,7 +26,6 @@ public:
 	void run();
 
 private:
-	std::vector<State> states;
 	std::vector<Tranzition> tranzitions;
 	State currState;
 	std::string name;
