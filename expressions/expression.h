@@ -16,6 +16,8 @@ public:
 	Expression& operator=(const Expression& rhs);
 	bool operator==(const Expression& rhs);
 	int evaluate() const;
+	bool isValidGuard();
+	bool isValidUpdate();
 
 	void setModuleName(const std::string name);
 

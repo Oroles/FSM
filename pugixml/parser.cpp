@@ -1,5 +1,7 @@
 #include "parser.h"
 
+#include <cassert>
+
 #include "../utils/utils.h"
 #include "../tables/symboltable.h"
 #include "../tables/chantable.h"
@@ -86,8 +88,15 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 			for ( auto it : expressions )
 			{
 				Expression ex(it);
-				t->addGuard( ex );
-				display(DebugMessagePriority::Parser, "Guard founded: ", ex, "\n" );	
+				if ( ex.isValidGuard() )
+				{
+					t->addGuard( ex );
+					display(DebugMessagePriority::Parser, "Guard founded: ", ex, "\n" );
+				}
+				else
+				{
+					assert(!"Invalid guard!");
+				}
 			}
 		}
 		if ( ( it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("assignment") ) )
@@ -97,8 +106,15 @@ void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
 			for ( auto it : expressions )
 			{
 				Expression ex(it);
-				t->addUpdate( ex );
-				display(DebugMessagePriority::Parser, "Update founded: ", ex, "\n" );
+				if ( ex.isValidUpdate() )
+				{
+					t->addUpdate( ex );
+					display(DebugMessagePriority::Parser, "Update founded: ", ex, "\n" );
+				}
+				else
+				{
+					assert(!"Invalid update");
+				}
 			}
 		}
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )

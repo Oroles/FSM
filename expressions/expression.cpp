@@ -367,6 +367,34 @@ std::vector<std::string> Expression::generateRPN()
 	return out;
 }
 
+bool Expression::isValidGuard()
+{
+	auto it = std::find_if(rpn.begin(),rpn.end(), [](const std::string val ){ return ( ( val == "=" ) || ( val == ":=" ) ||
+																					 ( val == "+=" ) || ( val == "-=" ) ||
+																					 ( val == "/=" ) || ( val == "*=" ) ||
+																					 ( val == ">>=" ) || ( val == "<<=" ) ||
+																					 ( val == "%=" ) ); } );
+	if ( it != rpn.end() )
+	{
+		return false;
+	}
+	return true;
+}
+
+bool Expression::isValidUpdate()
+{
+	auto it = std::find_if(rpn.begin(),rpn.end(), [](const std::string val ){ return ( ( val == "=" ) || ( val == ":=" ) ||
+																					 ( val == "+=" ) || ( val == "-=" ) ||
+																					 ( val == "/=" ) || ( val == "*=" ) ||
+																					 ( val == ">>=") || ( val == "<<=" ) ||
+																					 ( val == "%=") ); } );
+	if ( it != rpn.end() )
+	{
+		return true;
+	}
+	return false;
+}
+
 std::ostream& operator<<(std::ostream& o, const Expression& e)
 {
 	o << "Expression: " << e.expression;
