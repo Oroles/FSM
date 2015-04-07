@@ -24,8 +24,7 @@ public:
 	State getDestination() const;
 	void setDestination( const State d );
 	void setSync( const Sync s);
-	void setModuleName( const std::string name);
-	std::string getModuleName() const;
+	void setExpressionModuleNames( const std::string name);
 
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
@@ -44,7 +43,6 @@ private:
 	std::vector<Expression> updates;
 	std::vector<std::string> selects;
 	Sync sync;
-	std::string moduleName;
 
 };
 

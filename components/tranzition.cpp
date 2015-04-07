@@ -4,7 +4,7 @@
 #include "../tables/symboltable.h"
 #include "../tables/pintable.h"
 
-Tranzition::Tranzition() : source(""), destination(""), sync(""), moduleName("")
+Tranzition::Tranzition() : source(""), destination(""), sync("")
 {
 
 }
@@ -16,7 +16,7 @@ Tranzition::Tranzition(const State s, const State d) : source(s), destination(d)
 }
 Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(rhs.destination), 
 												guards(rhs.guards), updates(rhs.updates), selects(rhs.selects),
-												sync(rhs.sync), moduleName(rhs.moduleName)
+												sync(rhs.sync)
 {
 	assert(rhs.source.getName().size() != 0);
 	assert(rhs.destination.getName().size() != 0);
@@ -24,8 +24,7 @@ Tranzition::Tranzition(const Tranzition& rhs) : source(rhs.source), destination(
 
 Tranzition::Tranzition(Tranzition&& rhs) : source(std::move(rhs.source)), destination(std::move(rhs.destination)),
 										   guards(std::move(rhs.guards)), updates(std::move(rhs.updates)),
-										   selects(std::move(rhs.selects)), sync(std::move(rhs.sync)),
-										   moduleName(std::move(rhs.moduleName))
+										   selects(std::move(rhs.selects)), sync(std::move(rhs.sync))
 {
 
 }
@@ -39,7 +38,6 @@ Tranzition& Tranzition::operator=(const Tranzition& rhs)
 	guards = rhs.guards;
 	updates = rhs.updates;
 	sync = rhs.sync;
-	moduleName = rhs.moduleName;
 	selects = rhs.selects;
 	return *this;
 }
@@ -72,10 +70,9 @@ void Tranzition::setSync(const Sync s)
 	sync = s;
 }
 
-void Tranzition::setModuleName( const std::string name)
+void Tranzition::setExpressionModuleNames( const std::string name)
 {
 	display(DebugMessagePriority::Tranzition, "Tranzition ", *this, "is part of the module ", name, "\n" );
-	moduleName = name;
 	for ( auto& g : guards )
 	{
 		g.setModuleName(name);
@@ -84,11 +81,6 @@ void Tranzition::setModuleName( const std::string name)
 	{
 		u.setModuleName(name);
 	}
-}
-
-std::string Tranzition::getModuleName() const
-{
-	return moduleName;
 }
 
 State Tranzition::operator()(const State& s)

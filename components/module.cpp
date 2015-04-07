@@ -41,7 +41,7 @@ void Module::setName(const std::string n)
 	name = n;
 	for ( auto& t : tranzitions )
 	{
-		t.setModuleName( n );
+		t.setExpressionModuleNames( n );
 	}
 }
 
