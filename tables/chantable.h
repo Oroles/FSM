@@ -11,7 +11,7 @@ public:
 	static ChanTable& getInstance();
 	void addEntry(const Chan& c);
 	void addEntries( const std::vector<Chan>& v);
-
+	bool existsEntry( const Chan& c);
 	bool isSenderSync(std::string name);
 	bool isReceiverSync(std::string name);
 	void wantSender(std::string name);

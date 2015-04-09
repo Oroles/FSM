@@ -24,6 +24,11 @@ void ChanTable::addEntries(const std::vector<Chan>& v)
 	}
 }
 
+bool ChanTable::existsEntry(const Chan& c)
+{
+	return table.find(c.getName()) != table.end();
+}
+
 bool ChanTable::isSenderSync(std::string name)
 {
 	return table[name].isSenderSync();
