@@ -154,6 +154,10 @@ std::vector<Pin> StringParser::generatePins()
 			continue;
 		}
 		std::vector<std::string> infos = splitString(l," " );
+		if ( ( infos[2] != "OUT" ) && ( infos[2] != "IN" ) )
+		{
+			assert(!"Incorrect pin status");
+		}
 		rez.push_back( Pin( infos[1], infos[2], std::stoi( infos[3] ) ) );
 	}
 	return rez;
