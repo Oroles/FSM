@@ -43,12 +43,18 @@ int Pin::getValue() const
 void Pin::update()
 {
 	/* here reads data from the pin */
-	static int i = 0;
-	value = ++i;
+	if ( status == IN )
+	{
+		static int i = 0;
+		value = ++i;
+	}
 }
 
 void Pin::setValue(int value)
 {
 	/* here writes data on the pin */
-	this->value = value;
+	if ( status == OUT )
+	{
+		this->value = value;
+	}
 }
