@@ -43,7 +43,7 @@ int Pin::getValue() const
 void Pin::update()
 {
 	/* here reads data from the pin */
-	if ( status == IN )
+	if ( status == "IN" )
 	{
 		static int i = 0;
 		value = ++i;
@@ -53,7 +53,7 @@ void Pin::update()
 void Pin::setValue(int value)
 {
 	/* here writes data on the pin */
-	if ( status == OUT )
+	if ( status == "OUT" )
 	{
 		this->value = value;
 	}
