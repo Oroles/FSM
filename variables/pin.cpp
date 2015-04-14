@@ -21,9 +21,8 @@ Pin::Pin(std::string n, std::string s, int p) : name(n),  status(s), port(p)
 	{
 		pinMode(port,INPUT);
 	}
-#else
-	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
 Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port)
@@ -37,9 +36,8 @@ Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port)
 	{
 		pinMode(port,INPUT);
 	}
-#else
-	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
 Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.status)), port(std::move(rhs.port))
@@ -53,9 +51,8 @@ Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.st
 	{
 		pinMode(port,INPUT);
 	}
-#else
-	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
 Pin& Pin::operator=(const Pin& rhs)
@@ -84,8 +81,8 @@ void Pin::update()
 #ifdef RASPBERRY_PI
 		value = digitalRead(port);
 #else
-		static int i = 0;
-		value = ++i;
+		static int i = 1;
+		value = i;
 #endif
 	}
 }
@@ -98,7 +95,7 @@ void Pin::setValue(int value)
 #ifdef RASPBERRY_PI
 		digitalWrite(port,value);
 #else
-		this->value = value;
+
 #endif
 	}
 }
