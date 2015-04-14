@@ -22,7 +22,7 @@ Pin::Pin(std::string n, std::string s, int p) : name(n),  status(s), port(p)
 		pinMode(port,INPUT);
 	}
 #else
-	display(DebugMessagePriority::Pin, "The pin: ", port, "is set as ", status, "\n" );
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
 }
 
@@ -38,7 +38,7 @@ Pin::Pin( const Pin& rhs ) : name(rhs.name), status(rhs.status), port(rhs.port)
 		pinMode(port,INPUT);
 	}
 #else
-	display(DebugMessagePriority::Pin, "The pin: ", port, "is set as ", status, "\n" );
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
 }
 
@@ -54,7 +54,7 @@ Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.st
 		pinMode(port,INPUT);
 	}
 #else
-	display(DebugMessagePriority::Pin, "The pin: ", port, "is set as ", status, "\n" );
+	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 #endif
 }
 

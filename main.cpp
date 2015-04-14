@@ -1,13 +1,20 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <wiringPi.h>
 
 #include "components/fsm.h"
 #include "pugixml/parser.h"
 #include "utils/utils.h"
 
+
 int main(int argc, char* argv[])
 {
+
+#ifdef RASPBERRY_PI
+	wiringPiSetup();
+#endif
+
 	std::vector<std::string> arguments;
 	for ( int i = 0; i < argc; ++i)
 	{
