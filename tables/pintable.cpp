@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <wiringPi.h>
 
 PinTable& PinTable::getInstance()
 {
@@ -11,7 +12,9 @@ PinTable& PinTable::getInstance()
 
 PinTable::PinTable()
 {
-
+#ifdef RASPBERRY_PI
+	wiringPiSetup();
+#endif
 }
 
 bool PinTable::exists(std::string name)
