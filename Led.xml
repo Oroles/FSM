@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+int led = 0;
+int button = 0;
+
+/**
+* buttonStatus IN 0
+* led OUT 1
+**/</declaration><template><name x="5" y="5">Led</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="24" y="-120"></location><location id="id1" x="24" y="-288"></location><location id="id2" x="24" y="-208"></location><location id="id3" x="-208" y="-208"></location><init ref="id3"/><transition><source ref="id0"/><target ref="id3"/><label kind="assignment" x="-152" y="-104">led = 0</label><nail x="-208" y="-120"/></transition><transition><source ref="id1"/><target ref="id3"/><label kind="assignment" x="-152" y="-320">led = 1</label><nail x="-208" y="-288"/></transition><transition><source ref="id2"/><target ref="id0"/><label kind="guard" x="48" y="-176">button == 0</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="guard" x="40" y="-256">button == 1</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="select" x="-180" y="-233">buttonStatus : int[0,1]</label><label kind="assignment" x="-176" y="-200">button = buttonStatus</label></transition></template><system>// Place template instantiations here.
+Process = Led();
+
+// List one or more processes to be composed into a system.
+system Process;</system></nta>
