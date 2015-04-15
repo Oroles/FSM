@@ -6,10 +6,10 @@
 #include <cassert>
 #include <vector>
 
-#include "../components/fsm.h"
+#include "../components/timedautomata.h"
 #include "../components/module.h"
 #include "../components/state.h"
-#include "../components/tranzition.h"
+#include "../components/transition.h"
 #include "../expressions/expression.h"
 #include "pugixml.hpp"
 
@@ -23,14 +23,14 @@ public:
 		assert(rez.description() == std::string("No error"));
 	}
 
-	void generateFSM(FSM* fsm);
+	void generateFSM(TimedAutomata* fsm);
 
 private:
 	Module processTemplate(const pugi::xml_node& node );
 	State processCurrentState(const pugi::xml_node& node);
-	Tranzition processTranzition(const pugi::xml_node& node);
+	Transition processTransition(const pugi::xml_node& node);
 	std::string processName(const pugi::xml_node& node );
-	void processLabels(Tranzition* t, const pugi::xml_node& node );
+	void processLabels(Transition* t, const pugi::xml_node& node );
 	
 	pugi::xml_document doc;
 };

@@ -10,14 +10,14 @@
 #include "../tables/pintable.h"
 #include "stringparser.h"
 
-void Parser::generateFSM(FSM* fsm)
+void Parser::generateFSM(TimedAutomata* timedAutomata)
 {
 	pugi::xml_node modules = doc.child("nta");
 	for ( const pugi::xml_node node : modules )
 	{
 		if ( std::string(node.name()) == "template" )
 		{
-			fsm->addTemplate( this->processTemplate( node ) );
+			timedAutomata->addTemplate( this->processTemplate( node ) );
 		}
 		if ( std::string(node.name()) == "declaration" )
 		{
@@ -30,7 +30,7 @@ void Parser::generateFSM(FSM* fsm)
 		if ( std::string(node.name()) == "system" )
 		{
 			StringParser parser(node.child_value());
-			fsm->addModules( parser.generateModules() ); 
+			timedAutomata->addModules( parser.generateModules() ); 
 		}
 	}
 }
@@ -42,7 +42,7 @@ Module Parser::processTemplate(const pugi::xml_node& nodes )
 	{
 		if ( std::string(node.name()) == "transition" )
 		{
-			rez.addTranzition( this->processTranzition(node) );
+			rez.addTransition( this->processTransition(node) );
 		}
 		if ( std::string(node.name()) == "init" )
 		{
@@ -68,16 +68,16 @@ State Parser::processCurrentState(const pugi::xml_node& node)
 	return state;
 }
 
-Tranzition Parser::processTranzition(const pugi::xml_node& node)
+Transition Parser::processTransition(const pugi::xml_node& node)
 {
 	State source( node.child("source").attribute("ref").value() );
 	State destination( node.child("target").attribute("ref").value() );
-	Tranzition tranz(source,destination);
+	Transition tranz(source,destination);
 	this->processLabels( &tranz, node );
 	return tranz;
 }
 
-void Parser::processLabels(Tranzition* t, const pugi::xml_node& node)
+void Parser::processLabels(Transition* t, const pugi::xml_node& node)
 {
 	for ( auto it = node.begin(); it != node.end(); ++it )
 	{

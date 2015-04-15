@@ -7,10 +7,10 @@
 
 #include "module.h"
 
-class FSM
+class TimedAutomata
 {
 public:
-	FSM() {}
+	TimedAutomata() {}
 	
 	void step();
 

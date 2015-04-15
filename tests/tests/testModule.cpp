@@ -2,7 +2,7 @@
 
 #include "utils.h"
 #include "../components/module.h"
-#include "../components/tranzition.h"
+#include "../components/transition.h"
 #include "../components/state.h"
 
 int main( int argc, char* argv[] )
@@ -15,7 +15,7 @@ int main( int argc, char* argv[] )
 	TEST_EQUAL( m.nextState( State( "a" ) ), State( "a" ) );
 	m.setCurrentState( State( "b" ) );
 	TEST_EQUAL( m.nextState( State( "b" ) ), State( "b" ) );
-	m.addTranzition( Tranzition(State( "b" ) , State( "a" ) ) );
+	m.addTransition( Transition(State( "b" ) , State( "a" ) ) );
 	TEST_EQUAL( m.nextState( State( "b" ) ), State( "a" ) );
 
 	m.step();
@@ -23,9 +23,9 @@ int main( int argc, char* argv[] )
 	m.setCurrentState( State( "b" ) );
 	TEST_EQUAL( m.nextState( State( "b" ) ), State( "a" ) );
 
-	m.addTranzition( Tranzition( State( "b" ), State( "c" ) ) );
+	m.addTransition( Transition( State( "b" ), State( "c" ) ) );
 	TEST_EQUAL( m.nextState( State( "b" ) ), State( "a" ) );
-	m.addTranzition( Tranzition( State( "a" ), State( "b" ) ) );
+	m.addTransition( Transition( State( "a" ), State( "b" ) ) );
 	TEST_EQUAL( m.nextState( State( "a" ) ), State( "b" ) );
 
 	{

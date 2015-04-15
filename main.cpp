@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <wiringPi.h>
 
-#include "components/fsm.h"
+#include "components/timedautomata.h"
 #include "pugixml/parser.h"
 #include "utils/utils.h"
 
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	setStepProgress( arguments );
 	setQuit( arguments );
 
-	FSM fsm;
+	TimedAutomata fsm;
 	Parser parser(fileName);
 	parser.generateFSM(&fsm);
 

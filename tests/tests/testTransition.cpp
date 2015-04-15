@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "utils.h"
-#include "../components/tranzition.h"
+#include "../components/transition.h"
 #include "../components/state.h"
 #include "../expressions/expression.h"
 #include "../expressions/sync.h"
@@ -15,13 +15,13 @@ int main(int argc, char* argv[] )
 		std::pair<std::string,int>{ "c",3 } } );
 	State a("a");
 	State b("b");
-	Tranzition tran(a,b);
+	Transition tran(a,b);
 
 	TEST_EQUAL( tran.getSource(), a );
 	TEST_EQUAL( tran.getDestination(), b );
 
 	{
-		Tranzition aux = tran;
+		Transition aux = tran;
 		TEST_EQUAL( aux.getSource(), a );
 		TEST_EQUAL( aux.getDestination(), b );
 		State state1( "c" );
@@ -30,9 +30,6 @@ int main(int argc, char* argv[] )
 		aux.setDestination( state1 );
 		TEST_EQUAL( aux.getDestination(), state1 );
 	}
-
-	tran.setModuleName( "Process" );
-	TEST_EQUAL( tran.getModuleName(), "Process" );
 
 	/* Test isAvailable */
 	IS_TRUE( tran.isAvailable( a ) );

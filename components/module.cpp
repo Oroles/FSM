@@ -5,27 +5,27 @@ Module::Module()
 {
 }
 
-Module::Module(const Module& rhs): tranzitions(rhs.tranzitions), currState(rhs.currState), name(rhs.name)
+Module::Module(const Module& rhs): transitions(rhs.transitions), currState(rhs.currState), name(rhs.name)
 {
 }
 
-Module::Module(Module&& rhs) : tranzitions(std::move(rhs.tranzitions)),
+Module::Module(Module&& rhs) : transitions(std::move(rhs.transitions)),
 							   currState(std::move(rhs.currState)), name(std::move(rhs.name))
 {
 }
 
 Module& Module::operator=(const Module& rhs)
 {
-	tranzitions = rhs.tranzitions;
+	transitions = rhs.transitions;
 	currState = rhs.currState;
 	name = rhs.name;
 	return *this;
 }
 
-void Module::addTranzition(const Tranzition& t)
+void Module::addTransition(const Transition& t)
 {
-	display(DebugMessagePriority::Module, "Tranzition: ", t, "is added to module: ", name, "\n");
-	tranzitions.push_back( t );
+	display(DebugMessagePriority::Module, "Transition: ", t, "is added to module: ", name, "\n");
+	transitions.push_back( t );
 }
 
 void Module::setCurrentState(const State& s)
@@ -39,7 +39,7 @@ void Module::setName(const std::string n)
 	assert(n.size() != 0);
 	display(DebugMessagePriority::Module, "Set name to module: ", n, "\n");
 	name = n;
-	for ( auto& t : tranzitions )
+	for ( auto& t : transitions )
 	{
 		t.setExpressionModuleNames( n );
 	}
@@ -52,7 +52,7 @@ std::string Module::getName() const
 
 State Module::nextState(const State& s) const
 {
-	for( auto& t : tranzitions )
+	for( auto& t : transitions )
 	{
 		if ( t.isAvailable( s ) )
 		{
@@ -64,7 +64,7 @@ State Module::nextState(const State& s) const
 
 void Module::step()
 {
-	for( auto& t : tranzitions )
+	for( auto& t : transitions )
 	{
 		if ( t.isAvailable( currState ) )
 		{
@@ -74,7 +74,7 @@ void Module::step()
 			return;
 		}
 	}
-	display(DebugMessagePriority::Module,"No tranzition available from the state ", currState, " for module ", name, "\n" );
+	display(DebugMessagePriority::Module,"No transition available from the state ", currState, " for module ", name, "\n" );
 }
 
 void Module::run()

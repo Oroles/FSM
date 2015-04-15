@@ -1,11 +1,11 @@
-#include "fsm.h"
+#include "timedautomata.h"
 #include "../tables/clocktable.h"
 #include "../tables/localtable.h"
 #include "../tables/symboltable.h"
 #include "../tables/pintable.h"
 #include "../utils/utils.h"
 
-void FSM::step()
+void TimedAutomata::step()
 {
 	for ( auto& m : modules )
 	{
@@ -17,12 +17,12 @@ void FSM::step()
 	nextStep();
 }
 
-void FSM::addTemplate(const Module& t)
+void TimedAutomata::addTemplate(const Module& t)
 {
 	templates.push_back( t );
 }
 
-void FSM::addModules(const std::map<std::string,std::string> modulesName )
+void TimedAutomata::addModules(const std::map<std::string,std::string> modulesName )
 {
 	for ( auto name : modulesName )
 	{

@@ -5,7 +5,7 @@
 #include <string>
 
 #include "state.h"
-#include "tranzition.h"
+#include "transition.h"
 
 class Module
 {
@@ -15,7 +15,7 @@ public:
 	Module(Module&& rhs);
 	Module& operator=(const Module& rhs);
 
-	void addTranzition( const Tranzition& t );
+	void addTransition( const Transition& t );
 	void setCurrentState( const State& s );
 
 	void setName( const std::string n );
@@ -26,7 +26,7 @@ public:
 	void run();
 
 private:
-	std::vector<Tranzition> tranzitions;
+	std::vector<Transition> transitions;
 	State currState;
 	std::string name;
 };

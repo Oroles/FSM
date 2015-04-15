@@ -1,5 +1,5 @@
-#ifndef _TRANZITION_H_
-#define _TRANZITION_H_
+#ifndef _TRANSITION_H_
+#define _TRANSITION_H_
 
 #include <vector>
 #include <string>
@@ -9,16 +9,16 @@
 #include "../expressions/expression.h"
 #include "../expressions/sync.h"
 
-class Tranzition
+class Transition
 {
 public:
-	Tranzition();
+	Transition();
 
-	Tranzition(const State s, const State d);
-	Tranzition(const Tranzition& rhs);
-	Tranzition(Tranzition&& rhs);
+	Transition(const State s, const State d);
+	Transition(const Transition& rhs);
+	Transition(Transition&& rhs);
 
-	Tranzition& operator=(const Tranzition& rhs);
+	Transition& operator=(const Transition& rhs);
 	State getSource() const;
 	void setSource( const State s );
 	State getDestination() const;
@@ -27,7 +27,7 @@ public:
 	void setExpressionModuleNames( const std::string name);
 
 	State operator()(const State&);
-	friend std::ostream& operator<<(std::ostream& o, const Tranzition&);
+	friend std::ostream& operator<<(std::ostream& o, const Transition&);
 
 	bool isAvailable(const State&) const;
 	bool isSync() const;

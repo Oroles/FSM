@@ -7,8 +7,8 @@ class DebugMessagePriority
 {
 public:
 	/* This order should be change so the most important class to have a smaller value */
-	static const unsigned int Fsm = 1;
-	static const unsigned int Tranzition = 1 << 1;
+	static const unsigned int TimedAutomata = 1;
+	static const unsigned int Transition = 1 << 1;
 	static const unsigned int Module = 1 << 2;
 	static const unsigned int Parser = 1 << 3;
 	static const unsigned int Expression = 1 << 4;
