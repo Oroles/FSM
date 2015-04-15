@@ -81,7 +81,7 @@ std::vector<std::string> LocalTable::getValue(const std::string variable)
 		{
 			if ( t.first == variable )
 			{
-				rez.push_back( std::string( "In module " + i.first + " variable " + t.first + " = " + std::to_string(t.second) ) );
+				rez.push_back( std::string( "In template " + i.first + " variable " + t.first + " = " + std::to_string(t.second) ) );
 			}
 		}
 	}

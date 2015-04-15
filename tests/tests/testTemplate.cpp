@@ -1,13 +1,13 @@
 #include <iostream>
 
 #include "utils.h"
-#include "../components/module.h"
+#include "../components/template.h"
 #include "../components/transition.h"
 #include "../components/state.h"
 
 int main( int argc, char* argv[] )
 {
-	Module m;
+	Template m;
 	TEST_EQUAL( m.getName(), "" );
 	m.setName( "Process" );
 	TEST_EQUAL( m.getName(), "Process" );
@@ -29,14 +29,14 @@ int main( int argc, char* argv[] )
 	TEST_EQUAL( m.nextState( State( "a" ) ), State( "b" ) );
 
 	{
-		Module m1 = m;
+		Template m1 = m;
 		TEST_EQUAL( m1.nextState( State( "b" ) ), State( "a" ) );
 		TEST_EQUAL( m1.nextState( State( "a" ) ), State( "b" ) );
 		TEST_EQUAL( m1.nextState( State( "c") ), State( "c" ) );
 	}
 
 	{
-		Module m1;
+		Template m1;
 		m1 = m;
 		TEST_EQUAL( m1.nextState( State( "b" ) ), State( "a" ) );
 		TEST_EQUAL( m1.nextState( State( "a" ) ), State( "b" ) );

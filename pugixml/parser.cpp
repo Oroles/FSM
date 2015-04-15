@@ -12,8 +12,8 @@
 
 void Parser::generateFSM(TimedAutomata* timedAutomata)
 {
-	pugi::xml_node modules = doc.child("nta");
-	for ( const pugi::xml_node node : modules )
+	pugi::xml_node templates = doc.child("nta");
+	for ( const pugi::xml_node node : templates )
 	{
 		if ( std::string(node.name()) == "template" )
 		{
@@ -30,14 +30,14 @@ void Parser::generateFSM(TimedAutomata* timedAutomata)
 		if ( std::string(node.name()) == "system" )
 		{
 			StringParser parser(node.child_value());
-			timedAutomata->addModules( parser.generateModules() ); 
+			timedAutomata->addSystems( parser.generateSystems() ); 
 		}
 	}
 }
 
-Module Parser::processTemplate(const pugi::xml_node& nodes )
+Template Parser::processTemplate(const pugi::xml_node& nodes )
 {
-	Module rez;
+	Template rez;
 	for( const pugi::xml_node node : nodes )
 	{
 		if ( std::string(node.name()) == "transition" )

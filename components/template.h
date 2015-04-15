@@ -1,5 +1,5 @@
-#ifndef _MODULE_H_
-#define _MODULE_H_
+#ifndef _TEMPLATE_H_
+#define _TEMPLATE_H_
 
 #include <vector>
 #include <string>
@@ -7,13 +7,13 @@
 #include "state.h"
 #include "transition.h"
 
-class Module
+class Template
 {
 public:
-	Module();
-	Module(const Module& rhs);
-	Module(Module&& rhs);
-	Module& operator=(const Module& rhs);
+	Template();
+	Template(const Template& rhs);
+	Template(Template&& rhs);
+	Template& operator=(const Template& rhs);
 
 	void addTransition( const Transition& t );
 	void setCurrentState( const State& s );

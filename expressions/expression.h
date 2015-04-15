@@ -19,7 +19,7 @@ public:
 	bool isValidGuard();
 	bool isValidUpdate();
 
-	void setModuleName(const std::string name);
+	void setSystemName(const std::string name);
 
 private:
 
@@ -30,7 +30,7 @@ private:
 
 	std::string expression;
 	std::vector<std::string> rpn;
-	std::string moduleName;
+	std::string systemName;
 };
 
 #endif

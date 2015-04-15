@@ -91,7 +91,7 @@ std::vector<Chan> StringParser::generateChannels()
 	return rez;
 }
 
-std::map<std::string,std::string> StringParser::generateModules()
+std::map<std::string,std::string> StringParser::generateSystems()
 {
 	std::map<std::string,std::string> rez;
 	auto words_begin = std::sregex_iterator(text.begin(), text.end(), regex["decl"] );

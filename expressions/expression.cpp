@@ -158,12 +158,12 @@ Expression::Expression(std::string ex) : expression(ex)
 	rpn = this->generateRPN();
 }
 
-Expression::Expression(const Expression& rhs) : expression( rhs.expression ), rpn( rhs.rpn ), moduleName( rhs.moduleName )
+Expression::Expression(const Expression& rhs) : expression( rhs.expression ), rpn( rhs.rpn ), systemName( rhs.systemName )
 {
 
 }
 
-Expression::Expression(Expression&& rhs) : expression( std::move( rhs.expression ) ), rpn( std::move(rhs.rpn) ), moduleName( std::move(rhs.moduleName) )
+Expression::Expression(Expression&& rhs) : expression( std::move( rhs.expression ) ), rpn( std::move(rhs.rpn) ), systemName( std::move(rhs.systemName) )
 {
 
 }
@@ -172,7 +172,7 @@ Expression& Expression::operator=(const Expression& rhs)
 {
 	rpn = rhs.rpn;
 	expression = rhs.expression;
-	moduleName = rhs.moduleName;
+	systemName = rhs.systemName;
 	return *this;
 }
 
@@ -231,7 +231,7 @@ int Expression::evaluate() const
 			}
 		}
 	}
-	display(DebugMessagePriority::Expression, "Expression: ", expression, "from module ", moduleName, " is evaluated to ", aux[0], "\n" );
+	display(DebugMessagePriority::Expression, "Expression: ", expression, "from template ", systemName, " is evaluated to ", aux[0], "\n" );
 	return std::stoi( aux[0] );
 }
 
@@ -249,9 +249,9 @@ int Expression::get_value(std::string name) const
 	{
 		return ClockTable::getInstance().getValue(name);
 	}
-	if ( LocalTable::getInstance().exists( moduleName, name ) )
+	if ( LocalTable::getInstance().exists( systemName, name ) )
 	{
-		return LocalTable::getInstance().getValue(moduleName, name);
+		return LocalTable::getInstance().getValue( systemName, name);
 	}
 	if ( PinTable::getInstance().exists( name ) )
 	{
@@ -261,9 +261,9 @@ int Expression::get_value(std::string name) const
 	return 0;
 }
 
-void Expression::setModuleName(const std::string name)
+void Expression::setSystemName(const std::string name)
 {
-	moduleName = name;
+	systemName = name;
 }
 
 void Expression::set_value(std::string name, int val) const
@@ -283,9 +283,9 @@ void Expression::set_value(std::string name, int val) const
 		ClockTable::getInstance().setValue(name,val);
 		return;
 	}
-	if ( LocalTable::getInstance().exists( moduleName, name ) )
+	if ( LocalTable::getInstance().exists( systemName, name ) )
 	{
-		LocalTable::getInstance().setValue( moduleName, name, val );
+		LocalTable::getInstance().setValue( systemName, name, val );
 		return;
 	}
 	std::cout << name << std::endl;

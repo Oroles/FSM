@@ -9,7 +9,7 @@ public:
 	/* This order should be change so the most important class to have a smaller value */
 	static const unsigned int TimedAutomata = 1;
 	static const unsigned int Transition = 1 << 1;
-	static const unsigned int Module = 1 << 2;
+	static const unsigned int Template = 1 << 2;
 	static const unsigned int Parser = 1 << 3;
 	static const unsigned int Expression = 1 << 4;
 	static const unsigned int Pin = 1 << 5;

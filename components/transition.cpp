@@ -70,16 +70,16 @@ void Transition::setSync(const Sync s)
 	sync = s;
 }
 
-void Transition::setExpressionModuleNames( const std::string name)
+void Transition::setExpressionTemplateNames( const std::string name)
 {
-	display(DebugMessagePriority::Transition, "Transition ", *this, "is part of the module ", name, "\n" );
+	display(DebugMessagePriority::Transition, "Transition ", *this, "is part of the template ", name, "\n" );
 	for ( auto& g : guards )
 	{
-		g.setModuleName(name);
+		g.setSystemName(name);
 	}
 	for ( auto& u : updates )
 	{
-		u.setModuleName(name);
+		u.setSystemName(name);
 	}
 }
 

@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 
-#include "module.h"
+#include "template.h"
 
 class TimedAutomata
 {
@@ -14,12 +14,12 @@ public:
 	
 	void step();
 
-	void addTemplate(const Module& m );
-	void addModules(const std::map<std::string,std::string> modulesName);
+	void addTemplate(const Template& m );
+	void addSystems(const std::map<std::string,std::string> systemsName);
 
 private:
-	std::vector<Module> templates;
-	std::vector<Module> modules;
+	std::vector<Template> templates;
+	std::vector<Template> systems;
 };
 
 #endif

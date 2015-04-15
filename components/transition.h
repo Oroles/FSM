@@ -24,7 +24,7 @@ public:
 	State getDestination() const;
 	void setDestination( const State d );
 	void setSync( const Sync s);
-	void setExpressionModuleNames( const std::string name);
+	void setExpressionTemplateNames( const std::string name);
 
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Transition&);

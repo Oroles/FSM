@@ -7,7 +7,7 @@
 
 void TimedAutomata::step()
 {
-	for ( auto& m : modules )
+	for ( auto& m : systems )
 	{
 		m.step();
 	}
@@ -17,22 +17,22 @@ void TimedAutomata::step()
 	nextStep();
 }
 
-void TimedAutomata::addTemplate(const Module& t)
+void TimedAutomata::addTemplate(const Template& t)
 {
 	templates.push_back( t );
 }
 
-void TimedAutomata::addModules(const std::map<std::string,std::string> modulesName )
+void TimedAutomata::addSystems(const std::map<std::string,std::string> systemsName )
 {
-	for ( auto name : modulesName )
+	for ( auto name : systemsName )
 	{
 		for ( auto& t : templates )
 		{
 			if ( t.getName() == name.second )
 			{
-				Module aux = t;
+				Template aux = t;
 				aux.setName( name.first );
-				modules.push_back( aux );
+				systems.push_back( aux );
 				LocalTable::getInstance().generateTables( name.second, name.first );
 			}
 		}

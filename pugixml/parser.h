@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "../components/timedautomata.h"
-#include "../components/module.h"
+#include "../components/template.h"
 #include "../components/state.h"
 #include "../components/transition.h"
 #include "../expressions/expression.h"
@@ -26,7 +26,7 @@ public:
 	void generateFSM(TimedAutomata* fsm);
 
 private:
-	Module processTemplate(const pugi::xml_node& node );
+	Template processTemplate(const pugi::xml_node& node );
 	State processCurrentState(const pugi::xml_node& node);
 	Transition processTransition(const pugi::xml_node& node);
 	std::string processName(const pugi::xml_node& node );

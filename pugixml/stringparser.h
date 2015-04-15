@@ -18,7 +18,7 @@ public:
 	std::vector<Clock> generateClocks();
 	std::vector<Chan> generateChannels();
 	std::vector<std::pair<std::string,int> > generateSymbols();
-	std::map<std::string,std::string> generateModules();
+	std::map<std::string,std::string> generateSystems();
 	std::vector<Pin> generatePins();
 
 private:
