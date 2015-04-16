@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+clock x;
+chan c;
+int ledSender = 0;
+int ledReceiver = 0;
+
+/**
+* ledSender OUT 8
+* ledReceiver OUT 9
+**/</declaration><template><name x="5" y="5">Sender</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="16" y="24"></location><location id="id1" x="16" y="-112"></location><location id="id2" x="-128" y="-112"></location><init ref="id2"/><transition><source ref="id0"/><target ref="id2"/><label kind="assignment" x="-216" y="-32">x = 0, ledSender = 0</label></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="32" y="-64">x &gt; 200</label><label kind="assignment" x="-96" y="-152">ledSender = 1</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="synchronisation" x="-64" y="-128">c!</label></transition></template><template><name>Receiver</name><location id="id3" x="-8" y="24"></location><location id="id4" x="-8" y="-104"></location><location id="id5" x="-152" y="-104"></location><init ref="id5"/><transition><source ref="id5"/><target ref="id5"/><label kind="guard" x="-184" y="-184">x &lt; 100</label><label kind="assignment" x="-216" y="-208">ledReceiver = 1</label><nail x="-128" y="-160"/><nail x="-192" y="-160"/></transition><transition><source ref="id3"/><target ref="id5"/><label kind="guard" x="-152" y="-40">x &gt; 200</label></transition><transition><source ref="id4"/><target ref="id3"/><label kind="synchronisation" x="0" y="-56">c?</label></transition><transition><source ref="id5"/><target ref="id4"/><label kind="guard" x="-112" y="-128">x &gt;= 100</label><label kind="assignment" x="-128" y="-96">ledReceiver = 0</label></transition></template><system>// Place template instantiations here.
+S = Sender();
+R = Receiver();
+
+// List one or more processes to be composed into a system.
+system S,R;</system></nta>
