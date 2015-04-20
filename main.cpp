@@ -2,11 +2,18 @@
 #include <string>
 #include <algorithm>
 #include <wiringPi.h>
+#include <thread>
 
 #include "components/timedautomata.h"
 #include "pugixml/parser.h"
 #include "utils/utils.h"
 
+std::string stopCondition = "";
+
+void readData()
+{
+	std::cin >> stopCondition;
+}
 
 int main(int argc, char* argv[])
 {
@@ -22,19 +29,33 @@ int main(int argc, char* argv[])
 	}
 	setPriority( arguments );
 	std::string fileName = getFileName( arguments );
-	setStepProgress( arguments );
+	bool step = setStepProgress( arguments );
 	setQuit( arguments );
 
 	TimedAutomata fsm;
 	Parser parser(fileName);
 	parser.generateFSM(&fsm);
 
+
 	if ( quitApp == false )
 	{
-		while( 1 )
+		if ( step != true )
 		{
-			fsm.step();
+			std::thread t(readData);
+			while( stopCondition != "quit" )
+			{
+				fsm.step();
+			}
+			t.join();
+		}
+		else
+		{
+			while( 1 )
+			{
+				fsm.step();
+			}
 		}
 	}
+
 	return 0;
 }
