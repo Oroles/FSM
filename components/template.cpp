@@ -1,5 +1,5 @@
 #include "template.h"
-#include "../utils/utils.h"
+
 
 Template::Template()
 {
@@ -54,24 +54,35 @@ State Template::nextState(const State& s) const
 {
 	for( auto& t : transitions )
 	{
-		if ( t.isAvailable( s ) )
+		if ( t.isAvailable( s ) == TranzactionAvailableStatus::Available )
 		{
 			return t.getDestination();
 		}
 	}
-	return s;		
+	return s;
 }
 
 void Template::step()
 {
+	Transition aux;
 	for( auto& t : transitions )
 	{
-		if ( t.isAvailable( currState ) )
+		TranzactionAvailableStatus status = t.isAvailable( currState );
+		if ( status == TranzactionAvailableStatus::Available )
 		{
 			display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
 			currState = t( currState );
 			display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
+			aux.deSync();
 			return;
+		}
+		else
+		{
+			if ( status == TranzactionAvailableStatus::NotSync )
+			{
+				aux.deSync();
+				aux = t;
+			}
 		}
 	}
 	display(DebugMessagePriority::Template,"No transition available from the state ", currState, " for template ", name, "\n" );

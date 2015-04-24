@@ -53,6 +53,25 @@ bool Sync::isSync() const
 	return false;
 }
 
+void Sync::deSync()
+{
+	if ( name == "" )
+	{
+		return;
+	}
+	const char type = name.back();
+	const std::string chan = name.substr(0,name.length()-1);
+	if ( type == '!' )
+	{
+		ChanTable::getInstance().refuseSender( chan );
+	}
+	else
+	{
+		ChanTable::getInstance().refuseReceiver( chan );
+	}
+	return;
+}
+
 std::ostream& operator<<( std::ostream& o, const Sync& s )
 {
 	o << "Sync: " << s.name;

@@ -8,6 +8,7 @@
 #include "state.h"
 #include "../expressions/expression.h"
 #include "../expressions/sync.h"
+#include "../utils/utils.h"
 
 class Transition
 {
@@ -29,8 +30,9 @@ public:
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Transition&);
 
-	bool isAvailable(const State&) const;
+	TranzactionAvailableStatus isAvailable(const State&) const;
 	bool isSync() const;
+	void deSync();
 
 	void addGuard( const Expression& e );
 	void addUpdate( const Expression& e );

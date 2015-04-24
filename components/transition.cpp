@@ -97,29 +97,34 @@ State Transition::operator()(const State& s)
 	return destination;
 }
 
-bool Transition::isAvailable(const State& s) const
+TranzactionAvailableStatus Transition::isAvailable(const State& s) const
 {
 	if ( !(s == source) )
 	{
-		return false;
+		return TranzactionAvailableStatus::NotSource;
 	}
 	for ( auto& g : guards )
 	{
 		if ( !g.evaluate() )
 		{
-			return false;
+			return TranzactionAvailableStatus::NotGuard;
 		}
 	}
 	if ( !this->isSync() )
 	{
-		return false;
+		return TranzactionAvailableStatus::NotSync;
 	}
-	return true;
+	return TranzactionAvailableStatus::Available;
 }
 
 bool Transition::isSync() const
 {
 	return sync.isSync();
+}
+
+void Transition::deSync()
+{
+	sync.deSync();
 }
 
 void Transition::addGuard( const Expression& e )

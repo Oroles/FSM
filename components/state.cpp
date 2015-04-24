@@ -7,7 +7,7 @@ State::State() : name("")
 
 State::State(const std::string n) : name(n) 
 {
-	assert(n.size() != 0 );
+	//assert(n.size() != 0 );
 }
 
 State::State(const State& rhs) : name(rhs.name)

@@ -48,3 +48,13 @@ void ChanTable::wantReceiver(std::string name)
 {
 	table[name].wantReceiver();
 }
+
+void ChanTable::refuseSender(std::string name)
+{
+	table[name].refuseSender();
+}
+
+void ChanTable::refuseReceiver(std::string name)
+{
+	table[name].refuseReceiver();
+}

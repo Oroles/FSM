@@ -14,6 +14,8 @@ public:
 	bool existsEntry( const Chan& c);
 	bool isSenderSync(std::string name);
 	bool isReceiverSync(std::string name);
+	void refuseSender(std::string name);
+	void refuseReceiver(std::string name);
 	void wantSender(std::string name);
 	void wantReceiver(std::string name);
 

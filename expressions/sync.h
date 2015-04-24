@@ -13,6 +13,7 @@ public:
 	Sync(Sync&& rhs);
 	Sync& operator=(const Sync& rhs);
 	bool isSync() const;
+	void deSync();
 private:
 	friend std::ostream& operator<<(std::ostream&, const Sync& s);
 

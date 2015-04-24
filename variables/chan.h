@@ -21,6 +21,8 @@ public:
 	bool isReceiverSync();
 	void wantSender();
 	void wantReceiver();
+	void refuseSender();
+	void refuseReceiver();
 
 	~Chan();
 

@@ -3,9 +3,10 @@
 #include <algorithm>
 #include <wiringPi.h>
 #include <thread>
+#include <exception>
 
 #include "components/timedautomata.h"
-#include "pugixml/parser.h"
+#include "xmlparser/parser.h"
 #include "utils/utils.h"
 
 std::string stopCondition = "";
@@ -33,8 +34,16 @@ int main(int argc, char* argv[])
 	setQuit( arguments );
 
 	TimedAutomata fsm;
-	Parser parser(fileName);
-	parser.generateFSM(&fsm);
+	try
+	{
+		Parser parser(fileName);
+		parser.generateFSM(&fsm);
+	}
+	catch( std::exception& e )
+	{
+		std::cout << e.what() << std::endl;
+		return -1;
+	}
 
 
 	if ( quitApp == false )

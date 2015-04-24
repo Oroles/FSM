@@ -96,6 +96,16 @@ bool Chan::isReceiverSync()
 	return false;
 }
 
+void Chan::refuseSender()
+{
+	wcs = false;
+}
+
+void Chan::refuseReceiver()
+{
+	wcr = false;
+}
+
 void Chan::wantSender()
 {
 	wcs = true;
