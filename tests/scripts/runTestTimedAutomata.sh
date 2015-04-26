@@ -6,9 +6,9 @@ g++-4.9 -std=c++11 ../tests/testTimedAutomata.cpp  ../components/timedautomata.a
 				../variables/clock.a ../variables/pin.a ../utils/utils.a
 ./a.out
 if [ $? == 0 ]; then
-	echo "Passed testFsm"
+	echo "Passed testTimedAutomata"
 	rm a.out
 else
-	echo "Failed testFsm"
+	echo "Failed testTimedAutomata"
 	rm a.out
 fi

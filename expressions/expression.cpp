@@ -24,7 +24,7 @@
 								std::string second = aux[ aux.size() - 2 ]; \
 								aux.erase( aux.end() - 2, aux.end() );\
 								set_value( second, get_value(second) s get_value(first) );\
-								aux.push_back( std::to_string( get_value(second) ) );\
+								aux.push_back( std::to_string( get_value(second) s get_value(first) ) );\
 								continue;\
 							}
 
@@ -220,7 +220,7 @@ int Expression::evaluate() const
 				   	std::string second = aux[ aux.size() - 2 ];
 					aux.erase( aux.end() - 2, aux.end() );
 				   	set_value( second, get_value(first) );
-					aux.push_back( std::to_string( get_value(second) ) );
+					aux.push_back( std::to_string( get_value(first) ) );
 				   	continue;
 				}
 			}

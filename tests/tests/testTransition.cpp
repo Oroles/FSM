@@ -6,6 +6,7 @@
 #include "../expressions/expression.h"
 #include "../expressions/sync.h"
 #include "../tables/symboltable.h"
+#include "../utils/utils.h"
 
 int main(int argc, char* argv[] )
 {
@@ -32,11 +33,11 @@ int main(int argc, char* argv[] )
 	}
 
 	/* Test isAvailable */
-	IS_TRUE( tran.isAvailable( a ) );
-	IS_FALSE( tran.isAvailable( b ) );
+	TEST_EQUAL( TranzactionAvailableStatus::Available,  tran.isAvailable( a ) );
+	TEST_EQUAL( TranzactionAvailableStatus::NotSource, tran.isAvailable( b ) );
 	tran.addGuard( Expression("2 < 3") );
-	IS_TRUE( tran.isAvailable( a ) );
-	IS_FALSE( tran.isAvailable( b ) );
+	TEST_EQUAL( TranzactionAvailableStatus::Available, tran.isAvailable( a ) );
+	TEST_EQUAL( TranzactionAvailableStatus::NotSource, tran.isAvailable( b ) );
 
 	/* Test operator() */
 	TEST_EQUAL( tran.operator()( a ), b );
@@ -44,9 +45,10 @@ int main(int argc, char* argv[] )
 	tran.addUpdate( Expression( "a = 2" ) );
 	TEST_EQUAL( SymbolTable::getInstance().getValue("a"), 1 );
 	TEST_EQUAL( tran.operator()( a ), b );
+	SymbolTable::getInstance().updateSymbols();
 	TEST_EQUAL( SymbolTable::getInstance().getValue("a"), 2 );
 
-	/* Test isSync */
+	/* Test isSync */ 
 	IS_TRUE( tran.isSync() );
 	tran.setSync( Sync("c!") );
 	IS_FALSE( tran.isSync() );
@@ -55,13 +57,14 @@ int main(int argc, char* argv[] )
 	IS_TRUE( tran.isSync() );
 
 	/* Test guard */
-	IS_TRUE( tran.isAvailable( a ) );
+	TEST_EQUAL( TranzactionAvailableStatus::Available,  tran.isAvailable( a ) );
 	tran.addGuard( Expression("a == 2") );
-	IS_TRUE( tran.isAvailable( a ) );
+	TEST_EQUAL( TranzactionAvailableStatus::Available, tran.isAvailable( a ) );
 	SymbolTable::getInstance().setValue( "a", 1 );
-	IS_FALSE( tran.isAvailable( a ) );
+	SymbolTable::getInstance().updateSymbols();
+	TEST_EQUAL( TranzactionAvailableStatus::NotGuard, tran.isAvailable( a ) );
 	SymbolTable::getInstance().setValue( "a", 2 );
-	IS_TRUE( tran.isAvailable( a ) );
-
+	SymbolTable::getInstance().updateSymbols();
+	TEST_EQUAL( TranzactionAvailableStatus::Available,  tran.isAvailable( a ) );
 	return 0;
 }

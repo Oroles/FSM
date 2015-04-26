@@ -77,11 +77,6 @@ int main( int argc, char* argv[] )
 	}
 
 	{
-		Expression ex( "a = b");
-		TEST_EQUAL( ex.evaluate(), 2 );
-	}
-
-	{
 		Expression ex( "a := 1" );
 		TEST_EQUAL( ex.evaluate(), 1 );
 	}
@@ -89,46 +84,55 @@ int main( int argc, char* argv[] )
 	{
 		Expression ex( "a += 3" );
 		TEST_EQUAL( ex.evaluate(), 4 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex( "a -= 3" );
 		TEST_EQUAL( ex.evaluate(), 1 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex( "a *= 2" );
 		TEST_EQUAL( ex.evaluate(), 2 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex( "a /= 2" );
 		TEST_EQUAL( ex.evaluate(), 1 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex( "a <<= 2" );
 		TEST_EQUAL( ex.evaluate(), 4 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex( "a >>= 2" );
 		TEST_EQUAL( ex.evaluate(), 1 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex ( "a = 3 + 2 * 5");
 		TEST_EQUAL( ex.evaluate(), 13 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex ( "a = ( 3 + 2 ) * 5" );
 		TEST_EQUAL( ex.evaluate(), 25 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	{
 		Expression ex ( "a = ( a / 5 ) % ( 2 + 2 )");
 		TEST_EQUAL( ex.evaluate(), 1 );
+		SymbolTable::getInstance().updateSymbols();
 	}
 
 	return 0;
