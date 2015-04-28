@@ -1,0 +1,88 @@
+The  ledSender on pin:  8 is set as  OUT 
+ The  ledSender on pin:  8 is set as  OUT 
+ The  ledReceiver on pin:  9 is set as  OUT 
+ The  ledReceiver on pin:  9 is set as  OUT 
+ The  ledSender on pin:  8 is set as  OUT 
+ Set name to template:  Sender 
+ Init state:  State: id3 is added to template:  Sender 
+ The update  Expression: ledSender = 1 is added to  Transition: id0 -> id3 
+ Update founded:  Expression: ledSender = 1 
+ The update  Expression: x = 0 is added to  Transition: id0 -> id3 
+ Update founded:  Expression: x = 0 
+ Transition:  Transition: id0 -> id3 is added to template:  Sender 
+ The guard  Expression: x > 200 is added to  Transition: id1 -> id0 
+ Guard founded:  Expression: x > 200 
+ Transition:  Transition: id1 -> id0 is added to template:  Sender 
+ Syncs founded:  Sync: c! 
+ There is:  Sync: c!  sync added to  Transition: id2 -> id1 
+ The update  Expression: ledSender = 0 is added to  Transition: id2 -> id1 
+ Update founded:  Expression: ledSender = 0 
+ Transition:  Transition: id2 -> id1 is added to template:  Sender 
+ The guard  Expression: x > 50 is added to  Transition: id3 -> id2 
+ Guard founded:  Expression: x > 50 
+ Transition:  Transition: id3 -> id2 is added to template:  Sender 
+ Set name to template:  Receiver 
+ Init state:  State: id7 is added to template:  Receiver 
+ The update  Expression: ledReceiver = 0 is added to  Transition: id4 -> id7 
+ Update founded:  Expression: ledReceiver = 0 
+ The update  Expression: y = 0 is added to  Transition: id4 -> id7 
+ Update founded:  Expression: y = 0 
+ Transition:  Transition: id4 -> id7 is added to template:  Receiver 
+ The guard  Expression: y > 150 is added to  Transition: id5 -> id4 
+ Guard founded:  Expression: y > 150 
+ Transition:  Transition: id5 -> id4 is added to template:  Receiver 
+ Syncs founded:  Sync: c? 
+ There is:  Sync: c?  sync added to  Transition: id6 -> id5 
+ The update  Expression: ledReceiver = 1 is added to  Transition: id6 -> id5 
+ Update founded:  Expression: ledReceiver = 1 
+ The update  Expression: y = 25 is added to  Transition: id6 -> id5 
+ Update founded:  Expression: y = 25 
+ Transition:  Transition: id6 -> id5 is added to template:  Receiver 
+ The guard  Expression: y > 25 is added to  Transition: id7 -> id6 
+ Guard founded:  Expression: y > 25 
+ Transition:  Transition: id7 -> id6 is added to template:  Receiver 
+ Set name to template:  R 
+ Transition  Transition: id4 -> id7 is part of the template  R 
+ Transition  Transition: id5 -> id4 is part of the template  R 
+ Transition  Transition: id6 -> id5 is part of the template  R 
+ Transition  Transition: id7 -> id6 is part of the template  R 
+ Set name to template:  S 
+ Transition  Transition: id0 -> id3 is part of the template  S 
+ Transition  Transition: id1 -> id0 is part of the template  S 
+ Transition  Transition: id2 -> id1 is part of the template  S 
+ Transition  Transition: id3 -> id2 is part of the template  S 
+ Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 
+Expression:  y > 25 from template  R  is evaluated to  0 
+ No transition available from the state  State: id7  for template  R 
+ Expression:  x > 50 from template  S  is evaluated to  0 
+ No transition available from the state  State: id3  for template  S 
+ Press s to make progress: 

@@ -1,0 +1,49 @@
+Set name to template:  Send 
+ Init state:  State: id1 is added to template:  Send 
+ Transition:  Transition: id0 -> id1 is added to template:  Send 
+ Syncs founded:  Sync: c! 
+ There is:  Sync: c!  sync added to  Transition: id1 -> id0 
+ Transition:  Transition: id1 -> id0 is added to template:  Send 
+ Set name to template:  Receive 
+ Init state:  State: id4 is added to template:  Receive 
+ Transition:  Transition: id2 -> id4 is added to template:  Receive 
+ Syncs founded:  Sync: c? 
+ There is:  Sync: c?  sync added to  Transition: id3 -> id2 
+ Transition:  Transition: id3 -> id2 is added to template:  Receive 
+ Transition:  Transition: id4 -> id3 is added to template:  Receive 
+ Set name to template:  p1 
+ Transition  Transition: id0 -> id1 is part of the template  p1 
+ Transition  Transition: id1 -> id0 is part of the template  p1 
+ Set name to template:  p2 
+ Transition  Transition: id2 -> id4 is part of the template  p2 
+ Transition  Transition: id3 -> id2 is part of the template  p2 
+ Transition  Transition: id4 -> id3 is part of the template  p2 
+ No transition available from the state  State: id1  for template  p1 
+ Current state:  State: id4 for template  p2 
+ New state:  State: id3 for template  p2 
+ Press s to make progress: 
+No transition available from the state  State: id1  for template  p1 
+ No transition available from the state  State: id3  for template  p2 
+ Press s to make progress: 
+Current state:  State: id1 for template  p1 
+ New state:  State: id0 for template  p1 
+ Current state:  State: id3 for template  p2 
+ New state:  State: id2 for template  p2 
+ Press s to make progress: 
+Current state:  State: id0 for template  p1 
+ New state:  State: id1 for template  p1 
+ Current state:  State: id2 for template  p2 
+ New state:  State: id4 for template  p2 
+ Press s to make progress: 
+No transition available from the state  State: id1  for template  p1 
+ Current state:  State: id4 for template  p2 
+ New state:  State: id3 for template  p2 
+ Press s to make progress: 
+No transition available from the state  State: id1  for template  p1 
+ No transition available from the state  State: id3  for template  p2 
+ Press s to make progress: 
+Current state:  State: id1 for template  p1 
+ New state:  State: id0 for template  p1 
+ Current state:  State: id3 for template  p2 
+ New state:  State: id2 for template  p2 
+ Press s to make progress: 

@@ -1,0 +1,42 @@
+The  led on pin:  8 is set as  OUT 
+ The  led on pin:  8 is set as  OUT 
+ Set name to template:  Template 
+ Init state:  State: id1 is added to template:  Template 
+ The guard  Expression: x > 6 is added to  Transition: id0 -> id1 
+ Guard founded:  Expression: x > 6 
+ The update  Expression: x = 0 is added to  Transition: id0 -> id1 
+ Update founded:  Expression: x = 0 
+ The update  Expression: led = 0 is added to  Transition: id0 -> id1 
+ Update founded:  Expression: led = 0 
+ Transition:  Transition: id0 -> id1 is added to template:  Template 
+ The guard  Expression: x > 3 is added to  Transition: id1 -> id0 
+ Guard founded:  Expression: x > 3 
+ The update  Expression: led = 1 is added to  Transition: id1 -> id0 
+ Update founded:  Expression: led = 1 
+ Transition:  Transition: id1 -> id0 is added to template:  Template 
+ Set name to template:  Process 
+ Transition  Transition: id0 -> id1 is part of the template  Process 
+ Transition  Transition: id1 -> id0 is part of the template  Process 
+ Expression:  x > 3 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id1  for template  Process 
+ Press s to make progress: 
+Expression:  x > 3 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id1  for template  Process 
+ Press s to make progress: 
+Expression:  x > 3 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id1  for template  Process 
+ Press s to make progress: 
+Expression:  x > 3 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id1  for template  Process 
+ Press s to make progress: 
+Expression:  x > 3 from template  Process  is evaluated to  1 
+ Current state:  State: id1 for template  Process 
+ Expression:  led = 1 from template  Process  is evaluated to  1 
+ New state:  State: id0 for template  Process 
+ Press s to make progress: 
+Expression:  x > 6 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id0  for template  Process 
+ Press s to make progress: 
+Expression:  x > 6 from template  Process  is evaluated to  0 
+ No transition available from the state  State: id0  for template  Process 
+ Press s to make progress: 

@@ -1,0 +1,60 @@
+The  window on pin:  0 is set as  OUT 
+ The  window on pin:  0 is set as  OUT 
+ The  _temp on pin:  1 is set as  IN 
+ The  _temp on pin:  1 is set as  IN 
+ The  window on pin:  0 is set as  OUT 
+ Set name to template:  Template 
+ Init state:  State: id5 is added to template:  Template 
+ Transition:  Transition: id0 -> id5 is added to template:  Template 
+ The update  Expression: window = 1 is added to  Transition: id1 -> id0 
+ Update founded:  Expression: window = 1 
+ Transition:  Transition: id1 -> id0 is added to template:  Template 
+ The guard  Expression: temperature <= 5 is added to  Transition: id4 -> id1 
+ Guard founded:  Expression: temperature <= 5 
+ Transition:  Transition: id4 -> id1 is added to template:  Template 
+ Transition:  Transition: id2 -> id5 is added to template:  Template 
+ The update  Expression: window = 0 is added to  Transition: id3 -> id2 
+ Update founded:  Expression: window = 0 
+ Transition:  Transition: id3 -> id2 is added to template:  Template 
+ The guard  Expression: temperature > 5 is added to  Transition: id4 -> id3 
+ Guard founded:  Expression: temperature > 5 
+ Transition:  Transition: id4 -> id3 is added to template:  Template 
+ The select  _temp is added to  Transition: id5 -> id4 
+ The update  Expression: temperature = _temp is added to  Transition: id5 -> id4 
+ Update founded:  Expression: temperature = _temp 
+ Transition:  Transition: id5 -> id4 is added to template:  Template 
+ Set name to template:  Process 
+ Transition  Transition: id0 -> id5 is part of the template  Process 
+ Transition  Transition: id1 -> id0 is part of the template  Process 
+ Transition  Transition: id4 -> id1 is part of the template  Process 
+ Transition  Transition: id2 -> id5 is part of the template  Process 
+ Transition  Transition: id3 -> id2 is part of the template  Process 
+ Transition  Transition: id4 -> id3 is part of the template  Process 
+ Transition  Transition: id5 -> id4 is part of the template  Process 
+ Current state:  State: id5 for template  Process 
+ Expression:  temperature = _temp from template  Process  is evaluated to  1 
+ New state:  State: id4 for template  Process 
+ Press s to make progress: 
+Expression:  temperature <= 5 from template  Process  is evaluated to  1 
+ Current state:  State: id4 for template  Process 
+ New state:  State: id1 for template  Process 
+ Press s to make progress: 
+Current state:  State: id1 for template  Process 
+ Expression:  window = 1 from template  Process  is evaluated to  1 
+ New state:  State: id0 for template  Process 
+ Press s to make progress: 
+Current state:  State: id0 for template  Process 
+ New state:  State: id5 for template  Process 
+ Press s to make progress: 
+Current state:  State: id5 for template  Process 
+ Expression:  temperature = _temp from template  Process  is evaluated to  1 
+ New state:  State: id4 for template  Process 
+ Press s to make progress: 
+Expression:  temperature <= 5 from template  Process  is evaluated to  1 
+ Current state:  State: id4 for template  Process 
+ New state:  State: id1 for template  Process 
+ Press s to make progress: 
+Current state:  State: id1 for template  Process 
+ Expression:  window = 1 from template  Process  is evaluated to  1 
+ New state:  State: id0 for template  Process 
+ Press s to make progress: 

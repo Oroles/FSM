@@ -1,0 +1,64 @@
+Set name to template:  Lamp 
+ Init state:  State: id2 is added to template:  Lamp 
+ Transition:  Transition: id0 -> id2 is added to template:  Lamp 
+ Syncs founded:  Sync: press? 
+ There is:  Sync: press?  sync added to  Transition: id2 -> id1 
+ The update  Expression: y := 0 is added to  Transition: id2 -> id1 
+ Update founded:  Expression: y := 0 
+ Transition:  Transition: id2 -> id1 is added to template:  Lamp 
+ The guard  Expression: y >= 5 is added to  Transition: id1 -> id2 
+ Guard founded:  Expression: y >= 5 
+ Syncs founded:  Sync: press? 
+ There is:  Sync: press?  sync added to  Transition: id1 -> id2 
+ Transition:  Transition: id1 -> id2 is added to template:  Lamp 
+ The guard  Expression: y < 5 is added to  Transition: id1 -> id0 
+ Guard founded:  Expression: y < 5 
+ Syncs founded:  Sync: press? 
+ There is:  Sync: press?  sync added to  Transition: id1 -> id0 
+ Transition:  Transition: id1 -> id0 is added to template:  Lamp 
+ Set name to template:  User 
+ Init state:  State: id3 is added to template:  User 
+ Syncs founded:  Sync: press! 
+ There is:  Sync: press!  sync added to  Transition: id3 -> id3 
+ Transition:  Transition: id3 -> id3 is added to template:  User 
+ Set name to template:  Process 
+ Transition  Transition: id0 -> id2 is part of the template  Process 
+ Transition  Transition: id2 -> id1 is part of the template  Process 
+ Transition  Transition: id1 -> id2 is part of the template  Process 
+ Transition  Transition: id1 -> id0 is part of the template  Process 
+ Set name to template:  Process1 
+ Transition  Transition: id3 -> id3 is part of the template  Process1 
+ No transition available from the state  State: id2  for template  Process 
+ Current state:  State: id3 for template  Process1 
+ New state:  State: id3 for template  Process1 
+ Press s to make progress: 
+Current state:  State: id2 for template  Process 
+ Expression:  y := 0 from template  Process  is evaluated to  0 
+ New state:  State: id1 for template  Process 
+ No transition available from the state  State: id3  for template  Process1 
+ Press s to make progress: 
+Expression:  y >= 5 from template  Process  is evaluated to  0 
+ Expression:  y < 5 from template  Process  is evaluated to  1 
+ No transition available from the state  State: id1  for template  Process 
+ Current state:  State: id3 for template  Process1 
+ New state:  State: id3 for template  Process1 
+ Press s to make progress: 
+Expression:  y >= 5 from template  Process  is evaluated to  0 
+ Expression:  y < 5 from template  Process  is evaluated to  1 
+ Current state:  State: id1 for template  Process 
+ New state:  State: id0 for template  Process 
+ No transition available from the state  State: id3  for template  Process1 
+ Press s to make progress: 
+Current state:  State: id0 for template  Process 
+ New state:  State: id2 for template  Process 
+ No transition available from the state  State: id3  for template  Process1 
+ Press s to make progress: 
+No transition available from the state  State: id2  for template  Process 
+ Current state:  State: id3 for template  Process1 
+ New state:  State: id3 for template  Process1 
+ Press s to make progress: 
+Current state:  State: id2 for template  Process 
+ Expression:  y := 0 from template  Process  is evaluated to  0 
+ New state:  State: id1 for template  Process 
+ No transition available from the state  State: id3  for template  Process1 
+ Press s to make progress: 

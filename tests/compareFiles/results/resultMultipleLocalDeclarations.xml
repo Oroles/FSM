@@ -1,0 +1,60 @@
+Set name to template:  Template 
+ Init state:  State: id1 is added to template:  Template 
+ The update  Expression: i = i + 1 is added to  Transition: id0 -> id1 
+ Update founded:  Expression: i = i + 1 
+ Transition:  Transition: id0 -> id1 is added to template:  Template 
+ Transition:  Transition: id1 -> id0 is added to template:  Template 
+ Set name to template:  P0 
+ Init state:  State: id4 is added to template:  P0 
+ The update  Expression: i = i + 2 is added to  Transition: id2 -> id4 
+ Update founded:  Expression: i = i + 2 
+ Transition:  Transition: id2 -> id4 is added to template:  P0 
+ Transition:  Transition: id3 -> id2 is added to template:  P0 
+ Transition:  Transition: id4 -> id3 is added to template:  P0 
+ Set name to template:  Process1 
+ Transition  Transition: id0 -> id1 is part of the template  Process1 
+ Transition  Transition: id1 -> id0 is part of the template  Process1 
+ Set name to template:  Process2 
+ Transition  Transition: id2 -> id4 is part of the template  Process2 
+ Transition  Transition: id3 -> id2 is part of the template  Process2 
+ Transition  Transition: id4 -> id3 is part of the template  Process2 
+ Current state:  State: id1 for template  Process1 
+ New state:  State: id0 for template  Process1 
+ Current state:  State: id4 for template  Process2 
+ New state:  State: id3 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id0 for template  Process1 
+ Expression:  i = i + 1 from template  Process1  is evaluated to  1 
+ New state:  State: id1 for template  Process1 
+ Current state:  State: id3 for template  Process2 
+ New state:  State: id2 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id1 for template  Process1 
+ New state:  State: id0 for template  Process1 
+ Current state:  State: id2 for template  Process2 
+ Expression:  i = i + 2 from template  Process2  is evaluated to  2 
+ New state:  State: id4 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id0 for template  Process1 
+ Expression:  i = i + 1 from template  Process1  is evaluated to  2 
+ New state:  State: id1 for template  Process1 
+ Current state:  State: id4 for template  Process2 
+ New state:  State: id3 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id1 for template  Process1 
+ New state:  State: id0 for template  Process1 
+ Current state:  State: id3 for template  Process2 
+ New state:  State: id2 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id0 for template  Process1 
+ Expression:  i = i + 1 from template  Process1  is evaluated to  3 
+ New state:  State: id1 for template  Process1 
+ Current state:  State: id2 for template  Process2 
+ Expression:  i = i + 2 from template  Process2  is evaluated to  4 
+ New state:  State: id4 for template  Process2 
+ Press s to make progress: 
+Current state:  State: id1 for template  Process1 
+ New state:  State: id0 for template  Process1 
+ Current state:  State: id4 for template  Process2 
+ New state:  State: id3 for template  Process2 
+ Press s to make progress: 
