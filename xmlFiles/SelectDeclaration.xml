@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+int temperature = 0;
+int window = 0;
+
+/**
+* window OUT 0
+* _temp IN 1
+**/</declaration><template><name x="5" y="5">Template</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="-208" y="-240"></location><location id="id1" x="8" y="-240"></location><location id="id2" x="-208" y="-8"></location><location id="id3" x="16" y="-8"></location><location id="id4" x="16" y="-120"></location><location id="id5" x="-208" y="-120"></location><init ref="id5"/><transition><source ref="id0"/><target ref="id5"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="assignment" x="-144" y="-256">window = 1</label></transition><transition><source ref="id4"/><target ref="id1"/><label kind="guard" x="24" y="-192">temperature &lt;= 5</label></transition><transition><source ref="id2"/><target ref="id5"/></transition><transition><source ref="id3"/><target ref="id2"/><label kind="assignment" x="-136" y="-8">window = 0</label></transition><transition><source ref="id4"/><target ref="id3"/><label kind="guard" x="24" y="-64">temperature &gt; 5</label></transition><transition><source ref="id5"/><target ref="id4"/><label kind="select" x="-160" y="-144">_temp : int[0,10]</label><label kind="assignment" x="-168" y="-120">temperature = _temp</label></transition></template><system>// Place template instantiations here.
+Process = Template();
+
+// List one or more processes to be composed into a system.
+system Process;</system></nta>

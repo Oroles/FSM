@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+
+int i;
+int k = 1;
+chan c;
+</declaration><template><name x="5" y="5">Send</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="-512" y="-280"></location><location id="id1" x="-616" y="-280"></location><init ref="id1"/><transition><source ref="id0"/><target ref="id1"/><nail x="-512" y="-200"/><nail x="-616" y="-200"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="synchronisation" x="-568" y="-296">c!</label></transition></template><template><name>Receive</name><location id="id2" x="-112" y="-192"></location><location id="id3" x="-224" y="-184"></location><location id="id4" x="-344" y="-184"></location><init ref="id4"/><transition><source ref="id2"/><target ref="id4"/><nail x="-104" y="-112"/><nail x="-352" y="-112"/></transition><transition><source ref="id3"/><target ref="id2"/><label kind="synchronisation" x="-176" y="-208">c?</label></transition><transition><source ref="id4"/><target ref="id3"/></transition></template><system>// Place template instantiations here.
+p1 = Send();
+p2 = Receive();
+/* it should remove this */
+// List one or more processes to be composed into a system.
+system p1,p2;</system></nta>

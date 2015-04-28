@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+</declaration><template><name x="5" y="5">Template</name><declaration>// Place local declarations here.
+int i = 0;</declaration><location id="id0" x="-16" y="-152"></location><location id="id1" x="-120" y="-144"></location><init ref="id1"/><transition><source ref="id0"/><target ref="id1"/><label kind="assignment" x="-96" y="-80">i = i + 1</label><nail x="-16" y="-88"/><nail x="-120" y="-88"/></transition><transition><source ref="id1"/><target ref="id0"/></transition></template><template><name>P0</name><declaration>int i = 0;</declaration><location id="id2" x="-128" y="-24"></location><location id="id3" x="-80" y="-120"></location><location id="id4" x="-168" y="-120"></location><init ref="id4"/><transition><source ref="id2"/><target ref="id4"/><label kind="assignment" x="-208" y="-72">i = i + 2</label></transition><transition><source ref="id3"/><target ref="id2"/></transition><transition><source ref="id4"/><target ref="id3"/></transition></template><system>// Place template instantiations here.
+Process1 = Template();
+Process2 = P0();
+
+// List one or more processes to be composed into a system.
+system Process1, Process2;</system></nta>
