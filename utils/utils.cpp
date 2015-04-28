@@ -10,6 +10,8 @@ DebugMessagePriority priority;
 bool quitApp = false;
 bool stepProgress = false;
 
+std::string stopCondition;
+
 void setPriority(const std::vector<std::string>& args)
 {
 	auto it = std::find(args.begin(), args.end(), "-d");
@@ -93,6 +95,7 @@ void nextStep()
 		{
 			std::cout << "Press s to make progress: ";
 			std::cin >> aux;
+			std::cout << std::endl;
 			if ( aux != "s" )
 			{
 				if ( ClockTable::getInstance().exists(aux) )
@@ -110,6 +113,11 @@ void nextStep()
 					{
 						std::cout << v << std::endl;
 					}
+				}
+				if ( aux == "quit" )
+				{
+					stopCondition = "quit";
+					break;
 				}
 			}
 		}

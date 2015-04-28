@@ -9,7 +9,7 @@
 #include "xmlparser/parser.h"
 #include "utils/utils.h"
 
-std::string stopCondition = "";
+extern std::string stopCondition;
 
 void readData()
 {
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			while( 1 )
+			while( stopCondition != "quit" )
 			{
 				fsm.step();
 			}
