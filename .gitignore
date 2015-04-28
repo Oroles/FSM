@@ -5,7 +5,7 @@
 tests/components/
 tests/expressions/
 tests/gpio
-tests/pugixml/
+tests/xmlparser/
 tests/utils/
 tests/tables/
 tests/variables/
