@@ -2,15 +2,16 @@
 #include "../expressions/expression.h"
 #include "../tables/symboltable.h"
 #include "../tables/clocktable.h"
+#include "../utils/plaindata.h"
 #include "utils.h"
 
 
 int main( int argc, char* argv[] )
 {
-	SymbolTable::getInstance().addEntries( std::vector<std::pair<std::string,int> >{ 
-		std::pair<std::string,int>{ "a",1 },
-		std::pair<std::string,int>{ "b",2 },
-		std::pair<std::string,int>{ "c",3 } } );
+	SymbolTable::getInstance().addEntries( std::vector<PlainData>{ 
+		PlainData{ "a",1,1 },
+		PlainData{ "b",1,2 },
+		PlainData{ "c",1,3 } } );
 	{
 		Expression ex( "a < 4" );
 		IS_TRUE( ex.evaluate() );

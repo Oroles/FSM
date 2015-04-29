@@ -28,7 +28,7 @@ walk_tree()
 	do
 		if [ -d $file ]; then
 			folderName="${file##*/}"
-			if [[ "$folderName" != "tests" ]]
+			if [[ "$folderName" != "tests" && "$folderName" != "xmlFiles"  ]]
 			then
 				process_libs $file
 				walk_tree $file

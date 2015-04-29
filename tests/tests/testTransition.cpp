@@ -7,13 +7,14 @@
 #include "../expressions/sync.h"
 #include "../tables/symboltable.h"
 #include "../utils/utils.h"
+#include "../utils/plaindata.h"
 
 int main(int argc, char* argv[] )
 {
-	SymbolTable::getInstance().addEntries( std::vector<std::pair<std::string,int> >{ 
-		std::pair<std::string,int>{ "a",1 },
-		std::pair<std::string,int>{ "b",2 },
-		std::pair<std::string,int>{ "c",3 } } );
+	SymbolTable::getInstance().addEntries( std::vector<PlainData >{ 
+		PlainData{ "a",1,1 },
+		PlainData{ "b",1,2 },
+		PlainData{ "c",1,3 } } );
 	State a("a");
 	State b("b");
 	Transition tran(a,b);
