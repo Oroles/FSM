@@ -10,6 +10,7 @@
 #include "../variables/clock.h"
 #include "../variables/chan.h"
 #include "../variables/pin.h"
+#include "../utils/plaindata.h"
 
 class StringParser
 {
@@ -17,7 +18,7 @@ public:
 	StringParser( std::string t );
 	std::vector<Clock> generateClocks();
 	std::vector<Chan> generateChannels();
-	std::vector<std::pair<std::string,int> > generateSymbols();
+	std::vector<PlainData> generateSymbols();
 	std::map<std::string,std::string> generateSystems();
 	std::vector<Pin> generatePins();
 

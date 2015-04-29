@@ -117,6 +117,12 @@ bool isValidSymbol(const std::string name)
 	return std::regex_match( name, symbol );
 }
 
+bool isArrayVariable(const std::string name)
+{
+	std::regex symbol("([a-zA-Z0-9_]+)(\\[)([0-9]+)(\\])");
+	return std::regex_match( name, symbol );
+}
+
 bool isValid(const std::string expression)
 {
 	std::vector<std::string> operands = split(expression, ' ' );
@@ -127,6 +133,10 @@ bool isValid(const std::string expression)
 			continue;
 		}
 		if ( isValidSymbol( op ) )
+		{
+			continue;
+		}
+		if ( isArrayVariable( op ) )
 		{
 			continue;
 		}

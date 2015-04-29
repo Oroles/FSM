@@ -95,7 +95,7 @@ void nextStep()
 		{
 			std::cout << "Press s to make progress: ";
 			std::cin >> aux;
-			std::cout << std::endl;
+			std::cout << std::endl; //Is needed for black box testing otherwise it doesn't read data from the text. Strange!!!
 			if ( aux != "s" )
 			{
 				if ( ClockTable::getInstance().exists(aux) )
@@ -125,10 +125,28 @@ void nextStep()
 	return;
 }
 
-bool is_integer(std::string name)
+bool is_integer(const std::string name)
 {
 	size_t pos = name.find_first_not_of("0123456789");
 	return pos == std::string::npos;
+}
+
+bool is_array(const std::string name)
+{
+	size_t pos = name.find("[");
+	return pos != std::string::npos; 
+}
+
+std::string nameOfTheArray(const std::string name)
+{
+	std::string arrayName = name.substr(0, name.find("[") );
+	return arrayName;
+}
+
+int positionOfTheArray(const std::string name)
+{
+	std::string poz = name.substr(name.find("[")+1, name.find("]") - name.find("[") - 1 );
+	return std::stoi(poz);
 }
 
 std::vector<std::string> splitString(std::string data, const std::string split)

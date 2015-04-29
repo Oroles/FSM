@@ -8,8 +8,9 @@
 
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },
-										   { "decl", std::regex("([a-zA-Z0-9_]+)( ?)(=)( ?)([a-zA-Z0-9_]+)") },
+										   { "decl", std::regex( "([a-zA-Z0-9_]+)( ?)(=)( ?)([a-zA-Z0-9_]+)" ) },
 										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)(;)") },
+										   { "declArr", std::regex("(int)( ?)([a-zA-Z0-9_]+)(\\[)([0-9]+)(\\])(;)") },
 										   { "defVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)( ?)(=)( ?)((-?)[0-9_]+)(;)") } };
 
 StringParser::StringParser(std::string t) : text(t), pinList("")
@@ -109,9 +110,9 @@ std::map<std::string,std::string> StringParser::generateSystems()
 	return rez;
 }
 
-std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
+std::vector<PlainData> StringParser::generateSymbols()
 {
-	std::vector<std::pair<std::string,int> > rez;
+	std::vector<PlainData> rez;
 	auto words_begin = std::sregex_iterator(text.begin(), text.end(), regex["declVar"] );
 	auto words_end = std::sregex_iterator();
 
@@ -122,7 +123,7 @@ std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
 		std::string name = matchString.substr( poz + 1, std::string::npos );
 		poz = name.find( ";" );
 		name = name.substr( 0, poz );
-		rez.push_back(std::pair<std::string,int>(name,0));
+		rez.push_back(PlainData{name,1,0});
 	}
 
 	words_begin = std::sregex_iterator(text.begin(), text.end(), regex["defVar"] );
@@ -134,8 +135,19 @@ std::vector<std::pair<std::string,int> > StringParser::generateSymbols()
 		std::string name = matchString.substr(0, matchString.find(" ") );
 		std::string value = matchString.substr( matchString.find_last_of(" ") + 1, std::string::npos );
 		value = value.substr(0, value.find(";") );
-		rez.push_back(std::pair<std::string,int>(name,std::stoi(value)));
+		rez.push_back(PlainData{name,1,std::stoi(value)});
 	}
+
+	words_begin = std::sregex_iterator(text.begin(), text.end(), regex["declArr"]);
+	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
+	{
+		std::string matchString = i->str();
+		matchString = matchString.substr( matchString.find(" ") + 1, std::string::npos); //remove the type;
+		std::string name = matchString.substr(0, matchString.find("[") ); //get the name of the variable
+		std::string size = matchString.substr(matchString.find("[")+1, matchString.find("]") - matchString.find("[") - 1 ); //get the size of array;
+		rez.push_back(PlainData{name,std::stoi(size),0});
+	}
+
 	return rez;
 }
 
