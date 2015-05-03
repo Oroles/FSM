@@ -13,7 +13,7 @@ public:
 	Expression(std::string ex);
 	Expression(const Expression& rhs);
 	Expression(Expression&& rhs);
-	Expression& operator=(const Expression& rhs);
+	const Expression& operator=(const Expression& rhs);
 	bool operator==(const Expression& rhs);
 	int evaluate() const;
 	bool isValidGuard();

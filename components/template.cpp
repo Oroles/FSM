@@ -1,5 +1,16 @@
 #include "template.h"
 
+bool compareFunction( const Transition& lhs, const Transition& rhs )
+{
+	if ( lhs.hasSync() == true )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 Template::Template()
 {
@@ -14,7 +25,7 @@ Template::Template(Template&& rhs) : transitions(std::move(rhs.transitions)),
 {
 }
 
-Template& Template::operator=(const Template& rhs)
+const Template& Template::operator=(const Template& rhs)
 {
 	transitions = rhs.transitions;
 	currState = rhs.currState;
@@ -26,6 +37,24 @@ void Template::addTransition(const Transition& t)
 {
 	display(DebugMessagePriority::Template, "Transition: ", t, "is added to template: ", name, "\n");
 	transitions.push_back( t );
+	std::sort(transitions.begin(),transitions.end(),compareFunction);
+}
+
+TranzactionAvailableStatus Template::availableTransition(const Transition* t)
+{
+	if ( stepStatus == StepStatus::NotAdvance )
+	{
+		return t->isAvailable(currState);
+	}
+	return TranzactionAvailableStatus::NotSource;
+}
+
+void Template::advance(Transition* t)
+{
+	display(DebugMessagePriority::Template,"Advance Current state: ", currState, "for template ", name, "\n" );
+	currState = t->operator()( currState );
+	display(DebugMessagePriority::Template,"Advance New state: ", currState, "for template ", name, "\n" );
+	stepStatus = StepStatus::ChannelAdvance;
 }
 
 void Template::setCurrentState(const State& s)
@@ -45,52 +74,63 @@ void Template::setName(const std::string n)
 	}
 }
 
+void Template::setObserver( Observer* obs)
+{
+	this->obs = obs;
+}
+
 std::string Template::getName() const
 {
 	return name;
 }
 
-State Template::nextState(const State& s) const
+void Template::resetStepFlag()
 {
-	for( auto& t : transitions )
-	{
-		if ( t.isAvailable( s ) == TranzactionAvailableStatus::Available )
-		{
-			return t.getDestination();
-		}
-	}
-	return s;
+	stepStatus = StepStatus::NotAdvance;
+}
+
+std::vector<Transition>::iterator Template::begin()
+{
+	return transitions.begin();
+}
+
+std::vector<Transition>::iterator Template::end()
+{
+	return transitions.end();
 }
 
 void Template::step()
 {
-	Transition aux;
+	if ( stepStatus != StepStatus::NotAdvance )
+	{
+		return;
+	}
+
 	for( auto& t : transitions )
 	{
 		TranzactionAvailableStatus status = t.isAvailable( currState );
 		if ( status == TranzactionAvailableStatus::Available )
 		{
-			display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
-			currState = t( currState );
-			display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
-			aux.deSync();
-			return;
-		}
-		else
-		{
-			if ( status == TranzactionAvailableStatus::NotSync )
+			if ( t.hasSync() == true )
 			{
-				aux.deSync();
-				aux = t;
+				if ( obs->isAvailable(*this, t, t.getChannelName() ) == true )
+				{
+					display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
+					currState = t( currState );
+					display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
+					stepStatus = StepStatus::NormalAdvance;
+					return;
+				}
+			}
+			else
+			{
+				display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
+				currState = t( currState );
+				display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
+				stepStatus = StepStatus::NormalAdvance;
+				return;
 			}
 		}
 	}
 	display(DebugMessagePriority::Template,"No transition available from the state ", currState, " for template ", name, "\n" );
-}
-
-void Template::run()
-{
-	while( 1 ) {
-		this->step();
-	}
 }

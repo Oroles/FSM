@@ -7,6 +7,7 @@
 #include <iostream>
 
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z0-9_]+)(;)") },
+										   { "broadcast chan", std::regex("(broadcast chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },
 										   { "decl", std::regex( "([a-zA-Z0-9_]+)( ?)(=)( ?)([a-zA-Z0-9_]+)" ) },
 										   { "declVar", std::regex("(int)( ?)([a-zA-Z0-9_]+)(;)") },
@@ -75,20 +76,35 @@ std::vector<Clock> StringParser::generateClocks()
 	return rez;
 }
 
-std::vector<Chan> StringParser::generateChannels()
+std::vector<std::shared_ptr<Chan>> StringParser::generateChannels()
 {
-	std::vector<Chan> rez;
-	auto words_begin = std::sregex_iterator(text.begin(), text.end(), regex["chan"] );
+	std::vector<std::shared_ptr<Chan>> rez;
+
+	auto words_begin = std::sregex_iterator(text.begin(), text.end(), regex["broadcast chan"] );
 	auto words_end = std::sregex_iterator();
+	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
+	{
+		std::string matchString = i->str();
+		size_t pos_space = matchString.find_last_of(" ");
+		matchString = matchString.substr(pos_space + 1, std::string::npos); //obtain the name with semicolon
+		matchString = matchString.substr(0, matchString.size()-1); //remove the semicolon 
+		rez.push_back( std::shared_ptr<Chan>( new ChanBroadcast(matchString) ) );
+	}
+
+	text = std::regex_replace(text,regex["broadcast chan"],""); //removes all the broadcast channels
+
+	words_begin = std::sregex_iterator(text.begin(), text.end(), regex["chan"] );
+	words_end = std::sregex_iterator();
 
 	for ( std::sregex_iterator i = words_begin; i != words_end; ++i )
 	{
 		std::string matchString = i->str();
-		size_t pos_space = matchString.find(" ");
-		matchString = matchString.substr(pos_space+1,std::string::npos);
-		matchString = matchString.substr(0,matchString.find(";"));
-		rez.push_back( Chan(matchString) );
+		size_t pos_space = matchString.find_last_of(" ");
+		matchString = matchString.substr(pos_space+1,std::string::npos); //obtain the name with semicolon
+		matchString = matchString.substr(0,matchString.find(";")); //remove the semicolon
+		rez.push_back( std::shared_ptr<Chan>( new ChanBinary(matchString) ) );
 	}
+
 	return rez;
 }
 

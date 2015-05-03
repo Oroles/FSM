@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <memory>
 
 #include "state.h"
 #include "../expressions/expression.h"
@@ -19,7 +20,7 @@ public:
 	Transition(const Transition& rhs);
 	Transition(Transition&& rhs);
 
-	Transition& operator=(const Transition& rhs);
+	const Transition& operator=(const Transition& rhs);
 	State getSource() const;
 	void setSource( const State s );
 	State getDestination() const;
@@ -32,7 +33,8 @@ public:
 
 	TranzactionAvailableStatus isAvailable(const State&) const;
 	bool isSync() const;
-	void deSync();
+	bool hasSync() const;
+	std::string getChannelName() const;
 
 	void addGuard( const Expression& e );
 	void addUpdate( const Expression& e );
@@ -45,7 +47,6 @@ private:
 	std::vector<Expression> updates;
 	std::vector<std::string> selects;
 	Sync sync;
-
 };
 
 #endif

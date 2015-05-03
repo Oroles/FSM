@@ -29,7 +29,7 @@ Transition::Transition(Transition&& rhs) : source(std::move(rhs.source)), destin
 
 }
 
-Transition& Transition::operator=(const Transition& rhs)
+const Transition& Transition::operator=(const Transition& rhs)
 {
 	assert(rhs.source.getName().size() != 0 );
 	assert(rhs.destination.getName().size() != 0 );
@@ -99,7 +99,7 @@ State Transition::operator()(const State& s)
 
 TranzactionAvailableStatus Transition::isAvailable(const State& s) const
 {
-	if ( !(s == source) )
+	if ( s != source )
 	{
 		return TranzactionAvailableStatus::NotSource;
 	}
@@ -110,10 +110,6 @@ TranzactionAvailableStatus Transition::isAvailable(const State& s) const
 			return TranzactionAvailableStatus::NotGuard;
 		}
 	}
-	if ( !this->isSync() )
-	{
-		return TranzactionAvailableStatus::NotSync;
-	}
 	return TranzactionAvailableStatus::Available;
 }
 
@@ -122,9 +118,14 @@ bool Transition::isSync() const
 	return sync.isSync();
 }
 
-void Transition::deSync()
+bool Transition::hasSync() const
 {
-	sync.deSync();
+	return sync.getName() != "";
+}
+
+std::string Transition::getChannelName() const
+{
+	return sync.getName();
 }
 
 void Transition::addGuard( const Expression& e )

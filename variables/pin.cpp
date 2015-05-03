@@ -55,7 +55,7 @@ Pin::Pin( const Pin&& rhs ) : name(std::move(rhs.name)), status(std::move(rhs.st
 	display(DebugMessagePriority::Pin, "The ", name, "on pin: ", port, "is set as ", status, "\n" );
 }
 
-Pin& Pin::operator=(const Pin& rhs)
+const Pin& Pin::operator=(const Pin& rhs)
 {
 	name = rhs.name;
 	status = rhs.status;

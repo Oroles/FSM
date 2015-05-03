@@ -1,40 +1,28 @@
 #ifndef _CHAN_H_
 #define _CHAN_H_
 
-#include <string>
 #include <iostream>
-#include <cassert>
+#include <string>
 
 class Chan
 {
 public:
-	Chan();
-	Chan( std::string n);
-	Chan(const Chan& rhs);
-	Chan(Chan&& rhs);
-	Chan& operator=(const Chan& rhs);
-	bool operator==(const Chan& rhs);
+	enum class ChanType : int { Binary, Broadcast };
+	Chan(const std::string n);
+	Chan(const Chan& c);
+	Chan(Chan&& c);
+	const Chan& operator=(const Chan& c);
+	bool operator==(const Chan& c);
 	friend std::ostream& operator<<(std::ostream& o, const Chan& c);
 
+	virtual ~Chan();
+	virtual bool isSenderSync() = 0;
+	virtual bool isReceiverSync() = 0;
+	virtual ChanType getType() const = 0;
 	std::string getName() const;
-	bool isSenderSync();
-	bool isReceiverSync();
-	void wantSender();
-	void wantReceiver();
-	void refuseSender();
-	void refuseReceiver();
 
-	~Chan();
-
-private:
-	enum class Turn { Sender, Receiver };
+protected:
 	std::string name;
-	Turn turn;
-	bool wcs;
-	bool wcr;
-	bool acs;
-	bool acr;
-	
 };
 
 #endif

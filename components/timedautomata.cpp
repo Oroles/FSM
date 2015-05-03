@@ -11,6 +11,12 @@ void TimedAutomata::step()
 	{
 		m.step();
 	}
+
+	for ( auto& m : systems )
+	{
+		m.resetStepFlag();
+	}
+
 	ClockTable::getInstance().updateClocks();
 	SymbolTable::getInstance().updateSymbols();
 	PinTable::getInstance().updatePins();
@@ -36,5 +42,11 @@ void TimedAutomata::addSystems(const std::map<std::string,std::string> systemsNa
 				LocalTable::getInstance().generateTables( name.second, name.first );
 			}
 		}
+	}
+	//Makes the dependency table
+	for ( auto& t : systems )
+	{
+		t.setObserver( &obs );
+		obs.addObservable( &t );
 	}
 }

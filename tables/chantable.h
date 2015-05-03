@@ -3,21 +3,18 @@
 
 #include <map>
 #include <vector>
+#include <memory>
 #include "../variables/chan.h"
 
 class ChanTable
 {
 public:
 	static ChanTable& getInstance();
-	void addEntry(const Chan& c);
-	void addEntries( const std::vector<Chan>& v);
-	bool existsEntry( const Chan& c);
+	void addEntries( const std::vector<std::shared_ptr<Chan> >& v);
+	Chan::ChanType getType(std::string name);
+	bool existsEntry( const std::string& name);
 	bool isSenderSync(std::string name);
 	bool isReceiverSync(std::string name);
-	void refuseSender(std::string name);
-	void refuseReceiver(std::string name);
-	void wantSender(std::string name);
-	void wantReceiver(std::string name);
 
 private:
 	ChanTable();
@@ -25,7 +22,7 @@ private:
 	ChanTable(ChanTable&& rhs) = delete;
 	ChanTable& operator=(const ChanTable& rhs) = delete;
 
-	std::map<std::string,Chan> table;
+	std::map<std::string,std::shared_ptr<Chan> > table;
 };
 
 #endif

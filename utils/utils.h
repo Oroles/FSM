@@ -10,7 +10,7 @@
 extern DebugMessagePriority priority;
 extern bool quitApp;
 
-enum class TranzactionAvailableStatus : int { Available, NotGuard, NotSync, NotSource };
+enum class TranzactionAvailableStatus : int { Available, NotGuard, NotSource };
 
 void setPriority(const std::vector<std::string>& args);
 std::string getFileName(const std::vector<std::string>& args);

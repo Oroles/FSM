@@ -13,7 +13,7 @@ public:
 	State(const State& rhs);
 	State(State&& rhs);
 
-	State& operator=(const State& rhs);
+	const State& operator=(const State& rhs);
 	bool operator==(const State& rhs) const;
 	bool operator!=(const State& rhs) const;
 

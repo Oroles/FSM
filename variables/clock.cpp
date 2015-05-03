@@ -26,7 +26,7 @@ Clock::~Clock()
 	
 }
 
-Clock& Clock::operator=(const Clock& rhs)
+const Clock& Clock::operator=(const Clock& rhs)
 {
 	name = rhs.name;
 	value = rhs.value;

@@ -20,7 +20,7 @@ State::State(State&& rhs) : name(std::move(rhs.name))
 
 }
 
-State& State::operator=(const State& rhs)
+const State& State::operator=(const State& rhs)
 {
 	name = rhs.name;
 	return *this;

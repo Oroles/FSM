@@ -11,50 +11,30 @@ ChanTable::ChanTable()
 
 }
 
-void ChanTable::addEntry(const Chan& c)
-{
-	table[c.getName()] = c;
-}
-
-void ChanTable::addEntries(const std::vector<Chan>& v)
+void ChanTable::addEntries(const std::vector<std::shared_ptr<Chan> >& v)
 {
 	for ( auto& c : v )
 	{
-		table[c.getName()] = c;
+		table[c->getName()] = c;
 	}
 }
 
-bool ChanTable::existsEntry(const Chan& c)
+Chan::ChanType ChanTable::getType(std::string name)
 {
-	return table.find(c.getName()) != table.end();
+	return table[name]->getType();
+}
+
+bool ChanTable::existsEntry(const std::string& name)
+{
+	return table.find(name) != table.end();
 }
 
 bool ChanTable::isSenderSync(std::string name)
 {
-	return table[name].isSenderSync();
+	return table[name]->isSenderSync();
 }
 
 bool ChanTable::isReceiverSync(std::string name)
 {
-	return table[name].isReceiverSync();
-}
-
-void ChanTable::wantSender(std::string name)
-{
-	table[name].wantSender();
-}
-
-void ChanTable::wantReceiver(std::string name)
-{
-	table[name].wantReceiver();
-}
-
-void ChanTable::refuseSender(std::string name)
-{
-	table[name].refuseSender();
-}
-
-void ChanTable::refuseReceiver(std::string name)
-{
-	table[name].refuseReceiver();
+	return table[name]->isReceiverSync();
 }

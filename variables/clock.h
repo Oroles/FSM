@@ -12,7 +12,7 @@ public:
 	Clock( std::string n, int val );
 	Clock(const Clock& rhs);
 	Clock(Clock&& rhs);
-	Clock& operator=(const Clock& rhs);
+	const Clock& operator=(const Clock& rhs);
 	bool operator==(const Clock& rhs);
 	friend std::ostream& operator<<(std::ostream& o, const Clock& c );
 

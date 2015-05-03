@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "template.h"
+#include "observer.h"
 
 class TimedAutomata
 {
@@ -20,6 +21,7 @@ public:
 private:
 	std::vector<Template> templates;
 	std::vector<Template> systems;
+	Observer obs;
 };
 
 #endif

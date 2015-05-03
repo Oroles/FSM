@@ -178,7 +178,7 @@ Expression::Expression(Expression&& rhs) : expression( std::move( rhs.expression
 
 }
 
-Expression& Expression::operator=(const Expression& rhs)
+const Expression& Expression::operator=(const Expression& rhs)
 {
 	rpn = rhs.rpn;
 	expression = rhs.expression;

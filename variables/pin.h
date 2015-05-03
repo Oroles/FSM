@@ -10,7 +10,7 @@ public:
 	Pin( std::string n, std::string s, int p );
 	Pin( const Pin& rhs );
 	Pin( const Pin&& rhs );
-	Pin& operator=(const Pin& rhs);
+	const Pin& operator=(const Pin& rhs);
 	int getValue() const;
 	void update();
 	void setValue( int value );

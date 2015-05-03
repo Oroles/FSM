@@ -11,9 +11,9 @@ public:
 	Sync(const std::string& n);
 	Sync(const Sync& rhs);
 	Sync(Sync&& rhs);
-	Sync& operator=(const Sync& rhs);
+	const Sync& operator=(const Sync& rhs);
 	bool isSync() const;
-	void deSync();
+	std::string getName() const;
 private:
 	friend std::ostream& operator<<(std::ostream&, const Sync& s);
 
