@@ -64,7 +64,7 @@ void Transition::setDestination( const State d )
 	destination = d;
 }
 
-void Transition::setSync(const Sync s)
+void Transition::setSync(const std::string s)
 {
 	display(DebugMessagePriority::Transition, "There is: ", s, " sync added to ", *this, "\n" );
 	sync = s;
@@ -113,19 +113,14 @@ TranzactionAvailableStatus Transition::isAvailable(const State& s) const
 	return TranzactionAvailableStatus::Available;
 }
 
-bool Transition::isSync() const
-{
-	return sync.isSync();
-}
-
 bool Transition::hasSync() const
 {
-	return sync.getName() != "";
+	return sync != "";
 }
 
 std::string Transition::getChannelName() const
 {
-	return sync.getName();
+	return sync;
 }
 
 void Transition::addGuard( const Expression& e )

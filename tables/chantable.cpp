@@ -28,13 +28,3 @@ bool ChanTable::existsEntry(const std::string& name)
 {
 	return table.find(name) != table.end();
 }
-
-bool ChanTable::isSenderSync(std::string name)
-{
-	return table[name]->isSenderSync();
-}
-
-bool ChanTable::isReceiverSync(std::string name)
-{
-	return table[name]->isReceiverSync();
-}

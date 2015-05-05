@@ -8,7 +8,6 @@
 
 #include "state.h"
 #include "../expressions/expression.h"
-#include "../expressions/sync.h"
 #include "../utils/utils.h"
 
 class Transition
@@ -25,14 +24,13 @@ public:
 	void setSource( const State s );
 	State getDestination() const;
 	void setDestination( const State d );
-	void setSync( const Sync s);
+	void setSync( const std::string s);
 	void setExpressionTemplateNames( const std::string name);
 
 	State operator()(const State&);
 	friend std::ostream& operator<<(std::ostream& o, const Transition&);
 
 	TranzactionAvailableStatus isAvailable(const State&) const;
-	bool isSync() const;
 	bool hasSync() const;
 	std::string getChannelName() const;
 
@@ -46,7 +44,7 @@ private:
 	std::vector<Expression> guards;
 	std::vector<Expression> updates;
 	std::vector<std::string> selects;
-	Sync sync;
+	std::string sync;
 };
 
 #endif

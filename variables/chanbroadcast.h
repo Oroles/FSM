@@ -1,7 +1,7 @@
 #ifndef _CHAN_BROADCAST_H_
 #define _CHAN_BROADCAST_H_
 
-#include <iostream>
+#include <string>
 #include "chan.h"
 
 class ChanBroadcast : public Chan
@@ -14,8 +14,6 @@ public:
 	bool operator==(const ChanBroadcast& c);
 	friend std::ostream& operator<<(std::ostream& o, const ChanBroadcast& c);
 
-	bool isSenderSync();
-	bool isReceiverSync();
 	Chan::ChanType getType() const;
 
 	~ChanBroadcast();

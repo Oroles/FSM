@@ -13,8 +13,6 @@ public:
 	void addEntries( const std::vector<std::shared_ptr<Chan> >& v);
 	Chan::ChanType getType(std::string name);
 	bool existsEntry( const std::string& name);
-	bool isSenderSync(std::string name);
-	bool isReceiverSync(std::string name);
 
 private:
 	ChanTable();

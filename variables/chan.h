@@ -16,8 +16,6 @@ public:
 	friend std::ostream& operator<<(std::ostream& o, const Chan& c);
 
 	virtual ~Chan();
-	virtual bool isSenderSync() = 0;
-	virtual bool isReceiverSync() = 0;
 	virtual ChanType getType() const = 0;
 	std::string getName() const;
 

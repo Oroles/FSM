@@ -119,7 +119,7 @@ void Parser::processLabels(Transition* t, const pugi::xml_node& node)
 		}
 		if ( (it->name() == std::string("label") ) && ( it->attribute("kind").value() == std::string("synchronisation") ) )
 		{
-			Sync rez( it->child_value() );
+			std::string rez( it->child_value() );
 			display(DebugMessagePriority::Parser, "Syncs founded: ", rez, "\n" );
 			t->setSync( rez );
 		}
