@@ -61,17 +61,17 @@ Template Parser::processTemplate(const pugi::xml_node& nodes )
 	return rez;
 }
 
-State Parser::processCurrentState(const pugi::xml_node& node)
+Location Parser::processCurrentState(const pugi::xml_node& node)
 {
 	std::string id = node.attribute("ref").value();
-	State state(id);
+	Location state(id);
 	return state;
 }
 
 Transition Parser::processTransition(const pugi::xml_node& node)
 {
-	State source( node.child("source").attribute("ref").value() );
-	State destination( node.child("target").attribute("ref").value() );
+	Location source( node.child("source").attribute("ref").value() );
+	Location destination( node.child("target").attribute("ref").value() );
 	Transition tranz(source,destination);
 	this->processLabels( &tranz, node );
 	return tranz;

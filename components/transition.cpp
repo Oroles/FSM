@@ -9,7 +9,7 @@ Transition::Transition() : source(""), destination(""), sync("")
 
 }
 
-Transition::Transition(const State s, const State d) : source(s), destination(d)
+Transition::Transition(const Location s, const Location d) : source(s), destination(d)
 {
 	assert(s.getName().size() != 0);
 	assert(d.getName().size() != 0);
@@ -42,23 +42,23 @@ const Transition& Transition::operator=(const Transition& rhs)
 	return *this;
 }
 
-State Transition::getSource() const
+Location Transition::getSource() const
 {
 	return source;
 }
 
-void Transition::setSource( const State s )
+void Transition::setSource( const Location s )
 {
 	assert(s.getName().size() != 0 );
 	source = s;
 }
 
-State Transition::getDestination() const
+Location Transition::getDestination() const
 {
 	return destination;
 }
 
-void Transition::setDestination( const State d )
+void Transition::setDestination( const Location d )
 {
 	assert(d.getName().size() != 0 );
 	destination = d;
@@ -83,7 +83,7 @@ void Transition::setExpressionTemplateNames( const std::string name)
 	}
 }
 
-State Transition::operator()(const State& s)
+Location Transition::operator()(const Location& s)
 {
 	for ( auto& s : selects )
 	{
@@ -97,7 +97,7 @@ State Transition::operator()(const State& s)
 	return destination;
 }
 
-TranzactionAvailableStatus Transition::isAvailable(const State& s) const
+TranzactionAvailableStatus Transition::isAvailable(const Location& s) const
 {
 	if ( s != source )
 	{

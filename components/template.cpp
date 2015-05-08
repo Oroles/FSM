@@ -16,19 +16,19 @@ Template::Template()
 {
 }
 
-Template::Template(const Template& rhs): transitions(rhs.transitions), currState(rhs.currState), name(rhs.name)
+Template::Template(const Template& rhs): transitions(rhs.transitions), currLocation(rhs.currLocation), name(rhs.name)
 {
 }
 
 Template::Template(Template&& rhs) : transitions(std::move(rhs.transitions)),
-							   currState(std::move(rhs.currState)), name(std::move(rhs.name))
+							   currLocation(std::move(rhs.currLocation)), name(std::move(rhs.name))
 {
 }
 
 const Template& Template::operator=(const Template& rhs)
 {
 	transitions = rhs.transitions;
-	currState = rhs.currState;
+	currLocation = rhs.currLocation;
 	name = rhs.name;
 	return *this;
 }
@@ -44,23 +44,23 @@ TranzactionAvailableStatus Template::availableTransition(const Transition* t)
 {
 	if ( stepStatus == StepStatus::NotAdvance )
 	{
-		return t->isAvailable(currState);
+		return t->isAvailable(currLocation);
 	}
 	return TranzactionAvailableStatus::NotSource;
 }
 
 void Template::advance(Transition* t)
 {
-	display(DebugMessagePriority::Template,"Advance Current state: ", currState, "for template ", name, "\n" );
-	currState = t->operator()( currState );
-	display(DebugMessagePriority::Template,"Advance New state: ", currState, "for template ", name, "\n" );
+	display(DebugMessagePriority::Template,"Advance Current location: ", currLocation, "for template ", name, "\n" );
+	currLocation = t->operator()( currLocation );
+	display(DebugMessagePriority::Template,"Advance New location: ", currLocation, "for template ", name, "\n" );
 	stepStatus = StepStatus::ChannelAdvance;
 }
 
-void Template::setCurrentState(const State& s)
+void Template::setCurrentState(const Location& s)
 {
-	display(DebugMessagePriority::Template, "Init state: ", s, "is added to template: ", name, "\n");
-	currState = s;
+	display(DebugMessagePriority::Template, "Init location: ", s, "is added to template: ", name, "\n");
+	currLocation = s;
 }
 
 void Template::setName(const std::string n)
@@ -108,29 +108,29 @@ void Template::step()
 
 	for( auto& t : transitions )
 	{
-		TranzactionAvailableStatus status = t.isAvailable( currState );
+		TranzactionAvailableStatus status = t.isAvailable( currLocation );
 		if ( status == TranzactionAvailableStatus::Available )
 		{
 			if ( t.hasSync() == true )
 			{
 				if ( obs->isAvailable(*this, t, t.getChannelName() ) == true )
 				{
-					display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
-					currState = t( currState );
-					display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
+					display(DebugMessagePriority::Template,"Current location: ", currLocation, "for template ", name, "\n" );
+					currLocation = t( currLocation );
+					display(DebugMessagePriority::Template,"New location: ", currLocation, "for template ", name, "\n" );
 					stepStatus = StepStatus::NormalAdvance;
 					return;
 				}
 			}
 			else
 			{
-				display(DebugMessagePriority::Template,"Current state: ", currState, "for template ", name, "\n" );
-				currState = t( currState );
-				display(DebugMessagePriority::Template,"New state: ", currState, "for template ", name, "\n" );
+				display(DebugMessagePriority::Template,"Current location: ", currLocation, "for template ", name, "\n" );
+				currLocation = t( currLocation );
+				display(DebugMessagePriority::Template,"New location: ", currLocation, "for template ", name, "\n" );
 				stepStatus = StepStatus::NormalAdvance;
 				return;
 			}
 		}
 	}
-	display(DebugMessagePriority::Template,"No transition available from the state ", currState, " for template ", name, "\n" );
+	display(DebugMessagePriority::Template,"No transition available from the location ", currLocation, " for template ", name, "\n" );
 }

@@ -6,7 +6,7 @@
 #include <iterator>
 #include <string>
 
-#include "state.h"
+#include "location.h"
 #include "transition.h"
 #include "observer.h"
 
@@ -23,7 +23,7 @@ public:
 	void advance(Transition* t);
 	void resetStepFlag();
 
-	void setCurrentState( const State& s );
+	void setCurrentState( const Location& s );
 	void setName( const std::string n );
 	void setObserver(Observer*);
 	std::string getName() const;
@@ -42,7 +42,7 @@ private:
 	* ChannelAdvance when template advance because it had to sync with another one
 	*/
 	std::vector<Transition> transitions;
-	State currState;
+	Location currLocation;
 	std::string name;
 
 	Observer* obs;
