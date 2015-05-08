@@ -15,20 +15,20 @@ void Observer::addObservable(Template* rhs)
 			if ( channelName.find("!") != std::string::npos )
 			{
 				senders.push_back( Data{  rhs,
-										  std::shared_ptr<Transition>( std::make_shared<Transition>( t ) ),
+										  std::shared_ptr<Edge>( std::make_shared<Edge>( t ) ),
 										  std::string( channelName ) } );
 			}
 			else
 			{
 				receivers.push_back( Data{  rhs,
-										  std::shared_ptr<Transition>( std::make_shared<Transition>( t ) ),
+										  std::shared_ptr<Edge>( std::make_shared<Edge>( t ) ),
 										  std::string( channelName ) } );
 			}
 		}
 	}
 }
 
-bool Observer::isAvailable(const Template& temp, const Transition& trans, const std::string channelName )
+bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::string channelName )
 {
 	if ( channelName.find("!") != std::string::npos )
 	{
@@ -46,7 +46,7 @@ bool Observer::isAvailable(const Template& temp, const Transition& trans, const 
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TranzactionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
 						d.temp->advance( d.trans.get() );
@@ -67,7 +67,7 @@ bool Observer::isAvailable(const Template& temp, const Transition& trans, const 
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TranzactionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
 						d.temp->advance( d.trans.get() );
@@ -92,7 +92,7 @@ bool Observer::isAvailable(const Template& temp, const Transition& trans, const 
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TranzactionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
 						d.temp->advance( d.trans.get() );
@@ -114,7 +114,7 @@ bool Observer::isAvailable(const Template& temp, const Transition& trans, const 
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TranzactionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
 					{
 						//returns only true, the sender will advance later
 						return true;

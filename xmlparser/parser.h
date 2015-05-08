@@ -10,7 +10,7 @@
 #include "../components/timedautomata.h"
 #include "../components/template.h"
 #include "../components/location.h"
-#include "../components/transition.h"
+#include "../components/edge.h"
 #include "../expressions/expression.h"
 #include "pugixml.hpp"
 
@@ -42,9 +42,9 @@ public:
 private:
 	Template processTemplate(const pugi::xml_node& node );
 	Location processCurrentState(const pugi::xml_node& node);
-	Transition processTransition(const pugi::xml_node& node);
+	Edge processTransition(const pugi::xml_node& node);
 	std::string processName(const pugi::xml_node& node );
-	void processLabels(Transition* t, const pugi::xml_node& node );
+	void processLabels(Edge* t, const pugi::xml_node& node );
 	
 	pugi::xml_document doc;
 };

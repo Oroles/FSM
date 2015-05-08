@@ -7,7 +7,7 @@
 #include <string>
 
 #include "location.h"
-#include "transition.h"
+#include "edge.h"
 #include "observer.h"
 
 class Template
@@ -18,9 +18,9 @@ public:
 	Template(Template&& rhs);
 	const Template& operator=(const Template& rhs);
 
-	void addTransition( const Transition& t );
-	TranzactionAvailableStatus availableTransition(const Transition* t);
-	void advance(Transition* t);
+	void addTransition( const Edge& t );
+	TransitionAvailableStatus availableTransition(const Edge* t);
+	void advance(Edge* t);
 	void resetStepFlag();
 
 	void setCurrentState( const Location& s );
@@ -30,8 +30,8 @@ public:
 
 	void step();
 
-	std::vector<Transition>::iterator begin();
-	std::vector<Transition>::iterator end();
+	std::vector<Edge>::iterator begin();
+	std::vector<Edge>::iterator end();
 
 private:
 	enum class StepStatus : int { NotAdvance, NotPossible, NormalAdvance, ChannelAdvance };
@@ -41,7 +41,7 @@ private:
 	* NormalAdvance when template advanced without needing to be sync
 	* ChannelAdvance when template advance because it had to sync with another one
 	*/
-	std::vector<Transition> transitions;
+	std::vector<Edge> transitions;
 	Location currLocation;
 	std::string name;
 

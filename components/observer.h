@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-#include "transition.h"
+#include "edge.h"
 
 class Template;
 
@@ -14,13 +14,13 @@ class Observer
 {
 public:
 	void addObservable(Template* rhs);
-	bool isAvailable(const Template& temp, const Transition& trans, const std::string channelName );
+	bool isAvailable(const Template& temp, const Edge& trans, const std::string channelName );
 
 private:
 	struct Data
 	{
 		Template* temp;
-		std::shared_ptr<Transition> trans;
+		std::shared_ptr<Edge> trans;
 		std::string name;
 	};
 

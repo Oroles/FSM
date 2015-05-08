@@ -68,16 +68,16 @@ Location Parser::processCurrentState(const pugi::xml_node& node)
 	return state;
 }
 
-Transition Parser::processTransition(const pugi::xml_node& node)
+Edge Parser::processTransition(const pugi::xml_node& node)
 {
 	Location source( node.child("source").attribute("ref").value() );
 	Location destination( node.child("target").attribute("ref").value() );
-	Transition tranz(source,destination);
+	Edge tranz(source,destination);
 	this->processLabels( &tranz, node );
 	return tranz;
 }
 
-void Parser::processLabels(Transition* t, const pugi::xml_node& node)
+void Parser::processLabels(Edge* t, const pugi::xml_node& node)
 {
 	for ( auto it = node.begin(); it != node.end(); ++it )
 	{

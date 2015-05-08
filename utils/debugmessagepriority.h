@@ -8,14 +8,14 @@ class DebugMessagePriority
 public:
 	/* This order should be change so the most important class to have a smaller value */
 	static const unsigned int TimedAutomata = 1;
-	static const unsigned int Transition = 1 << 1;
+	static const unsigned int Edge = 1 << 1;
 	static const unsigned int Template = 1 << 2;
 	static const unsigned int Parser = 1 << 3;
 	static const unsigned int Expression = 1 << 4;
 	static const unsigned int Pin = 1 << 5;
 	static const unsigned int Chan = 1 << 14;
 	static const unsigned int Clock = 1 << 6;
-	static const unsigned int State = 1 << 7;
+	static const unsigned int Location = 1 << 7;
 	static const unsigned int SymbolTable = 1 << 8;
 	static const unsigned int StringParser = 1 << 9;
 	static const unsigned int ClockTable = 1 << 10;

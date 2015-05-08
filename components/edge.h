@@ -10,16 +10,16 @@
 #include "../expressions/expression.h"
 #include "../utils/utils.h"
 
-class Transition
+class Edge
 {
 public:
-	Transition();
+	Edge();
 
-	Transition(const Location s, const Location d);
-	Transition(const Transition& rhs);
-	Transition(Transition&& rhs);
+	Edge(const Location s, const Location d);
+	Edge(const Edge& rhs);
+	Edge(Edge&& rhs);
 
-	const Transition& operator=(const Transition& rhs);
+	const Edge& operator=(const Edge& rhs);
 	Location getSource() const;
 	void setSource( const Location s );
 	Location getDestination() const;
@@ -28,9 +28,9 @@ public:
 	void setExpressionTemplateNames( const std::string name);
 
 	Location operator()(const Location&);
-	friend std::ostream& operator<<(std::ostream& o, const Transition&);
+	friend std::ostream& operator<<(std::ostream& o, const Edge&);
 
-	TranzactionAvailableStatus isAvailable(const Location&) const;
+	TransitionAvailableStatus isAvailable(const Location&) const;
 	bool hasSync() const;
 	std::string getChannelName() const;
 

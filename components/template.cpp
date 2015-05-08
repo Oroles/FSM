@@ -1,6 +1,6 @@
 #include "template.h"
 
-bool compareFunction( const Transition& lhs, const Transition& rhs )
+bool compareFunction( const Edge& lhs, const Edge& rhs )
 {
 	if ( lhs.hasSync() == true )
 	{
@@ -33,23 +33,23 @@ const Template& Template::operator=(const Template& rhs)
 	return *this;
 }
 
-void Template::addTransition(const Transition& t)
+void Template::addTransition(const Edge& t)
 {
-	display(DebugMessagePriority::Template, "Transition: ", t, "is added to template: ", name, "\n");
+	display(DebugMessagePriority::Template, "Edge: ", t, "is added to template: ", name, "\n");
 	transitions.push_back( t );
 	std::sort(transitions.begin(),transitions.end(),compareFunction);
 }
 
-TranzactionAvailableStatus Template::availableTransition(const Transition* t)
+TransitionAvailableStatus Template::availableTransition(const Edge* t)
 {
 	if ( stepStatus == StepStatus::NotAdvance )
 	{
 		return t->isAvailable(currLocation);
 	}
-	return TranzactionAvailableStatus::NotSource;
+	return TransitionAvailableStatus::NotSource;
 }
 
-void Template::advance(Transition* t)
+void Template::advance(Edge* t)
 {
 	display(DebugMessagePriority::Template,"Advance Current location: ", currLocation, "for template ", name, "\n" );
 	currLocation = t->operator()( currLocation );
@@ -89,12 +89,12 @@ void Template::resetStepFlag()
 	stepStatus = StepStatus::NotAdvance;
 }
 
-std::vector<Transition>::iterator Template::begin()
+std::vector<Edge>::iterator Template::begin()
 {
 	return transitions.begin();
 }
 
-std::vector<Transition>::iterator Template::end()
+std::vector<Edge>::iterator Template::end()
 {
 	return transitions.end();
 }
@@ -108,8 +108,8 @@ void Template::step()
 
 	for( auto& t : transitions )
 	{
-		TranzactionAvailableStatus status = t.isAvailable( currLocation );
-		if ( status == TranzactionAvailableStatus::Available )
+		TransitionAvailableStatus status = t.isAvailable( currLocation );
+		if ( status == TransitionAvailableStatus::Available )
 		{
 			if ( t.hasSync() == true )
 			{
