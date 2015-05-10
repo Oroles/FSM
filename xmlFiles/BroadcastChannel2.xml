@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+broadcast chan bc;
+chan c;</declaration><template><name x="5" y="5">Sender</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="-320" y="-120"></location><location id="id1" x="-240" y="-72"></location><location id="id2" x="-120" y="-64"></location><location id="id3" x="-48" y="-160"></location><location id="id4" x="-176" y="-160"></location><init ref="id4"/><transition><source ref="id1"/><target ref="id0"/></transition><transition><source ref="id2"/><target ref="id1"/><label kind="synchronisation" x="-176" y="-64">bc!</label></transition><transition><source ref="id3"/><target ref="id2"/></transition><transition><source ref="id4"/><target ref="id3"/><label kind="synchronisation" x="-128" y="-184">c!</label></transition></template><template><name>Receiver</name><location id="id5" x="-248" y="8"></location><location id="id6" x="-144" y="16"></location><location id="id7" x="-24" y="24"></location><location id="id8" x="-8" y="-72"></location><location id="id9" x="-128" y="-72"></location><init ref="id9"/><transition><source ref="id6"/><target ref="id5"/></transition><transition><source ref="id7"/><target ref="id6"/><label kind="synchronisation" x="-96" y="0">bc?</label></transition><transition><source ref="id8"/><target ref="id7"/><label kind="synchronisation" x="8" y="-32">c?</label></transition><transition><source ref="id9"/><target ref="id8"/></transition></template><system>// Place template instantiations here.
+S = Sender();
+R = Receiver();
+R1 = Receiver();
+
+// List one or more processes to be composed into a system.
+system S,R,R1;</system></nta>

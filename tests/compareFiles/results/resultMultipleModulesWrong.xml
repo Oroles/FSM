@@ -1,12 +1,12 @@
 Set name to template:  Template1 
- Init state:  State: id1 is added to template:  Template1 
- Transition:  Transition: id0 -> id1 is added to template:  Template1 
- Transition:  Transition: id1 -> id0 is added to template:  Template1 
+ Init location:  Location: id1 is added to template:  Template1 
+ Edge:  Edge: id0 -> id1 is added to template:  Template1 
+ Edge:  Edge: id1 -> id0 is added to template:  Template1 
  Set name to template:  Template2 
- Init state:  State: id5 is added to template:  Template2 
- Transition:  Transition: id2 -> id5 is added to template:  Template2 
- Transition:  Transition: id4 -> id3 is added to template:  Template2 
- Transition:  Transition: id5 -> id4 is added to template:  Template2 
+ Init location:  Location: id5 is added to template:  Template2 
+ Edge:  Edge: id2 -> id5 is added to template:  Template2 
+ Edge:  Edge: id4 -> id3 is added to template:  Template2 
+ Edge:  Edge: id5 -> id4 is added to template:  Template2 
  Press s to make progress: 
 Press s to make progress: 
 Press s to make progress: 

@@ -1,41 +1,41 @@
 Set name to template:  Template 
- Init state:  State: id1 is added to template:  Template 
- The update  Expression: X = 2 is added to  Transition: id0 -> id1 
+ Init location:  Location: id1 is added to template:  Template 
+ The update  Expression: X = 2 is added to  Edge: id0 -> id1 
  Update founded:  Expression: X = 2 
- The update  Expression: Y = 2 is added to  Transition: id0 -> id1 
+ The update  Expression: Y = 2 is added to  Edge: id0 -> id1 
  Update founded:  Expression: Y = 2 
- Transition:  Transition: id0 -> id1 is added to template:  Template 
- The guard  Expression: Y > 2 is added to  Transition: id1 -> id0 
+ Edge:  Edge: id0 -> id1 is added to template:  Template 
+ The guard  Expression: Y > 2 is added to  Edge: id1 -> id0 
  Guard founded:  Expression: Y > 2 
- The guard  Expression: X > 5 is added to  Transition: id1 -> id0 
+ The guard  Expression: X > 5 is added to  Edge: id1 -> id0 
  Guard founded:  Expression: X > 5 
- Transition:  Transition: id1 -> id0 is added to template:  Template 
+ Edge:  Edge: id1 -> id0 is added to template:  Template 
  Set name to template:  Process 
- Transition  Transition: id0 -> id1 is part of the template  Process 
- Transition  Transition: id1 -> id0 is part of the template  Process 
+ Edge  Edge: id0 -> id1 is part of the template  Process 
+ Edge  Edge: id1 -> id0 is part of the template  Process 
  Expression:  Y > 2 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  1 
  Expression:  X > 5 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  1 
  Expression:  X > 5 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  1 
  Expression:  X > 5 from template  Process  is evaluated to  0 
- No transition available from the state  State: id1  for template  Process 
+ No transition available from the location  Location: id1  for template  Process 
  Press s to make progress: 
 Expression:  Y > 2 from template  Process  is evaluated to  1 
  Expression:  X > 5 from template  Process  is evaluated to  1 
- Current state:  State: id1 for template  Process 
- New state:  State: id0 for template  Process 
+ Current location:  Location: id1 for template  Process 
+ New location:  Location: id0 for template  Process 
  Press s to make progress: 

@@ -1,39 +1,39 @@
 Set name to template:  Template 
- Init state:  State: id2 is added to template:  Template 
- Transition:  Transition: id0 -> id2 is added to template:  Template 
- The guard  Expression: i > 0 is added to  Transition: id1 -> id0 
+ Init location:  Location: id2 is added to template:  Template 
+ Edge:  Edge: id0 -> id2 is added to template:  Template 
+ The guard  Expression: i > 0 is added to  Edge: id1 -> id0 
  Guard founded:  Expression: i > 0 
- Transition:  Transition: id1 -> id0 is added to template:  Template 
- The update  Expression: i = 2 is added to  Transition: id2 -> id1 
+ Edge:  Edge: id1 -> id0 is added to template:  Template 
+ The update  Expression: i = 2 is added to  Edge: id2 -> id1 
  Update founded:  Expression: i = 2 
- Transition:  Transition: id2 -> id1 is added to template:  Template 
+ Edge:  Edge: id2 -> id1 is added to template:  Template 
  Set name to template:  Process 
- Transition  Transition: id0 -> id2 is part of the template  Process 
- Transition  Transition: id1 -> id0 is part of the template  Process 
- Transition  Transition: id2 -> id1 is part of the template  Process 
- Current state:  State: id2 for template  Process 
+ Edge  Edge: id0 -> id2 is part of the template  Process 
+ Edge  Edge: id1 -> id0 is part of the template  Process 
+ Edge  Edge: id2 -> id1 is part of the template  Process 
+ Current location:  Location: id2 for template  Process 
  Expression:  i = 2 from template  Process  is evaluated to  2 
- New state:  State: id1 for template  Process 
+ New location:  Location: id1 for template  Process 
  Press s to make progress: 
 Expression:  i > 0 from template  Process  is evaluated to  1 
- Current state:  State: id1 for template  Process 
- New state:  State: id0 for template  Process 
+ Current location:  Location: id1 for template  Process 
+ New location:  Location: id0 for template  Process 
  Press s to make progress: 
-Current state:  State: id0 for template  Process 
- New state:  State: id2 for template  Process 
+Current location:  Location: id0 for template  Process 
+ New location:  Location: id2 for template  Process 
  Press s to make progress: 
-Current state:  State: id2 for template  Process 
+Current location:  Location: id2 for template  Process 
  Expression:  i = 2 from template  Process  is evaluated to  2 
- New state:  State: id1 for template  Process 
+ New location:  Location: id1 for template  Process 
  Press s to make progress: 
 Expression:  i > 0 from template  Process  is evaluated to  1 
- Current state:  State: id1 for template  Process 
- New state:  State: id0 for template  Process 
+ Current location:  Location: id1 for template  Process 
+ New location:  Location: id0 for template  Process 
  Press s to make progress: 
-Current state:  State: id0 for template  Process 
- New state:  State: id2 for template  Process 
+Current location:  Location: id0 for template  Process 
+ New location:  Location: id2 for template  Process 
  Press s to make progress: 
-Current state:  State: id2 for template  Process 
+Current location:  Location: id2 for template  Process 
  Expression:  i = 2 from template  Process  is evaluated to  2 
- New state:  State: id1 for template  Process 
+ New location:  Location: id1 for template  Process 
  Press s to make progress: 

@@ -1,0 +1,59 @@
+Set name to template:  Sender 
+ Init location:  Location: id4 is added to template:  Sender 
+ Edge:  Edge: id1 -> id0 is added to template:  Sender 
+ Syncs founded:  bc! 
+ There is:  bc!  sync added to  Edge: id2 -> id1 
+ Edge:  Edge: id2 -> id1 is added to template:  Sender 
+ Edge:  Edge: id3 -> id2 is added to template:  Sender 
+ Syncs founded:  c! 
+ There is:  c!  sync added to  Edge: id4 -> id3 
+ Edge:  Edge: id4 -> id3 is added to template:  Sender 
+ Set name to template:  Receiver 
+ Init location:  Location: id9 is added to template:  Receiver 
+ Edge:  Edge: id6 -> id5 is added to template:  Receiver 
+ Syncs founded:  bc? 
+ There is:  bc?  sync added to  Edge: id7 -> id6 
+ Edge:  Edge: id7 -> id6 is added to template:  Receiver 
+ Syncs founded:  c? 
+ There is:  c?  sync added to  Edge: id8 -> id7 
+ Edge:  Edge: id8 -> id7 is added to template:  Receiver 
+ Edge:  Edge: id9 -> id8 is added to template:  Receiver 
+ Set name to template:  R 
+ Edge  Edge: id7 -> id6 is part of the template  R 
+ Edge  Edge: id8 -> id7 is part of the template  R 
+ Edge  Edge: id6 -> id5 is part of the template  R 
+ Edge  Edge: id9 -> id8 is part of the template  R 
+ Set name to template:  S 
+ Edge  Edge: id4 -> id3 is part of the template  S 
+ Edge  Edge: id2 -> id1 is part of the template  S 
+ Edge  Edge: id1 -> id0 is part of the template  S 
+ Edge  Edge: id3 -> id2 is part of the template  S 
+ Current location:  Location: id9 for template  R 
+ New location:  Location: id8 for template  R 
+ No transition available from the location  Location: id4  for template  S 
+ Press s to make progress: 
+Advance Current location:  Location: id4 for template  S 
+ Advance New location:  Location: id3 for template  S 
+ Current location:  Location: id8 for template  R 
+ New location:  Location: id7 for template  R 
+ Press s to make progress: 
+No transition available from the location  Location: id7  for template  R 
+ Current location:  Location: id3 for template  S 
+ New location:  Location: id2 for template  S 
+ Press s to make progress: 
+Current location:  Location: id7 for template  R 
+ New location:  Location: id6 for template  R 
+ Current location:  Location: id2 for template  S 
+ New location:  Location: id1 for template  S 
+ Press s to make progress: 
+Current location:  Location: id6 for template  R 
+ New location:  Location: id5 for template  R 
+ Current location:  Location: id1 for template  S 
+ New location:  Location: id0 for template  S 
+ Press s to make progress: 
+No transition available from the location  Location: id5  for template  R 
+ No transition available from the location  Location: id0  for template  S 
+ Press s to make progress: 
+No transition available from the location  Location: id5  for template  R 
+ No transition available from the location  Location: id0  for template  S 
+ Press s to make progress: 

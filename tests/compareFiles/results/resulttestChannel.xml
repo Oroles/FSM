@@ -1,0 +1,52 @@
+Set name to template:  Template 
+ Init location:  Location: id1 is added to template:  Template 
+ The guard  Expression: x >= 3 is added to  Edge: id1 -> id0 
+ Guard founded:  Expression: x >= 3 
+ Syncs founded:  c! 
+ There is:  c!  sync added to  Edge: id1 -> id0 
+ Edge:  Edge: id1 -> id0 is added to template:  Template 
+ Set name to template:  template2 
+ Init location:  Location: id3 is added to template:  template2 
+ The guard  Expression: x <= 3 is added to  Edge: id3 -> id2 
+ Guard founded:  Expression: x <= 3 
+ Syncs founded:  c? 
+ There is:  c?  sync added to  Edge: id3 -> id2 
+ Edge:  Edge: id3 -> id2 is added to template:  template2 
+ Set name to template:  Receiver 
+ Edge  Edge: id3 -> id2 is part of the template  Receiver 
+ Set name to template:  Sender 
+ Edge  Edge: id1 -> id0 is part of the template  Sender 
+ Expression:  x <= 3 from template  Receiver  is evaluated to  1 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id3  for template  Receiver 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id1  for template  Sender 
+ Press s to make progress: 
+Expression:  x <= 3 from template  Receiver  is evaluated to  1 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id3  for template  Receiver 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id1  for template  Sender 
+ Press s to make progress: 
+Expression:  x <= 3 from template  Receiver  is evaluated to  1 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id3  for template  Receiver 
+ Expression:  x >= 3 from template  Sender  is evaluated to  0 
+ No transition available from the location  Location: id1  for template  Sender 
+ Press s to make progress: 
+Expression:  x <= 3 from template  Receiver  is evaluated to  1 
+ Expression:  x >= 3 from template  Sender  is evaluated to  1 
+ Advance Current location:  Location: id1 for template  Sender 
+ Advance New location:  Location: id0 for template  Sender 
+ Current location:  Location: id3 for template  Receiver 
+ New location:  Location: id2 for template  Receiver 
+ Press s to make progress: 
+No transition available from the location  Location: id2  for template  Receiver 
+ No transition available from the location  Location: id0  for template  Sender 
+ Press s to make progress: 
+No transition available from the location  Location: id2  for template  Receiver 
+ No transition available from the location  Location: id0  for template  Sender 
+ Press s to make progress: 
+No transition available from the location  Location: id2  for template  Receiver 
+ No transition available from the location  Location: id0  for template  Sender 
+ Press s to make progress: 

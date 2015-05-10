@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+chan c;
+clock x;
+</declaration><template><name x="5" y="5">Template</name><declaration>// Place local declarations here.</declaration><location id="id0" x="264" y="-32"></location><location id="id1" x="40" y="-32"></location><init ref="id1"/><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="88" y="-56">x &gt;= 3</label><label kind="synchronisation" x="200" y="-56">c!</label></transition></template><template><name>template2</name><location id="id2" x="200" y="0"></location><location id="id3" x="0" y="0"></location><init ref="id3"/><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="32" y="-24">x &lt;= 3</label><label kind="synchronisation" x="112" y="-24">c?</label></transition></template><system>// Place template instantiations here.
+Sender = Template();
+Receiver = template2();
+//Process3 = template3();
+// List one or more processes to be composed into a system.
+system Sender, Receiver;</system></nta>
