@@ -31,7 +31,7 @@ void SymbolTable::setValue(std::string name, int value)
 	}
 	else
 	{
-		assert(!"Symbol table set value to an unexisting symbol");
+		throw InvalidEntry();
 	}
 }
 
@@ -61,7 +61,7 @@ int SymbolTable::getValue(const std::string name)
 	}
 	else
 	{
-		assert("Symbol table get value to an unexisting symbol");
+		throw InvalidEntry();
 	}
 	return -1;
 }
@@ -90,7 +90,7 @@ void SymbolTable::addEntries(const std::vector<PlainData> entries)
 		}
 		else
 		{
-			assert(!"Symbol table value already exits in table");
+			throw InvalidEntry();
 		}
 	}
 }

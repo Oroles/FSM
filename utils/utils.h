@@ -10,6 +10,22 @@
 extern DebugMessagePriority priority;
 extern bool quitApp;
 
+class InvalidEntry : public std::exception{
+public:
+	virtual const char* what() const throw()
+	{
+		return "Invalid table entry";
+	}
+};
+
+class InvalidExpression : public std::exception{
+public:
+	virtual const char* what() const throw()
+	{
+		return "Invalid expression";
+	}
+};
+
 enum class TransitionAvailableStatus : int { Available, NotGuard, NotSource };
 
 void setPriority(const std::vector<std::string>& args);

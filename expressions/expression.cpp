@@ -267,7 +267,7 @@ int Expression::get_value(std::string name) const
 	{
 		return PinTable::getInstance().getValue( name );
 	}
-	assert(!"Should not reach here");
+	throw InvalidExpression();
 	return 0;
 }
 
@@ -298,8 +298,7 @@ void Expression::set_value(std::string name, int val) const
 		LocalTable::getInstance().setValue( systemName, name, val );
 		return;
 	}
-	std::cout << name << std::endl;
-	assert(!"assign a value to a non-variable");
+	throw InvalidExpression();
 	return;
 }
 

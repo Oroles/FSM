@@ -1,6 +1,7 @@
 #include "clocktable.h"
 
 #include <cassert>
+#include "../utils/utils.h"
 
 ClockTable& ClockTable::getInstance()
 {
@@ -21,7 +22,7 @@ void ClockTable::addEntry(const Clock& c)
 	}
 	else
 	{
-		assert(!"Entry in clock table already exits");
+		throw InvalidEntry();
 	}
 	
 }
@@ -42,7 +43,7 @@ int ClockTable::getValue(const std::string name)
 	}
 	else
 	{
-		assert("!Entry in clock table doesn't exists");
+		throw InvalidEntry();
 	}
 	return -1;
 }
@@ -66,7 +67,7 @@ void ClockTable::updateClocks()
 		}
 		else
 		{
-			assert("!Update clocks try to update a clock that doesn't exists");
+			throw InvalidEntry();
 		}
 	}
 	messages.clear();

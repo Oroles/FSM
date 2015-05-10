@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "../utils/plaindata.h"
+#include "../utils/utils.h"
 
 class SymbolTable
 {

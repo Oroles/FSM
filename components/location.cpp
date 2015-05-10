@@ -7,7 +7,6 @@ Location::Location() : name("")
 
 Location::Location(const std::string n) : name(n) 
 {
-	//assert(n.size() != 0 );
 }
 
 Location::Location(const Location& rhs) : name(rhs.name)

@@ -95,7 +95,7 @@ void Parser::processLabels(Edge* t, const pugi::xml_node& node)
 				}
 				else
 				{
-					assert(!"Invalid guard!");
+					throw InvalidExpression();
 				}
 			}
 		}
@@ -113,7 +113,7 @@ void Parser::processLabels(Edge* t, const pugi::xml_node& node)
 				}
 				else
 				{
-					assert(!"Invalid update");
+					throw InvalidExpression();
 				}
 			}
 		}

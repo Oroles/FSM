@@ -6,6 +6,14 @@
 #include <map>
 #include <iostream>
 
+class InvalidPinStatus : public std::exception{
+public:
+	virtual const char* what() const throw()
+	{
+		return "Invalid pin status";
+	}
+};
+
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "broadcast chan", std::regex("(broadcast chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },
@@ -184,7 +192,7 @@ std::vector<Pin> StringParser::generatePins()
 		std::vector<std::string> infos = splitString(l," " );
 		if ( ( infos[2] != "OUT" ) && ( infos[2] != "IN" ) )
 		{
-			assert(!"Incorrect pin status");
+			InvalidPinStatus();	
 		}
 		rez.push_back( Pin( infos[1], infos[2], std::stoi( infos[3] ) ) );
 	}

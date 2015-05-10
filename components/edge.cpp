@@ -50,7 +50,6 @@ Location Edge::getSource() const
 
 void Edge::setSource( const Location s )
 {
-	assert(s.getName().size() != 0 );
 	source = s;
 }
 
@@ -61,7 +60,6 @@ Location Edge::getDestination() const
 
 void Edge::setDestination( const Location d )
 {
-	assert(d.getName().size() != 0 );
 	destination = d;
 }
 

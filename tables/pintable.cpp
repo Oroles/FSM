@@ -3,6 +3,8 @@
 #include <cassert>
 #include <iostream>
 
+#include "../utils/utils.h"
+
 PinTable& PinTable::getInstance()
 {
 	static PinTable instance;
@@ -22,7 +24,7 @@ void PinTable::addEntry(const std::string name, const std::string status, const 
 {
 	if ( this->exists(name) )
 	{
-		assert(!"Pin already exists in PinTable");
+		throw InvalidEntry();
 	}
 	table[name] = Pin(name,status,port);
 }
@@ -33,7 +35,7 @@ void PinTable::addEntries(const std::vector<Pin> pins)
 	{
 		if ( table.find( p.getName() ) != table.end() )
 		{
-			assert(!"Pin already exists in Pintable" );
+			throw InvalidEntry();
 		}
 		table[p.getName()] = p;
 	}
@@ -44,7 +46,7 @@ void PinTable::updateEntry(const std::string name)
 {
 	if ( !this->exists(name) )
 	{
-		assert(!"Pin update doesn't exists in PinTable");
+		throw InvalidEntry();
 	}
 	table[name].update();
 }
@@ -54,7 +56,7 @@ int PinTable::getValue(const std::string name)
 {
 	if ( !this->exists(name) )
 	{
-		assert(!"Pin get value doesn't exists in PinTable");
+		throw InvalidEntry();
 	}
 	return table[name].getValue();
 }
@@ -64,7 +66,7 @@ void PinTable::setValue(const std::string name, int value)
 {
 	if ( !this->exists(name) )
 	{
-		assert(!"Pin set value doesn't exists in PinTable");
+		throw InvalidEntry();
 	}
 	messages.push_back( std::pair<std::string,int>( name, value ) );
 }

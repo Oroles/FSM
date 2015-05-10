@@ -47,7 +47,7 @@ void LocalTable::setValue(const std::string table, const std::string variable,  
 	}
 	else
 	{
-		assert(!"Symbol table set value to an unexisting symbol");
+		throw InvalidEntry();
 	}
 }
 
@@ -68,7 +68,7 @@ int LocalTable::getValue(const std::string table, const std::string variable)
 	}
 	else
 	{
-		assert("Symbol table get value to an unexisting symbol");
+		throw InvalidEntry();
 	}
 	return -1;
 }
@@ -101,7 +101,7 @@ void LocalTable::addEntries(const std::string table, const std::vector<PlainData
 		}
 		else
 		{
-			assert(!"Symbol table value already exits in table");
+			throw InvalidEntry();
 		}
 	}
 }
