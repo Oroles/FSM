@@ -3,26 +3,26 @@
 
 #include "utils.h"
 #include "../components/timedautomata.h"
-#include "../components/transition.h"
-#include "../components/state.h"
+#include "../components/edge.h"
+#include "../components/location.h"
 
 int main(int argc, char* argv[])
 {
 	TimedAutomata ta;
 	{
 		Template m1;
-		m1.setCurrentState( State( "a" ) );
-		m1.addTransition( Transition( State( "a" ), State( "b" ) ) );
-		m1.addTransition( Transition( State( "b" ), State( "a" ) ) );
+		m1.setCurrentState( Location( "a" ) );
+		m1.addTransition( Edge( Location( "a" ), Location( "b" ) ) );
+		m1.addTransition( Edge( Location( "b" ), Location( "a" ) ) );
 		m1.setName( "m1" );
 		ta.addTemplate( m1 );
 	}
 
 	{
 		Template m2;
-		m2.setCurrentState( State( "a0" ) );
-		m2.addTransition( Transition( State( "a0" ), State( "b1" ) ) );
-		m2.addTransition( Transition( State( "b1" ), State( "a0" ) ) );
+		m2.setCurrentState( Location( "a0" ) );
+		m2.addTransition( Edge( Location( "a0" ), Location( "b1" ) ) );
+		m2.addTransition( Edge( Location( "b1" ), Location( "a0" ) ) );
 		m2.setName( "m2" );
 		ta.addTemplate( m2 );
 	}

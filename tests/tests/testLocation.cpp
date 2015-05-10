@@ -1,15 +1,15 @@
 #include <iostream>
 
-#include "../components/state.h"
+#include "../components/location.h"
 
 #include "utils.h"
 
 int main( int argc, char* argv[] )
 {
-	State s("ana");
-	State s1;
-	State s2( "maria" );
-	State s3( s );
+	Location s("ana");
+	Location s1;
+	Location s2( "maria" );
+	Location s3( s );
 
 	/* Test constructors & equal operator */
 	TEST_NOT_EQUAL(s,s1);
