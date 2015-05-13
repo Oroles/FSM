@@ -13,6 +13,8 @@
 class Edge
 {
 public:
+	enum class TransitionAvailableStatus : int { Available, NotGuard, NotSource };
+
 	Edge();
 
 	Edge(const Location s, const Location d);

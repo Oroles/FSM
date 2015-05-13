@@ -6,14 +6,6 @@
 #include <map>
 #include <iostream>
 
-class InvalidPinStatus : public std::exception{
-public:
-	virtual const char* what() const throw()
-	{
-		return "Invalid pin status";
-	}
-};
-
 std::map<std::string,std::regex> regex = { { "chan", std::regex("(chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "broadcast chan", std::regex("(broadcast chan)( [a-zA-Z0-9_]+)(;)") },
 										   { "clock", std::regex("(clock)( [a-zA-Z0-9_]+)(;)") },

@@ -4,7 +4,7 @@
 #include "../tables/symboltable.h"
 #include "../tables/pintable.h"
 
-Edge::Edge() : source(""), destination(""), sync("")
+Edge::Edge() : source("",""), destination("",""), sync("")
 {
 
 }
@@ -96,20 +96,20 @@ Location Edge::operator()(const Location& s)
 	return destination;
 }
 
-TransitionAvailableStatus Edge::isAvailable(const Location& s) const
+Edge::TransitionAvailableStatus Edge::isAvailable(const Location& s) const
 {
 	if ( s != source )
 	{
-		return TransitionAvailableStatus::NotSource;
+		return Edge::TransitionAvailableStatus::NotSource;
 	}
 	for ( auto& g : guards )
 	{
 		if ( !g.evaluate() )
 		{
-			return TransitionAvailableStatus::NotGuard;
+			return Edge::TransitionAvailableStatus::NotGuard;
 		}
 	}
-	return TransitionAvailableStatus::Available;
+	return Edge::TransitionAvailableStatus::Available;
 }
 
 bool Edge::hasSync() const

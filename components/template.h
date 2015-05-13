@@ -19,8 +19,9 @@ public:
 	const Template& operator=(const Template& rhs);
 
 	void addTransition( const Edge& t );
-	TransitionAvailableStatus availableTransition(const Edge* t);
-	void advance(Edge* t);
+	Edge::TransitionAvailableStatus availableTransition(const Edge* t);
+	void channelAdvance(Edge* t);
+	void normalAdvance(Edge* t);
 	void resetStepFlag();
 
 	void setCurrentState( const Location& s );
@@ -28,7 +29,7 @@ public:
 	void setObserver(Observer*);
 	std::string getName() const;
 
-	void step();
+	bool step();
 
 	std::vector<Edge>::iterator begin();
 	std::vector<Edge>::iterator end();

@@ -47,6 +47,7 @@ private:
 	void processLabels(Edge* t, const pugi::xml_node& node );
 	
 	pugi::xml_document doc;
+	std::vector<Location> templateLocations;
 };
 
 #endif

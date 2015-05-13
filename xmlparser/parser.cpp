@@ -17,6 +17,7 @@ void Parser::generateFSM(TimedAutomata* timedAutomata)
 	{
 		if ( std::string(node.name()) == "template" )
 		{
+			templateLocations.clear();
 			timedAutomata->addTemplate( this->processTemplate( node ) );
 		}
 		if ( std::string(node.name()) == "declaration" )
@@ -57,6 +58,16 @@ Template Parser::processTemplate(const pugi::xml_node& nodes )
 			StringParser parser( node.child_value() );
 			LocalTable::getInstance().addEntries(rez.getName(), parser.generateSymbols() );
 		}
+		if ( std::string(node.name()) == "location" )
+		{
+			std::string name = node.attribute("id").value();
+			std::string type = "default";
+			for ( auto types : node )
+			{
+				type = types.name();
+			}
+			templateLocations.push_back(Location(name,type));
+		}
 	}
 	return rez;
 }
@@ -64,14 +75,21 @@ Template Parser::processTemplate(const pugi::xml_node& nodes )
 Location Parser::processCurrentState(const pugi::xml_node& node)
 {
 	std::string id = node.attribute("ref").value();
-	Location state(id);
+	auto it = std::find_if( templateLocations.begin(), templateLocations.end(), [id](const Location l){ return id == l.getName(); } );
+	Location state( *it );
 	return state;
 }
 
 Edge Parser::processTransition(const pugi::xml_node& node)
 {
-	Location source( node.child("source").attribute("ref").value() );
-	Location destination( node.child("target").attribute("ref").value() );
+	std::string name = node.child("source").attribute("ref").value();
+	auto it = std::find_if( templateLocations.begin(), templateLocations.end(), [name](const Location l){ return name == l.getName(); } );
+	Location source( *it );
+
+	name = node.child("target").attribute("ref").value();
+	it = std::find_if( templateLocations.begin(), templateLocations.end(), [name](const Location l){ return name == l.getName(); } );
+	Location destination( *it );
+
 	Edge tranz(source,destination);
 	this->processLabels( &tranz, node );
 	return tranz;

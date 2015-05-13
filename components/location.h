@@ -9,7 +9,7 @@ class Location
 {
 public:
 	Location();
-	Location(const std::string n);
+	Location(const std::string n, const std::string type);
 	Location(const Location& rhs);
 	Location(Location&& rhs);
 
@@ -20,10 +20,12 @@ public:
 	friend std::ostream& operator<<(std::ostream& o, const Location& rhs);
 
 	std::string getName() const;
+	std::string getType() const;
 	void setName(std::string n);
 
 private:
 	std::string name;
+	std::string type;
 };
 
 #endif

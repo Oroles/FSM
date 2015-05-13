@@ -46,10 +46,10 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == Edge::TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
-						d.temp->advance( d.trans.get() );
+						d.temp->channelAdvance( d.trans.get() );
 						return true;
 					}
 				}
@@ -67,10 +67,10 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == Edge::TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
-						d.temp->advance( d.trans.get() );
+						d.temp->channelAdvance( d.trans.get() );
 					}
 				}
 			}
@@ -92,10 +92,10 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == Edge::TransitionAvailableStatus::Available )
 					{
 						//now me make the other template to advance
-						d.temp->advance( d.trans.get() );
+						d.temp->channelAdvance( d.trans.get() );
 						return true;
 					}
 				}
@@ -114,7 +114,7 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 				if ( d.name == chan )
 				{
 					//we found the sender, we have to check if is available
-					if (  d.temp->availableTransition( d.trans.get() ) == TransitionAvailableStatus::Available )
+					if (  d.temp->availableTransition( d.trans.get() ) == Edge::TransitionAvailableStatus::Available )
 					{
 						//returns only true, the sender will advance later
 						return true;

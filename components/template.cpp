@@ -40,21 +40,29 @@ void Template::addTransition(const Edge& t)
 	std::sort(transitions.begin(),transitions.end(),compareFunction);
 }
 
-TransitionAvailableStatus Template::availableTransition(const Edge* t)
+Edge::TransitionAvailableStatus Template::availableTransition(const Edge* t)
 {
 	if ( stepStatus == StepStatus::NotAdvance )
 	{
 		return t->isAvailable(currLocation);
 	}
-	return TransitionAvailableStatus::NotSource;
+	return Edge::TransitionAvailableStatus::NotSource;
 }
 
-void Template::advance(Edge* t)
+void Template::channelAdvance(Edge* t)
 {
 	display(DebugMessagePriority::Template,"Advance Current location: ", currLocation, "for template ", name, "\n" );
 	currLocation = t->operator()( currLocation );
 	display(DebugMessagePriority::Template,"Advance New location: ", currLocation, "for template ", name, "\n" );
 	stepStatus = StepStatus::ChannelAdvance;
+}
+
+void Template::normalAdvance(Edge* t)
+{
+	display(DebugMessagePriority::Template,"Current location: ", currLocation, "for template ", name, "\n" );
+	currLocation = t->operator()( currLocation );
+	display(DebugMessagePriority::Template,"New location: ", currLocation, "for template ", name, "\n" );
+	stepStatus = StepStatus::NormalAdvance;
 }
 
 void Template::setCurrentState(const Location& s)
@@ -99,38 +107,56 @@ std::vector<Edge>::iterator Template::end()
 	return transitions.end();
 }
 
-void Template::step()
+bool Template::step()
 {
 	if ( stepStatus != StepStatus::NotAdvance )
 	{
-		return;
+		return false;
 	}
 
 	for( auto& t : transitions )
 	{
-		TransitionAvailableStatus status = t.isAvailable( currLocation );
-		if ( status == TransitionAvailableStatus::Available )
+		Edge::TransitionAvailableStatus status = t.isAvailable( currLocation );
+		if ( status == Edge::TransitionAvailableStatus::Available )
 		{
 			if ( t.hasSync() == true )
 			{
 				if ( obs->isAvailable(*this, t, t.getChannelName() ) == true )
 				{
-					display(DebugMessagePriority::Template,"Current location: ", currLocation, "for template ", name, "\n" );
-					currLocation = t( currLocation );
-					display(DebugMessagePriority::Template,"New location: ", currLocation, "for template ", name, "\n" );
-					stepStatus = StepStatus::NormalAdvance;
-					return;
+					this->normalAdvance(&t);
+					if ( currLocation.getType() == "committed" )
+					{
+						/* if the state is committed it has to move from the current location, therefore
+						* reset the flag of the template, and try to make another step, if there is no
+						* step available from the new state then throw an exception because it's a deadlock
+						*/
+						stepStatus = StepStatus::NotAdvance;
+						bool returnFlag = this->step();
+						if ( returnFlag == false )
+						{
+							throw DeadlockLocations();
+						}
+					}
+					return true;
 				}
 			}
 			else
 			{
-				display(DebugMessagePriority::Template,"Current location: ", currLocation, "for template ", name, "\n" );
-				currLocation = t( currLocation );
-				display(DebugMessagePriority::Template,"New location: ", currLocation, "for template ", name, "\n" );
-				stepStatus = StepStatus::NormalAdvance;
-				return;
+				this->normalAdvance(&t);
+				if ( currLocation.getType() == "committed" )
+				{
+					/* See the previous comment */
+					stepStatus = StepStatus::NotAdvance;
+					bool returnFlag = this->step();
+					if ( returnFlag == false )
+					{
+						throw DeadlockLocations();
+					}
+				}
+				return true;
 			}
 		}
 	}
 	display(DebugMessagePriority::Template,"No transition available from the location ", currLocation, " for template ", name, "\n" );
+	return false;
 }
