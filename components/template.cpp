@@ -124,7 +124,7 @@ bool Template::step()
 				if ( obs->isAvailable(*this, t, t.getChannelName() ) == true )
 				{
 					this->normalAdvance(&t);
-					if ( currLocation.getType() == "committed" )
+					if ( ( currLocation.getType() == "committed" ) || ( currLocation.getType() == "urgent" ) )
 					{
 						/* if the state is committed it has to move from the current location, therefore
 						* reset the flag of the template, and try to make another step, if there is no
@@ -136,6 +136,7 @@ bool Template::step()
 						{
 							throw DeadlockLocations();
 						}
+						stepStatus = StepStatus::NormalAdvance;
 					}
 					return true;
 				}
@@ -143,7 +144,7 @@ bool Template::step()
 			else
 			{
 				this->normalAdvance(&t);
-				if ( currLocation.getType() == "committed" )
+				if ( ( currLocation.getType() == "committed" ) || ( currLocation.getType() == "urgent" ) )
 				{
 					/* See the previous comment */
 					stepStatus = StepStatus::NotAdvance;
@@ -152,6 +153,7 @@ bool Template::step()
 					{
 						throw DeadlockLocations();
 					}
+					stepStatus = StepStatus::NormalAdvance;
 				}
 				return true;
 			}
