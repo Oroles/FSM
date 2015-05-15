@@ -13,7 +13,7 @@ extern std::string stopCondition;
 
 void readData()
 {
-	std::cin >> stopCondition;
+		std::cin >> stopCondition;
 }
 
 int main(int argc, char* argv[])
@@ -32,8 +32,10 @@ int main(int argc, char* argv[])
 	std::string fileName = getFileName( arguments );
 	bool step = setStepProgress( arguments );
 	setQuit( arguments );
+	int period = setTimeProgress( arguments );
 
 	TimedAutomata fsm;
+	fsm.setPeriod( period );
 	try
 	{
 		Parser parser(fileName);
@@ -53,11 +55,21 @@ int main(int argc, char* argv[])
 			if ( step != true )
 			{
 				std::thread t(readData);
-				while( stopCondition != "quit" )
+				try
 				{
-					fsm.step();
+					while( stopCondition != "quit" )
+					{
+						fsm.step();
+					}
+					t.join();
 				}
-				t.join();
+				catch( std::exception& e )
+				{
+					//this is for unschedule systems
+					std::cout << e.what() << std::endl;
+					fsm.closeDevices();
+					t.join();
+				}
 			}
 			else
 			{

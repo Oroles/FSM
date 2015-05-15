@@ -71,6 +71,34 @@ bool setStepProgress(const std::vector<std::string>& args)
 	}
 }
 
+int setTimeProgress(const std::vector<std::string>& args)
+{
+	auto it = std::find(args.begin(), args.end(), "-time" );
+	if ( it == args.end() )
+	{
+		return -1;
+	}
+	else
+	{
+		if ( ++it == args.end() )
+		{
+			assert(!"Add a number which represents miliseconds");
+			return -1;
+		}
+		else
+		{
+			int period = std::stoi(*it);
+			if (period < 0)
+			{
+				assert(!"Time should be bigger than 0");
+				return -1;
+			}
+			return period;
+		}
+	}
+	return -1;
+}
+
 bool setQuit(const std::vector<std::string>& args)
 {
 	auto it = std::find(args.begin(), args.end(), "-quit");

@@ -15,6 +15,7 @@ public:
 	
 	void step();
 	void closeDevices();
+	void setPeriod(int p);
 
 	void addTemplate(const Template& m );
 	void addSystems(const std::map<std::string,std::string> systemsName);
@@ -23,6 +24,7 @@ private:
 	std::vector<Template> templates;
 	std::vector<Template> systems;
 	Observer obs;
+	int period = -1;
 };
 
 #endif

@@ -34,6 +34,14 @@ public:
 	}
 };
 
+class UnscheduleSystem : public std::exception{
+public:
+	virtual const char* what() const throw()
+	{
+		return "UnscheduleSystem";
+	}
+};
+
 class InvalidPinStatus : public std::exception{
 public:
 	virtual const char* what() const throw()
@@ -46,6 +54,7 @@ void setPriority(const std::vector<std::string>& args);
 std::string getFileName(const std::vector<std::string>& args);
 bool setStepProgress(const std::vector<std::string>& args);
 bool setQuit(const std::vector<std::string>& args);
+int setTimeProgress(const std::vector<std::string>& args);
 void nextStep();
 
 bool is_integer(const std::string name); //Checks if the string contains only numbers

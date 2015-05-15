@@ -5,8 +5,12 @@
 #include "../tables/pintable.h"
 #include "../utils/utils.h"
 
+#include <chrono>
+#include <thread>
+
 void TimedAutomata::step()
 {
+	auto startTime = std::chrono::high_resolution_clock::now();
 	for ( auto& m : systems )
 	{
 		m.step();
@@ -21,11 +25,38 @@ void TimedAutomata::step()
 	SymbolTable::getInstance().updateSymbols();
 	PinTable::getInstance().updatePins();
 	nextStep();
+
+	auto endTime = std::chrono::high_resolution_clock::now();
+	int totalTime = std::chrono::duration_cast<std::chrono::milliseconds>( endTime - startTime ).count();
+
+	if ( period < 0 )
+	{
+		return;
+	}
+	else
+	{
+		if ( totalTime > period )
+		{
+			//throw exception, the runtime exceed the period
+			throw UnscheduleSystem();
+		}
+		else
+		{
+			//find out how much it has to sleep
+			int timeToSleep = period - totalTime;
+			std::this_thread::sleep_for(std::chrono::milliseconds(timeToSleep));
+		}
+	}
 }
 
 void TimedAutomata::addTemplate(const Template& t)
 {
 	templates.push_back( t );
+}
+
+void TimedAutomata::setPeriod(int p)
+{
+	period = p;
 }
 
 void TimedAutomata::addSystems(const std::map<std::string,std::string> systemsName )
