@@ -18,6 +18,7 @@ public:
 	void updatePins();
 	int getValue( const std::string name );
 	void setValue( const std::string name, int value );
+	void closeAllDevices();
 
 private:
 	PinTable();

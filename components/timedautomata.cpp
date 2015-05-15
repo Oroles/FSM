@@ -50,3 +50,8 @@ void TimedAutomata::addSystems(const std::map<std::string,std::string> systemsNa
 		obs.addObservable( &t );
 	}
 }
+
+void TimedAutomata::closeDevices()
+{
+	PinTable::getInstance().closeAllDevices();
+}

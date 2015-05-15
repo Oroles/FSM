@@ -14,6 +14,7 @@ public:
 	TimedAutomata() {}
 	
 	void step();
+	void closeDevices();
 
 	void addTemplate(const Template& m );
 	void addSystems(const std::map<std::string,std::string> systemsName);

@@ -46,25 +46,34 @@ int main(int argc, char* argv[])
 	}
 
 
-	if ( quitApp == false )
+	try
 	{
-		if ( step != true )
+		if ( quitApp == false )
 		{
-			std::thread t(readData);
-			while( stopCondition != "quit" )
+			if ( step != true )
 			{
-				fsm.step();
+				std::thread t(readData);
+				while( stopCondition != "quit" )
+				{
+					fsm.step();
+				}
+				t.join();
 			}
-			t.join();
-		}
-		else
-		{
-			while( stopCondition != "quit" )
+			else
 			{
-				fsm.step();
+				while( stopCondition != "quit" )
+				{
+					fsm.step();
+				}
 			}
 		}
 	}
+	catch( std::exception& e )
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	fsm.closeDevices();
 
 	return 0;
 }

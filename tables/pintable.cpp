@@ -79,3 +79,11 @@ void PinTable::updatePins()
 	}
 	messages.clear();
 }
+
+void PinTable::closeAllDevices()
+{
+	for ( auto& p : table )
+	{
+		p.second.setValue(0);
+	}
+}
