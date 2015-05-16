@@ -9,8 +9,6 @@
 
 #include "../variables/clock.h"
 #include "../variables/chan.h"
-#include "../variables/chanbinary.h"
-#include "../variables/chanbroadcast.h"
 #include "../variables/pin.h"
 #include "../utils/plaindata.h"
 

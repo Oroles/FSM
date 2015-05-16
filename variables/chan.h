@@ -7,7 +7,7 @@
 class Chan
 {
 public:
-	enum class ChanType : int { Binary, Broadcast };
+	enum class ChanType : int { Binary, Broadcast, Urgent };
 	Chan(const std::string n);
 	Chan(const Chan& c);
 	Chan(Chan&& c);

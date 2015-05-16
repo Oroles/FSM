@@ -1,15 +1,43 @@
 #include "template.h"
 
+#include "../tables/chantable.h"
+
+std::string removeLastChar(std::string str)
+{
+	return str.substr(0,str.size()-1);
+}
+
 bool compareFunction( const Edge& lhs, const Edge& rhs )
 {
+	//Urgent channels are the most important, follow by broadcast and the last are binary channel
 	if ( lhs.hasSync() == true )
 	{
+		if ( rhs.hasSync() == false )
+		{
+			return true;
+		}
+		else
+		{
+			if ( ChanTable::getInstance().getType(removeLastChar(lhs.getChannelName())) == Chan::ChanType::Urgent )
+			{
+				return true;
+			}
+			else
+			{
+				if ( ChanTable::getInstance().getType(removeLastChar(lhs.getChannelName())) != Chan::ChanType::Urgent &&
+					 ChanTable::getInstance().getType(removeLastChar(rhs.getChannelName())) == Chan::ChanType::Urgent )
+				{
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 	else
 	{
 		return false;
 	}
+
 }
 
 Template::Template()

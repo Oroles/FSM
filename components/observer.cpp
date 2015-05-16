@@ -34,7 +34,7 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 	{
 		//search in receivers
 		std::string chan = channelName.substr( 0, channelName.size() - 1 );
-		if ( Chan::ChanType::Binary == ChanTable::getInstance().getType(chan) )
+		if ( ( Chan::ChanType::Binary == ChanTable::getInstance().getType(chan) ) || ( Chan::ChanType::Urgent == ChanTable::getInstance().getType(chan) ) )
 		{
 			/* Here the channel is binary, so it has to find first receiver which can advance
 			* and make him to advance, after that it has to advance. If doesn't find any receivers
@@ -81,7 +81,7 @@ bool Observer::isAvailable(const Template& temp, const Edge& trans, const std::s
 	{
 		//search in senders
 		std::string chan = channelName.substr( 0, channelName.size() - 1 );
-		if ( Chan::ChanType::Binary == ChanTable::getInstance().getType(chan) )
+		if ( ( Chan::ChanType::Binary == ChanTable::getInstance().getType(chan) ) || ( Chan::ChanType::Urgent == ChanTable::getInstance().getType(chan) ) )
 		{
 			/* Here the channel binary so it has to check in senders if the sender is 
 			* can advance, if so it make him to advance an after that it will advnace
