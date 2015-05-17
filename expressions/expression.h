@@ -16,8 +16,9 @@ public:
 	const Expression& operator=(const Expression& rhs);
 	bool operator==(const Expression& rhs);
 	int evaluate() const;
-	bool isValidGuard();
-	bool isValidUpdate();
+	bool isValidGuard() const;
+	bool isValidUpdate() const;
+	bool isValidInvariant() const;
 
 	void setSystemName(const std::string name);
 

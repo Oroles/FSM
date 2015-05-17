@@ -109,6 +109,10 @@ Edge::TransitionAvailableStatus Edge::isAvailable(const Location& s) const
 			return Edge::TransitionAvailableStatus::NotGuard;
 		}
 	}
+	if ( destination.isAvailable() == false )
+	{
+		return Edge::TransitionAvailableStatus::NotInvariant;
+	}
 	return Edge::TransitionAvailableStatus::Available;
 }
 

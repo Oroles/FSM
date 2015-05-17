@@ -40,11 +40,12 @@ public:
 	void generateFSM(TimedAutomata* fsm);
 
 private:
-	Template processTemplate(const pugi::xml_node& node );
+	Template processTemplate(const pugi::xml_node& node);
 	Location processCurrentState(const pugi::xml_node& node);
 	Edge processTransition(const pugi::xml_node& node);
-	std::string processName(const pugi::xml_node& node );
-	void processLabels(Edge* t, const pugi::xml_node& node );
+	std::string processName(const pugi::xml_node& node);
+	void processLabels(Edge* t, const pugi::xml_node& node);
+	void generateLabels(const pugi::xml_node& node);
 	
 	pugi::xml_document doc;
 	std::vector<Location> templateLocations;

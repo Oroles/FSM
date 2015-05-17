@@ -60,13 +60,7 @@ Template Parser::processTemplate(const pugi::xml_node& nodes )
 		}
 		if ( std::string(node.name()) == "location" )
 		{
-			std::string name = node.attribute("id").value();
-			std::string type = "default";
-			for ( auto types : node )
-			{
-				type = types.name();
-			}
-			templateLocations.push_back(Location(name,type));
+			generateLabels(node);
 		}
 	}
 	return rez;
@@ -148,6 +142,39 @@ void Parser::processLabels(Edge* t, const pugi::xml_node& node)
 			t->addSelect( name );
 		}
 	}
+}
+
+void Parser::generateLabels(const pugi::xml_node& node)
+{
+	std::string name = node.attribute("id").value();
+	std::string type = "default";
+	Location l = Location(name,type);
+	for ( auto it : node )
+	{
+		if ( ( it.name() == std::string("label") ) && (it.attribute("kind").value() == std::string("invariant") ) )
+		{
+			std::string data = it.child_value();
+			std::vector<std::string> expressions = splitString(data,"&&");
+			for ( auto e : expressions )
+			{
+				Expression ex( e );
+				if ( ex.isValidInvariant() )
+				{
+					l.addExpression( ex );
+				}
+				else
+				{
+					throw InvalidExpression();
+				}
+			}
+		}
+		else
+		{
+			type = it.name();
+		}
+	}
+	l.setType(type);
+	templateLocations.push_back(l);
 }
 
 std::string Parser::processName(const pugi::xml_node& node)

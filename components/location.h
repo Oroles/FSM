@@ -4,6 +4,9 @@
 #include <string>
 #include <iostream>
 #include <cassert>
+#include <vector>
+
+#include "../expressions/expression.h"
 
 class Location
 {
@@ -22,10 +25,14 @@ public:
 	std::string getName() const;
 	std::string getType() const;
 	void setName(std::string n);
+	void setType(std::string t);
+	void addExpression(const Expression& ex);
+	bool isAvailable() const;
 
 private:
 	std::string name;
 	std::string type;
+	std::vector<Expression> expressions;
 };
 
 #endif

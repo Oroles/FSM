@@ -376,7 +376,7 @@ std::vector<std::string> Expression::generateRPN()
 	return out;
 }
 
-bool Expression::isValidGuard()
+bool Expression::isValidGuard() const
 {
 	auto it = std::find_if(rpn.begin(),rpn.end(), [](const std::string val ){ return ( ( val == "=" ) || ( val == ":=" ) ||
 																					 ( val == "+=" ) || ( val == "-=" ) ||
@@ -390,7 +390,7 @@ bool Expression::isValidGuard()
 	return true;
 }
 
-bool Expression::isValidUpdate()
+bool Expression::isValidUpdate() const
 {
 	auto it = std::find_if(rpn.begin(),rpn.end(), [](const std::string val ){ return ( ( val == "=" ) || ( val == ":=" ) ||
 																					 ( val == "+=" ) || ( val == "-=" ) ||
@@ -402,6 +402,11 @@ bool Expression::isValidUpdate()
 		return true;
 	}
 	return false;
+}
+
+bool Expression::isValidInvariant() const
+{
+	return this->isValidGuard();
 }
 
 std::ostream& operator<<(std::ostream& o, const Expression& e)

@@ -13,7 +13,7 @@
 class Edge
 {
 public:
-	enum class TransitionAvailableStatus : int { Available, NotGuard, NotSource };
+	enum class TransitionAvailableStatus : int { Available, NotGuard, NotSource, NotInvariant };
 
 	Edge();
 
