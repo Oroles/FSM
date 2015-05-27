@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+clock x;
+chan c;
+int ledS = 0;
+int ledR = 0;
+
+/**
+* ledS OUT 8
+* ledR OUT 9
+**/</declaration><template><name x="5" y="5">Sender</name><declaration>// Place local declarations here.
+</declaration><location id="id0" x="32" y="-112"></location><location id="id1" x="-128" y="-112"></location><init ref="id1"/><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="-108" y="-142">x &lt;= 3</label><label kind="synchronisation" x="-24" y="-144">c!</label><label kind="assignment" x="-80" y="-104">ledS = 1</label></transition></template><template><name>Receiver</name><location id="id2" x="-56" y="-72"></location><location id="id3" x="-200" y="-72"></location><init ref="id3"/><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="-188" y="-102">x &gt;= 3</label><label kind="synchronisation" x="-104" y="-104">c?</label><label kind="assignment" x="-160" y="-64">ledR = 1</label></transition></template><system>// Place template instantiations here.
+S = Sender();
+R = Receiver();
+
+// List one or more processes to be composed into a system.
+system S,R;</system></nta>
